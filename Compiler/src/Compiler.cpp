@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include <cctype>
+#include <stdexcept>
 
 Compiler::Compiler() : labelCounter(0), tempVarCounter(0) {}
 
@@ -40,11 +42,25 @@ std::vector<Instruction> Compiler::compile(std::unique_ptr<ProgramNode> program)
     symbolTable.clear();
     labelCounter = 0;
     tempVarCounter = 0;
+    stringLiterals.clear();
+    stringToLabel.clear();
 
     if (program)
     {
-        compileProgram(program.get());
-        emit(InstructionType::HALT);
+        try
+        {
+            compileProgram(program.get());
+            emit(InstructionType::HALT);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "❌ خطأ أثناء الترجمة: " << e.what() << std::endl;
+            instructions.clear();
+        }
+    }
+    else
+    {
+        std::cerr << "⚠️  البرنامج فارغ - لا شيء لترجمته" << std::endl;
     }
 
     return instructions;
@@ -52,21 +68,39 @@ std::vector<Instruction> Compiler::compile(std::unique_ptr<ProgramNode> program)
 
 void Compiler::compileProgram(ProgramNode *program)
 {
+    if (!program)
+    {
+        std::cerr << "⚠️  برنامج فارغ في compileProgram" << std::endl;
+        return;
+    }
+
     // معالجة التعريفات أولاً
     for (auto &declaration : program->declarations)
     {
-        compileStatement(declaration.get());
+        if (declaration)
+        {
+            compileStatement(declaration.get());
+        }
     }
 
     // ثم معالجة الجمل
     for (auto &statement : program->statements)
     {
-        compileStatement(statement.get());
+        if (statement)
+        {
+            compileStatement(statement.get());
+        }
     }
 }
 
 void Compiler::compileStatement(ASTNode *statement)
 {
+    if (!statement)
+    {
+        std::cerr << "⚠️  جملة فارغة في compileStatement" << std::endl;
+        return;
+    }
+
     if (auto varDecl = dynamic_cast<VariableDeclarationNode *>(statement))
     {
         compileVariableDeclaration(varDecl);
@@ -99,11 +133,18 @@ void Compiler::compileStatement(ASTNode *statement)
     {
         compileRepeat(repeatStmt);
     }
+    else
+    {
+        std::cerr << "⚠️  نوع جملة غير معروف في compileStatement: " << statement->getTypeName() << std::endl;
+    }
 }
 
 void Compiler::compileVariableDeclaration(VariableDeclarationNode *node)
 {
-    // تخزين نوع المتغير في جدول الرموز
+    if (!node)
+        return;
+
+    // تخزين المتغير في جدول الرموز
     symbolTable[node->name] = "متغير";
 
     if (node->initialValue)
@@ -122,6 +163,9 @@ void Compiler::compileVariableDeclaration(VariableDeclarationNode *node)
 
 void Compiler::compileConstantDeclaration(ConstantDeclarationNode *node)
 {
+    if (!node)
+        return;
+
     // تخزين الثابت في جدول الرموز
     symbolTable[node->name] = "ثابت";
 
@@ -131,16 +175,26 @@ void Compiler::compileConstantDeclaration(ConstantDeclarationNode *node)
 
 void Compiler::compileAssignment(AssignmentNode *node)
 {
+    if (!node)
+        return;
+
     std::string temp = compileExpression(node->value.get());
     emit(InstructionType::STORE, node->variableName, temp);
 }
 
 void Compiler::compilePrint(PrintNode *node)
 {
-    // طباعة السلاسل النصية مباشرة بدون إنشاء مؤقتات
+    if (!node || !node->expression)
+    {
+        std::cerr << "⚠️  جملة طباعة فارغة أو بدون تعبير" << std::endl;
+        return;
+    }
+
+    // طباعة السلاسل النصية مباشرة
     if (auto literal = dynamic_cast<LiteralNode *>(node->expression.get()))
     {
-        if (literal->type == TokenType::STRING_LITERAL)
+        // *** الإصلاح: استخدام literalType بدلاً من type ***
+        if (literal->literalType == TokenType::STRING_LITERAL)
         {
             std::string label = getStringLabel(literal->value);
             emit(InstructionType::PRINT, "STRING", label);
@@ -154,11 +208,20 @@ void Compiler::compilePrint(PrintNode *node)
 
 void Compiler::compileRead(ReadNode *node)
 {
+    if (!node)
+        return;
+
     emit(InstructionType::READ, node->variableName);
 }
 
 void Compiler::compileIf(IfNode *node)
 {
+    if (!node || !node->condition)
+    {
+        std::cerr << "⚠️  جملة شرطية فارغة أو بدون شرط" << std::endl;
+        return;
+    }
+
     std::string elseLabel = generateLabel();
     std::string endLabel = generateLabel();
 
@@ -168,7 +231,10 @@ void Compiler::compileIf(IfNode *node)
     // فرع then
     for (auto &stmt : node->thenBranch)
     {
-        compileStatement(stmt.get());
+        if (stmt)
+        {
+            compileStatement(stmt.get());
+        }
     }
 
     if (!node->elseBranch.empty())
@@ -181,7 +247,10 @@ void Compiler::compileIf(IfNode *node)
     // فرع else
     for (auto &stmt : node->elseBranch)
     {
-        compileStatement(stmt.get());
+        if (stmt)
+        {
+            compileStatement(stmt.get());
+        }
     }
 
     if (!node->elseBranch.empty())
@@ -192,6 +261,12 @@ void Compiler::compileIf(IfNode *node)
 
 void Compiler::compileWhile(WhileNode *node)
 {
+    if (!node || !node->condition)
+    {
+        std::cerr << "⚠️  حلقة طالما فارغة أو بدون شرط" << std::endl;
+        return;
+    }
+
     std::string startLabel = generateLabel();
     std::string endLabel = generateLabel();
 
@@ -202,7 +277,10 @@ void Compiler::compileWhile(WhileNode *node)
 
     for (auto &stmt : node->body)
     {
-        compileStatement(stmt.get());
+        if (stmt)
+        {
+            compileStatement(stmt.get());
+        }
     }
 
     emit(InstructionType::JMP, startLabel);
@@ -211,24 +289,43 @@ void Compiler::compileWhile(WhileNode *node)
 
 void Compiler::compileRepeat(RepeatNode *node)
 {
+    if (!node || !node->condition)
+    {
+        std::cerr << "⚠️  حلقة كرر-حتى فارغة أو بدون شرط" << std::endl;
+        return;
+    }
+
     std::string startLabel = generateLabel();
-    std::string endLabel = generateLabel();
 
     emit(InstructionType::LABEL, startLabel);
 
     for (auto &stmt : node->body)
     {
-        compileStatement(stmt.get());
+        if (stmt)
+        {
+            compileStatement(stmt.get());
+        }
     }
 
     std::string conditionTemp = compileExpression(node->condition.get());
+    // في حلقة repeat-until، نكرر حتى يصبح الشرط صحيحاً
     emit(InstructionType::JZ, conditionTemp, startLabel);
 }
 
 std::string Compiler::compileExpression(ASTNode *expr)
 {
+    if (!expr)
+    {
+        throw std::runtime_error("تعبير فارغ في compileExpression");
+    }
+
     if (auto binaryOp = dynamic_cast<BinaryOpNode *>(expr))
     {
+        if (!binaryOp->left || !binaryOp->right)
+        {
+            throw std::runtime_error("عملية ثنائية بدون معاملين");
+        }
+
         std::string leftTemp = compileExpression(binaryOp->left.get());
         std::string rightTemp = compileExpression(binaryOp->right.get());
         std::string resultTemp = generateTempVar();
@@ -263,14 +360,12 @@ std::string Compiler::compileExpression(ASTNode *expr)
         case TokenType::LESS_EQUAL:
         case TokenType::GREATER_EQUAL:
         {
-            // CMP لا يُنتج قيمة مباشرة، لذا نحاكي تقييمًا بوليانيًا 0/1
             std::string trueLabel = generateLabel();
             std::string endLabel = generateLabel();
-            // افتراضيًا النتيجة 0
+
             emit(InstructionType::LOAD, resultTemp, "0");
             emit(InstructionType::CMP, leftTemp, rightTemp);
 
-            // قفزة إلى trueLabel عند تحقق الشرط
             switch (binaryOp->op)
             {
             case TokenType::EQUALS:
@@ -301,13 +396,18 @@ std::string Compiler::compileExpression(ASTNode *expr)
             break;
         }
         default:
-            throw std::runtime_error("معامل غير مدعوم في التعبير");
+            throw std::runtime_error("معامل غير مدعوم في التعبير: " + std::to_string(static_cast<int>(binaryOp->op)));
         }
 
         return resultTemp;
     }
     else if (auto unaryOp = dynamic_cast<UnaryOpNode *>(expr))
     {
+        if (!unaryOp->operand)
+        {
+            throw std::runtime_error("عملية أحادية بدون معامل");
+        }
+
         std::string operandTemp = compileExpression(unaryOp->operand.get());
         std::string resultTemp = generateTempVar();
 
@@ -322,7 +422,7 @@ std::string Compiler::compileExpression(ASTNode *expr)
             emit(InstructionType::SUB, resultTemp, resultTemp, operandTemp);
             break;
         default:
-            throw std::runtime_error("معامل أحادي غير مدعوم");
+            throw std::runtime_error("معامل أحادي غير مدعوم: " + std::to_string(static_cast<int>(unaryOp->op)));
         }
 
         return resultTemp;
@@ -330,8 +430,9 @@ std::string Compiler::compileExpression(ASTNode *expr)
     else if (auto literal = dynamic_cast<LiteralNode *>(expr))
     {
         std::string temp = generateTempVar();
-        // إذا كانت قيمة نصية، نحفظها كوسم سلسلة، وإلا قيمة مباشرة
-        if (literal->type == TokenType::STRING_LITERAL)
+
+        // *** الإصلاح: استخدام literalType بدلاً من type ***
+        if (literal->literalType == TokenType::STRING_LITERAL)
         {
             std::string label = getStringLabel(literal->value);
             emit(InstructionType::LOAD, temp, label);
@@ -349,7 +450,7 @@ std::string Compiler::compileExpression(ASTNode *expr)
         return temp;
     }
 
-    throw std::runtime_error("نوع تعبير غير مدعوم");
+    throw std::runtime_error("نوع تعبير غير مدعوم: " + std::string(expr->getTypeName()));
 }
 
 void Compiler::generateAssembly(const std::string &filename)
@@ -387,7 +488,7 @@ void Compiler::generateAssembly(const std::string &filename)
     {
         std::string label = "str_" + std::to_string(i);
         file << label << ": .asciiz \"";
-        // تبسيط: لا نهرب السلاسل بالكامل هنا
+        // هروب الأحرف الخاصة في السلاسل النصية
         for (char ch : stringLiterals[i])
         {
             if (ch == '"')
@@ -396,6 +497,8 @@ void Compiler::generateAssembly(const std::string &filename)
                 file << "\\\\";
             else if (ch == '\n')
                 file << "\\n";
+            else if (ch == '\t')
+                file << "\\t";
             else
                 file << ch;
         }
@@ -427,8 +530,9 @@ void Compiler::generateAssembly(const std::string &filename)
             else
             {
                 bool isNumber = !instr.operand2.empty() &&
-                                 (std::isdigit(static_cast<unsigned char>(instr.operand2[0])) ||
-                                  ((instr.operand2[0] == '-' || instr.operand2[0] == '+') && instr.operand2.size() > 1));
+                                (std::isdigit(static_cast<unsigned char>(instr.operand2[0])) ||
+                                 ((instr.operand2[0] == '-' || instr.operand2[0] == '+') && instr.operand2.size() > 1 &&
+                                  std::isdigit(static_cast<unsigned char>(instr.operand2[1]))));
                 if (isNumber)
                 {
                     file << "li $t0, " << instr.operand2 << std::endl;
@@ -442,36 +546,41 @@ void Compiler::generateAssembly(const std::string &filename)
                 }
             }
             break;
+
         case InstructionType::STORE:
             file << "lw $t0, " << instr.operand2 << std::endl;
             file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::ADD:
             file << "lw $t1, " << instr.operand2 << std::endl;
             file << "    lw $t2, " << instr.operand3 << std::endl;
             file << "    add $t0, $t1, $t2" << std::endl;
             file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::SUB:
             file << "lw $t1, " << instr.operand2 << std::endl;
             file << "    lw $t2, " << instr.operand3 << std::endl;
             file << "    sub $t0, $t1, $t2" << std::endl;
             file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::MUL:
             file << "lw $t1, " << instr.operand2 << std::endl;
             file << "    lw $t2, " << instr.operand3 << std::endl;
             file << "    mul $t0, $t1, $t2" << std::endl;
             file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::DIV:
             file << "lw $t1, " << instr.operand2 << std::endl;
             file << "    lw $t2, " << instr.operand3 << std::endl;
             file << "    div $t0, $t1, $t2" << std::endl;
             file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::PRINT:
-            // operand1 يحدد النوع: VALUE أو STRING
             if (instr.operand1 == "STRING")
             {
                 file << "li $v0, 4" << std::endl;
@@ -488,61 +597,75 @@ void Compiler::generateAssembly(const std::string &filename)
             file << "    la $a0, newline" << std::endl;
             file << "    syscall" << std::endl;
             break;
+
         case InstructionType::READ:
             file << "li $v0, 5" << std::endl;
             file << "    syscall" << std::endl;
             file << "    sw $v0, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JMP:
             file << "j " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JZ:
             file << "lw $t0, " << instr.operand1 << std::endl;
             file << "    beqz $t0, " << instr.operand2 << std::endl;
             break;
+
         case InstructionType::LABEL:
             file << instr.operand1 << ":" << std::endl;
             break;
+
         case InstructionType::CMP:
-            // خزن أسماء المتغيرات للمقارنة لاحقًا
             lastCmpLeft = instr.operand1;
             lastCmpRight = instr.operand2;
-            file << "# CMP " << instr.operand1 << ", " << instr.operand2 << std::endl;
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    # CMP " << instr.operand1 << ", " << instr.operand2 << std::endl;
             break;
+
         case InstructionType::JE:
             file << "lw $t1, " << lastCmpLeft << std::endl;
             file << "    lw $t2, " << lastCmpRight << std::endl;
             file << "    beq $t1, $t2, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JNE:
             file << "lw $t1, " << lastCmpLeft << std::endl;
             file << "    lw $t2, " << lastCmpRight << std::endl;
             file << "    bne $t1, $t2, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JG:
             file << "lw $t1, " << lastCmpLeft << std::endl;
             file << "    lw $t2, " << lastCmpRight << std::endl;
-            file << "    bgt $t1, $t2, " << instr.operand1 << std::endl; // مافي MIPS قياسي لكن اغلب المجمعات تدعم
+            file << "    bgt $t1, $t2, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JL:
             file << "lw $t1, " << lastCmpLeft << std::endl;
             file << "    lw $t2, " << lastCmpRight << std::endl;
             file << "    blt $t1, $t2, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JGE:
             file << "lw $t1, " << lastCmpLeft << std::endl;
             file << "    lw $t2, " << lastCmpRight << std::endl;
             file << "    bge $t1, $t2, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::JLE:
             file << "lw $t1, " << lastCmpLeft << std::endl;
             file << "    lw $t2, " << lastCmpRight << std::endl;
             file << "    ble $t1, $t2, " << instr.operand1 << std::endl;
             break;
+
         case InstructionType::HALT:
             file << "li $v0, 10" << std::endl;
             file << "    syscall" << std::endl;
             break;
+
         default:
             file << "# " << instr.toString() << std::endl;
             break;
@@ -583,6 +706,12 @@ void Compiler::generateCCode(const std::string &filename)
         file << "    int t" << i << " = 0;" << std::endl;
     }
 
+    // تعريف السلاسل النصية كمتغيرات ثابتة
+    for (size_t i = 0; i < stringLiterals.size(); ++i)
+    {
+        file << "    char* str_" << i << " = \"" << stringLiterals[i] << "\";" << std::endl;
+    }
+
     file << std::endl;
 
     for (const auto &instr : instructions)
@@ -615,7 +744,7 @@ void Compiler::generateCCode(const std::string &filename)
         case InstructionType::PRINT:
             if (instr.operand1 == "STRING")
             {
-                file << "printf(\"%s\", " << instr.operand2 << ");";
+                file << "printf(\"%s\\n\", " << instr.operand2 << ");";
             }
             else
             {
@@ -632,26 +761,13 @@ void Compiler::generateCCode(const std::string &filename)
             file << "if (!" << instr.operand1 << ") goto " << instr.operand2 << ";";
             break;
         case InstructionType::CMP:
-            // لا شيء مباشر في C، يعتمد على قفزات لاحقة
             file << "/* CMP " << instr.operand1 << ", " << instr.operand2 << " */";
             break;
         case InstructionType::JE:
-            file << "if (" << instr.operand1 << ") goto " << instr.operand1 << ";"; // سيتم استبداله أثناء البناء المنطقي
+            file << "/* JE " << instr.operand1 << " - مقارنة للمساواة */";
             break;
         case InstructionType::JNE:
-            file << "/* JNE label */";
-            break;
-        case InstructionType::JG:
-            file << "/* JG label */";
-            break;
-        case InstructionType::JL:
-            file << "/* JL label */";
-            break;
-        case InstructionType::JGE:
-            file << "/* JGE label */";
-            break;
-        case InstructionType::JLE:
-            file << "/* JLE label */";
+            file << "/* JNE " << instr.operand1 << " - مقارنة لعدم المساواة */";
             break;
         case InstructionType::LABEL:
             file << instr.operand1 << ":";
@@ -660,7 +776,7 @@ void Compiler::generateCCode(const std::string &filename)
             file << "return 0;";
             break;
         default:
-            file << "// " << instr.toString();
+            file << "// " << instr.toString() << ";";
             break;
         }
 
@@ -697,12 +813,26 @@ void Compiler::generateIntermediateCode(const std::string &filename)
         file << symbol.first << " : " << symbol.second << std::endl;
     }
 
+    file << std::endl
+         << "السلاسل النصية:" << std::endl;
+    file << "==============" << std::endl;
+    for (size_t i = 0; i < stringLiterals.size(); ++i)
+    {
+        file << "str_" << i << ": \"" << stringLiterals[i] << "\"" << std::endl;
+    }
+
     file.close();
     std::cout << "✅ تم توليد الكود الوسيط في: " << filename << std::endl;
 }
 
 void Compiler::displayInstructions() const
 {
+    if (instructions.empty())
+    {
+        std::cout << "⚠️  لا توجد تعليمات وسيطة لعرضها" << std::endl;
+        return;
+    }
+
     std::cout << "\n🔧 الكود الوسيط المولد:" << std::endl;
     std::cout << "====================" << std::endl;
 
@@ -715,4 +845,6 @@ void Compiler::displayInstructions() const
     std::cout << "عدد التعليمات: " << instructions.size() << std::endl;
     std::cout << "عدد المتغيرات المؤقتة: " << tempVarCounter << std::endl;
     std::cout << "عدد العلامات: " << labelCounter << std::endl;
+    std::cout << "عدد السلاسل النصية: " << stringLiterals.size() << std::endl;
+    std::cout << "عدد الرموز في جدول الرموز: " << symbolTable.size() << std::endl;
 }

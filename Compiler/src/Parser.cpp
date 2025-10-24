@@ -47,11 +47,15 @@ bool Parser::isAtEnd() const
 
 Token Parser::peek() const
 {
+    if (current >= tokens.size())
+        return Token(TokenType::END_OF_FILE, "", 0, 0);
     return tokens[current];
 }
 
 Token Parser::previous() const
 {
+    if (current == 0)
+        return Token(TokenType::END_OF_FILE, "", 0, 0);
     return tokens[current - 1];
 }
 
@@ -100,20 +104,31 @@ std::unique_ptr<ProgramNode> Parser::parseProgram()
 {
     auto program = std::make_unique<ProgramNode>();
 
-    consume(TokenType::PROGRAM, "توقع كلمة 'برنامج'");
-    program->name = consume(TokenType::IDENTIFIER, "توقع اسم البرنامج").value;
+    // التحقق من وجود كلمة "برنامج" في البداية
+    if (!check(TokenType::PROGRAM))
+    {
+        throw ParseError(peek(), "توقع كلمة 'برنامج' في بداية البرنامج");
+    }
+    advance(); // استهلاك كلمة "برنامج"
+
+    // الحصول على اسم البرنامج
+    if (!check(TokenType::IDENTIFIER))
+    {
+        throw ParseError(peek(), "توقع اسم البرنامج بعد 'برنامج'");
+    }
+    program->name = advance().value;
+
     std::cout << "[DBG] program name='" << program->name << "' next token="
               << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
 
-    // فاصل اختياري بعد ترويسة البرنامج (قد تكون ";" أو "؛")
+    // قبول فاصلة منقوطة اختيارية بعد اسم البرنامج
     if (match(TokenType::SEMICOLON))
     {
-        // لا شيء
+        // لا شيء - تم استهلاك الفاصلة
     }
 
     // تحليل التعريفات
-    while (check(TokenType::VARIABLE) || check(TokenType::CONSTANT) ||
-           check(TokenType::PROCEDURE))
+    while (check(TokenType::VARIABLE) || check(TokenType::CONSTANT))
     {
         std::cout << "[DBG] parsing declaration, current token=" << peek().typeToString()
                   << " ('" << peek().value << ")" << std::endl;
@@ -121,15 +136,18 @@ std::unique_ptr<ProgramNode> Parser::parseProgram()
     }
 
     // تحليل الجمل
-    while (!check(TokenType::END) && !isAtEnd())
+    while (!isAtEnd() && !check(TokenType::END))
     {
         std::cout << "[DBG] parsing statement, current token=" << peek().typeToString()
                   << " ('" << peek().value << ") at line=" << peek().line << std::endl;
         program->statements.push_back(parseStatement());
     }
 
-    // في هذه اللغة لا يوجد 'نهاية' للبرنامج ككل في الأمثلة
-    // لذا لا نتوقع 'نهاية' هنا وننهي عند نهاية الملف
+    // قبول كلمة "نهاية" اختيارية في النهاية
+    if (match(TokenType::END))
+    {
+        std::cout << "[DBG] found END keyword" << std::endl;
+    }
 
     return program;
 }
@@ -157,21 +175,21 @@ std::unique_ptr<VariableDeclarationNode> Parser::parseVariableDeclaration()
     std::cout << "[DBG] parseVariableDeclaration: expecting IDENTIFIER, got "
               << peek().typeToString() << " ('" << peek().value << ") at line="
               << peek().line << ", col=" << peek().column << std::endl;
+
     declaration->name = consume(TokenType::IDENTIFIER, "توقع اسم المتغير").value;
     std::cout << "[DBG] name='" << declaration->name << "' next="
               << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
 
-    // نوع اختياري: ": نوع" مثل ": صحيح" أو ": حقيقي"...
+    // نوع اختياري: ": نوع"
     if (match(TokenType::COLON))
     {
         std::cout << "[DBG] saw ':' then token=" << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
-        // كن متساهلًا: تخطَّ كل شيء حتى '=' أو ';' (نوع وتعليقات محتملة)
+        // تخطي النوع
         while (!check(TokenType::ASSIGN) && !check(TokenType::SEMICOLON) && !isAtEnd())
         {
             std::cout << "[DBG] skipping token after ':' -> " << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
             advance();
         }
-        std::cout << "[DBG] after type skip, at token=" << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
     }
 
     if (match(TokenType::ASSIGN))
@@ -179,9 +197,7 @@ std::unique_ptr<VariableDeclarationNode> Parser::parseVariableDeclaration()
         declaration->initialValue = parseExpression();
     }
 
-    // debug: قبل استهلاك الفاصلة المنقوطة
     consume(TokenType::SEMICOLON, "توقع ';' بعد تعريف المتغير");
-    // debug: بعد استهلاك الفاصلة المنقوطة
 
     return declaration;
 }
@@ -191,6 +207,7 @@ std::unique_ptr<ConstantDeclarationNode> Parser::parseConstantDeclaration()
     auto declaration = std::make_unique<ConstantDeclarationNode>();
 
     declaration->name = consume(TokenType::IDENTIFIER, "توقع اسم الثابت").value;
+
     // نوع اختياري للثابت
     if (match(TokenType::COLON))
     {
@@ -199,6 +216,7 @@ std::unique_ptr<ConstantDeclarationNode> Parser::parseConstantDeclaration()
             advance();
         }
     }
+
     consume(TokenType::ASSIGN, "توقع '=' بعد اسم الثابت");
     declaration->value = parseExpression();
     consume(TokenType::SEMICOLON, "توقع ';' بعد تعريف الثابت");
@@ -210,9 +228,9 @@ std::unique_ptr<ASTNode> Parser::parseStatement()
 {
     std::cout << "[DBG] parseStatement at token=" << peek().typeToString()
               << " ('" << peek().value << ") line=" << peek().line << std::endl;
+
     if (check(TokenType::IDENTIFIER))
     {
-        // قد تكون جملة إسناد (identifier = expr;)
         return parseAssignment();
     }
     else if (match(TokenType::PRINT))
@@ -238,7 +256,7 @@ std::unique_ptr<ASTNode> Parser::parseStatement()
     else if (match(TokenType::SEMICOLON))
     {
         // تجاهل الفواصل المنقوطة الفارغة بين الجمل
-        return std::make_unique<VariableNode>();
+        return std::make_unique<VariableNode>("__empty__");
     }
     else
     {
@@ -255,7 +273,6 @@ std::unique_ptr<AssignmentNode> Parser::parseAssignment()
     assignment->variableName = consume(TokenType::IDENTIFIER, "توقع اسم المتغير").value;
     consume(TokenType::ASSIGN, "توقع '=' في التعيين");
     assignment->value = parseExpression();
-
     consume(TokenType::SEMICOLON, "توقع ';' بعد الجملة");
 
     return assignment;
@@ -313,6 +330,7 @@ std::unique_ptr<IfNode> Parser::parseIfStatement()
     }
 
     consume(TokenType::END, "توقع كلمة 'نهاية' لجملة if");
+
     // السماح بشكل "نهاية اذا" مع فاصلة منقوطة
     match(TokenType::IF);
     match(TokenType::SEMICOLON);
@@ -325,9 +343,8 @@ std::unique_ptr<WhileNode> Parser::parseWhileStatement()
     auto whileStmt = std::make_unique<WhileNode>();
 
     whileStmt->condition = parseExpression();
-    // السماح بوجود 'فان' بعد شرط الحلقة كما في الأمثلة
-    match(TokenType::THEN);
-    // السماح بوجود 'فان' بعد الشرط كما في الأمثلة
+
+    // السماح بوجود 'فان' بعد شرط الحلقة
     match(TokenType::THEN);
 
     // تحليل جسم الحلقة
@@ -337,6 +354,7 @@ std::unique_ptr<WhileNode> Parser::parseWhileStatement()
     }
 
     consume(TokenType::END, "توقع كلمة 'نهاية' لجملة while");
+
     // السماح بشكل "نهاية طالما" مع فاصلة منقوطة
     match(TokenType::WHILE);
     match(TokenType::SEMICOLON);
@@ -374,9 +392,8 @@ std::unique_ptr<ASTNode> Parser::parseComparison()
            match(TokenType::LESS) || match(TokenType::LESS_EQUAL) ||
            match(TokenType::GREATER) || match(TokenType::GREATER_EQUAL))
     {
-
-        auto binaryOp = std::make_unique<BinaryOpNode>();
-        binaryOp->op = previous().type;
+        TokenType op = previous().type;
+        auto binaryOp = std::make_unique<BinaryOpNode>(op);
         binaryOp->left = std::move(expr);
         binaryOp->right = parseTerm();
         expr = std::move(binaryOp);
@@ -392,9 +409,8 @@ std::unique_ptr<ASTNode> Parser::parseTerm()
     while (match(TokenType::PLUS) || match(TokenType::MINUS) ||
            match(TokenType::OR))
     {
-
-        auto binaryOp = std::make_unique<BinaryOpNode>();
-        binaryOp->op = previous().type;
+        TokenType op = previous().type;
+        auto binaryOp = std::make_unique<BinaryOpNode>(op);
         binaryOp->left = std::move(expr);
         binaryOp->right = parseFactor();
         expr = std::move(binaryOp);
@@ -410,9 +426,8 @@ std::unique_ptr<ASTNode> Parser::parseFactor()
     while (match(TokenType::MULTIPLY) || match(TokenType::DIVIDE) ||
            match(TokenType::MOD) || match(TokenType::AND))
     {
-
-        auto binaryOp = std::make_unique<BinaryOpNode>();
-        binaryOp->op = previous().type;
+        TokenType op = previous().type;
+        auto binaryOp = std::make_unique<BinaryOpNode>(op);
         binaryOp->left = std::move(expr);
         binaryOp->right = parsePrimary();
         expr = std::move(binaryOp);
@@ -426,16 +441,13 @@ std::unique_ptr<ASTNode> Parser::parsePrimary()
     if (match(TokenType::NUMBER) || match(TokenType::REAL_LITERAL) ||
         match(TokenType::STRING_LITERAL))
     {
-        auto literal = std::make_unique<LiteralNode>();
-        literal->type = previous().type;
-        literal->value = previous().value;
+        auto literal = std::make_unique<LiteralNode>(previous().type, previous().value);
         return literal;
     }
 
     if (match(TokenType::IDENTIFIER))
     {
-        auto variable = std::make_unique<VariableNode>();
-        variable->name = previous().value;
+        auto variable = std::make_unique<VariableNode>(previous().value);
         return variable;
     }
 
@@ -448,8 +460,7 @@ std::unique_ptr<ASTNode> Parser::parsePrimary()
 
     if (match(TokenType::NOT) || match(TokenType::MINUS))
     {
-        auto unaryOp = std::make_unique<UnaryOpNode>();
-        unaryOp->op = previous().type;
+        auto unaryOp = std::make_unique<UnaryOpNode>(previous().type);
         unaryOp->operand = parsePrimary();
         return unaryOp;
     }
@@ -457,14 +468,14 @@ std::unique_ptr<ASTNode> Parser::parsePrimary()
     throw ParseError(peek(), "توقع تعبير صالح");
 }
 
-// دوال مساعدة للتصحيح
+// دوال مساعدة للتصحيح - الإصدار المصحح
 void Parser::printAST(const std::unique_ptr<ASTNode> &node, int depth) const
 {
     if (!node)
         return;
 
     std::string indent(depth * 2, ' ');
-    std::cout << indent << "├─ " << node->toString() << std::endl;
+    std::cout << indent << "├─ " << node->toString() << " [" << node->getTypeName() << "]" << std::endl;
 
     if (auto program = dynamic_cast<ProgramNode *>(node.get()))
     {
@@ -497,6 +508,14 @@ void Parser::printAST(const std::unique_ptr<ASTNode> &node, int depth) const
             printAST(stmt, depth + 1);
         }
     }
+    else if (auto repeatStmt = dynamic_cast<RepeatNode *>(node.get()))
+    {
+        for (const auto &stmt : repeatStmt->body)
+        {
+            printAST(stmt, depth + 1);
+        }
+        printAST(repeatStmt->condition, depth + 1);
+    }
     else if (auto binaryOp = dynamic_cast<BinaryOpNode *>(node.get()))
     {
         printAST(binaryOp->left, depth + 1);
@@ -505,6 +524,34 @@ void Parser::printAST(const std::unique_ptr<ASTNode> &node, int depth) const
     else if (auto unaryOp = dynamic_cast<UnaryOpNode *>(node.get()))
     {
         printAST(unaryOp->operand, depth + 1);
+    }
+    else if (auto varDecl = dynamic_cast<VariableDeclarationNode *>(node.get()))
+    {
+        if (varDecl->initialValue)
+        {
+            printAST(varDecl->initialValue, depth + 1);
+        }
+    }
+    else if (auto constDecl = dynamic_cast<ConstantDeclarationNode *>(node.get()))
+    {
+        if (constDecl->value)
+        {
+            printAST(constDecl->value, depth + 1);
+        }
+    }
+    else if (auto assignment = dynamic_cast<AssignmentNode *>(node.get()))
+    {
+        if (assignment->value)
+        {
+            printAST(assignment->value, depth + 1);
+        }
+    }
+    else if (auto printStmt = dynamic_cast<PrintNode *>(node.get()))
+    {
+        if (printStmt->expression)
+        {
+            printAST(printStmt->expression, depth + 1);
+        }
     }
 }
 

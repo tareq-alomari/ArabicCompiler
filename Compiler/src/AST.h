@@ -4,6 +4,7 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <iostream>
 #include "Lexer.h"
 
 // أنواع العقد في الشجرة التجريدية
@@ -41,6 +42,12 @@ struct ProgramNode : public ASTNode
     std::vector<std::unique_ptr<ASTNode>> statements;
 
     ProgramNode() { type = NodeType::PROGRAM; }
+
+    // constructor with name
+    ProgramNode(const std::string &programName) : name(programName)
+    {
+        type = NodeType::PROGRAM;
+    }
 
     std::string toString() const override
     {
@@ -323,8 +330,7 @@ struct LiteralNode : public ASTNode
     LiteralNode(TokenType type, const std::string &val)
         : literalType(type), value(val)
     {
-        // التصحيح: تعيين نوع العقدة الصحيح
-        this->type = NodeType::LITERAL;
+        type = NodeType::LITERAL;
     }
 
     std::string toString() const override
@@ -363,8 +369,18 @@ struct VariableNode : public ASTNode
         type = NodeType::VARIABLE;
     }
 
+    // default constructor
+    VariableNode() : name("")
+    {
+        type = NodeType::VARIABLE;
+    }
+
     std::string toString() const override
     {
+        if (name.empty())
+        {
+            return "متغير: [غير مسمى]";
+        }
         return "متغير: " + name;
     }
 
@@ -410,11 +426,14 @@ public:
         {
             print(ifStmt->condition, newPrefix, false);
             // عرض فرع then
-            std::cout << newPrefix << "├── then:" << std::endl;
-            for (size_t i = 0; i < ifStmt->thenBranch.size(); i++)
+            if (!ifStmt->thenBranch.empty())
             {
-                bool lastThen = (i == ifStmt->thenBranch.size() - 1) && ifStmt->elseBranch.empty();
-                print(ifStmt->thenBranch[i], newPrefix + "│   ", lastThen);
+                std::cout << newPrefix << "├── then:" << std::endl;
+                for (size_t i = 0; i < ifStmt->thenBranch.size(); i++)
+                {
+                    bool lastThen = (i == ifStmt->thenBranch.size() - 1) && ifStmt->elseBranch.empty();
+                    print(ifStmt->thenBranch[i], newPrefix + "│   ", lastThen);
+                }
             }
             // عرض فرع else إن وجد
             if (!ifStmt->elseBranch.empty())
@@ -431,21 +450,27 @@ public:
         {
             print(whileStmt->condition, newPrefix, false);
             // عرض جسم الحلقة
-            std::cout << newPrefix << "└── body:" << std::endl;
-            for (size_t i = 0; i < whileStmt->body.size(); i++)
+            if (!whileStmt->body.empty())
             {
-                bool lastBody = (i == whileStmt->body.size() - 1);
-                print(whileStmt->body[i], newPrefix + "    ", lastBody);
+                std::cout << newPrefix << "└── body:" << std::endl;
+                for (size_t i = 0; i < whileStmt->body.size(); i++)
+                {
+                    bool lastBody = (i == whileStmt->body.size() - 1);
+                    print(whileStmt->body[i], newPrefix + "    ", lastBody);
+                }
             }
         }
         else if (auto repeatStmt = dynamic_cast<RepeatNode *>(node.get()))
         {
             // عرض جسم الحلقة
-            std::cout << newPrefix << "├── body:" << std::endl;
-            for (size_t i = 0; i < repeatStmt->body.size(); i++)
+            if (!repeatStmt->body.empty())
             {
-                bool lastBody = (i == repeatStmt->body.size() - 1);
-                print(repeatStmt->body[i], newPrefix + "│   ", lastBody);
+                std::cout << newPrefix << "├── body:" << std::endl;
+                for (size_t i = 0; i < repeatStmt->body.size(); i++)
+                {
+                    bool lastBody = (i == repeatStmt->body.size() - 1);
+                    print(repeatStmt->body[i], newPrefix + "│   ", lastBody);
+                }
             }
             print(repeatStmt->condition, newPrefix, true);
         }
@@ -458,6 +483,42 @@ public:
         {
             print(unaryOp->operand, newPrefix, true);
         }
+        else if (auto varDecl = dynamic_cast<VariableDeclarationNode *>(node.get()))
+        {
+            if (varDecl->initialValue)
+            {
+                print(varDecl->initialValue, newPrefix, true);
+            }
+        }
+        else if (auto constDecl = dynamic_cast<ConstantDeclarationNode *>(node.get()))
+        {
+            if (constDecl->value)
+            {
+                print(constDecl->value, newPrefix, true);
+            }
+        }
+        else if (auto assignment = dynamic_cast<AssignmentNode *>(node.get()))
+        {
+            if (assignment->value)
+            {
+                print(assignment->value, newPrefix, true);
+            }
+        }
+        else if (auto printStmt = dynamic_cast<PrintNode *>(node.get()))
+        {
+            if (printStmt->expression)
+            {
+                print(printStmt->expression, newPrefix, true);
+            }
+        }
+    }
+
+    // overload for raw pointers
+    static void print(ASTNode *node, const std::string &prefix = "", bool isLast = true)
+    {
+        if (!node)
+            return;
+        print(std::unique_ptr<ASTNode>(node), prefix, isLast);
     }
 };
 

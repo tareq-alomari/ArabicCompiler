@@ -7,6 +7,7 @@
 #include <fstream>
 #include <unordered_map>
 #include <unordered_set>
+#include <memory>
 
 enum class InstructionType
 {
@@ -57,15 +58,30 @@ struct Instruction
         case InstructionType::STORE:
             return "STORE " + operand1 + ", " + operand2;
         case InstructionType::ADD:
-            return "ADD " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "ADD " + operand1 + ", " + operand2;
+            else
+                return "ADD " + operand1 + ", " + operand2 + ", " + operand3;
         case InstructionType::SUB:
-            return "SUB " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "SUB " + operand1 + ", " + operand2;
+            else
+                return "SUB " + operand1 + ", " + operand2 + ", " + operand3;
         case InstructionType::MUL:
-            return "MUL " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "MUL " + operand1 + ", " + operand2;
+            else
+                return "MUL " + operand1 + ", " + operand2 + ", " + operand3;
         case InstructionType::DIV:
-            return "DIV " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "DIV " + operand1 + ", " + operand2;
+            else
+                return "DIV " + operand1 + ", " + operand2 + ", " + operand3;
         case InstructionType::MOD:
-            return "MOD " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "MOD " + operand1 + ", " + operand2;
+            else
+                return "MOD " + operand1 + ", " + operand2 + ", " + operand3;
         case InstructionType::JMP:
             return "JMP " + operand1;
         case InstructionType::JZ:
@@ -95,9 +111,15 @@ struct Instruction
         case InstructionType::JLE:
             return "JLE " + operand1;
         case InstructionType::OR:
-            return "OR " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "OR " + operand1 + ", " + operand2;
+            else
+                return "OR " + operand1 + ", " + operand2 + ", " + operand3;
         case InstructionType::AND:
-            return "AND " + operand1 + ", " + operand2 + ", " + operand3;
+            if (operand3.empty())
+                return "AND " + operand1 + ", " + operand2;
+            else
+                return "AND " + operand1 + ", " + operand2 + ", " + operand3;
         default:
             return "UNKNOWN";
         }
@@ -111,7 +133,6 @@ private:
     std::unordered_map<std::string, std::string> symbolTable;
     int labelCounter;
     int tempVarCounter;
-    // إدارة السلاسل النصية لطباعتها في التجميع و C
     std::vector<std::string> stringLiterals;
     std::unordered_map<std::string, std::string> stringToLabel;
 
@@ -141,6 +162,9 @@ public:
     void generateCCode(const std::string &filename);
     void generateIntermediateCode(const std::string &filename);
     void displayInstructions() const;
+
+    // دالة مساعدة جديدة للتحقق من وجود أخطاء
+    bool hasErrors() const { return instructions.empty(); }
 };
 
 #endif

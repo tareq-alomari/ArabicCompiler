@@ -1,21 +1,38 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+#include <memory>
 #include "Lexer.h"
 #include "Parser.h"
 #include "Compiler.h"
 
+// قراءة الملف العربي باستخدام الترميز الصحيح
 std::string readFile(const std::string &filename)
 {
-    std::ifstream file(filename);
+    std::ifstream file(filename, std::ios::binary);
     if (!file.is_open())
     {
+        std::cerr << "خطأ: لا يمكن فتح الملف: " << filename << std::endl;
         throw std::runtime_error("لا يمكن فتح الملف: " + filename);
     }
 
     std::stringstream buffer;
     buffer << file.rdbuf();
-    return buffer.str();
+    std::string content = buffer.str();
+
+    // محاولة تحويل الترميز إذا كان هناك مشاكل
+    if (!content.empty() && static_cast<unsigned char>(content[0]) == 0xEF &&
+        content.size() > 2 && static_cast<unsigned char>(content[1]) == 0xBB &&
+        static_cast<unsigned char>(content[2]) == 0xBF)
+    {
+        // إزالة BOM UTF-8 إذا كان موجوداً
+        content = content.substr(3);
+    }
+
+    return content;
 }
 
 void printTokens(const std::vector<Token> &tokens)
@@ -26,7 +43,21 @@ void printTokens(const std::vector<Token> &tokens)
     for (const auto &token : tokens)
     {
         std::cout << "السطر " << token.line << ", العمود " << token.column << ": "
-                  << token.typeToString() << " -> '" << token.value << "'" << std::endl;
+                  << token.typeToString() << " -> '";
+
+        // طباعة القيمة مع التعامل مع الأحرف غير القابلة للطباعة
+        for (char c : token.value)
+        {
+            if (c >= 32 && c < 127)
+            {
+                std::cout << c;
+            }
+            else
+            {
+                std::cout << "?";
+            }
+        }
+        std::cout << "'" << std::endl;
     }
     std::cout << std::endl;
 }
@@ -43,16 +74,23 @@ void displayHelp()
     std::cout << "  --ir      توليد كود وسيط" << std::endl;
     std::cout << "  --all     توليد جميع المخرجات" << std::endl;
     std::cout << "  --tokens  عرض الرموز المميزة" << std::endl;
+    std::cout << "  --ast     عرض شجرة الاشتقاق النحوي" << std::endl;
     std::cout << "  --help    عرض هذه المساعدة" << std::endl;
     std::cout << std::endl;
     std::cout << "أمثلة:" << std::endl;
     std::cout << "  ArabicCompiler program.arabic --all" << std::endl;
     std::cout << "  ArabicCompiler program.arabic --asm --tokens" << std::endl;
+    std::cout << "  ArabicCompiler program.arabic --tokens --ast" << std::endl;
 }
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2 || std::string(argv[1]) == "--help")
+// إعداد الترميز للمخرجات العربية
+#ifdef _WIN32
+    system("chcp 65001 > nul");
+#endif
+
+    if (argc < 2 || (argc >= 2 && std::string(argv[1]) == "--help"))
     {
         displayHelp();
         return 0;
@@ -63,6 +101,7 @@ int main(int argc, char *argv[])
     bool generateC = false;
     bool generateIr = false;
     bool showTokens = false;
+    bool showAST = false;
 
     // معالجة الخيارات
     for (int i = 2; i < argc; i++)
@@ -80,6 +119,8 @@ int main(int argc, char *argv[])
         }
         else if (option == "--tokens")
             showTokens = true;
+        else if (option == "--ast")
+            showAST = true;
         else
         {
             std::cerr << "❌ خيار غير معروف: " << option << std::endl;
@@ -89,31 +130,23 @@ int main(int argc, char *argv[])
     }
 
     // إذا لم يتم تحديد أي خيار، استخدم الافتراضي
-    if (!generateAsm && !generateC && !generateIr)
+    if (!generateAsm && !generateC && !generateIr && !showTokens && !showAST)
     {
-        generateAsm = true;
+        generateAsm = true; // الافتراضي: توليد كود التجميع
     }
 
     try
     {
         std::string sourceCode = readFile(filename);
         std::cout << "📁 جاري تحليل الملف: " << filename << std::endl;
+        std::cout << "📏 طول النص: " << sourceCode.length() << " حرف" << std::endl;
 
         // التحليل اللغوي
         Lexer lexer(sourceCode);
         auto tokens = lexer.tokenize();
 
-        if (showTokens)
-        {
-            printTokens(tokens);
-            // إذا كان الهدف فقط عرض الرموز المميزة، ننهي هنا بنجاح
-            if (!generateAsm && !generateC && !generateIr)
-            {
-                return 0;
-            }
-        }
-
         // التحقق من الأخطاء اللغوية
+        bool hasLexicalErrors = false;
         for (const auto &token : tokens)
         {
             if (token.type == TokenType::ERROR)
@@ -121,11 +154,28 @@ int main(int argc, char *argv[])
                 std::cerr << "❌ خطأ لغوي في السطر " << token.line
                           << ", العمود " << token.column << ": "
                           << token.value << std::endl;
-                return 1;
+                hasLexicalErrors = true;
             }
         }
 
-        std::cout << "✅ التحليل اللغوي تم بنجاح!" << std::endl;
+        if (hasLexicalErrors)
+        {
+            std::cerr << "❌ فشل التحليل اللغوي بسبب وجود أخطاء." << std::endl;
+            return 1;
+        }
+
+        // إذا طلب المستخدم عرض الرموز فقط
+        if (showTokens)
+        {
+            printTokens(tokens);
+            if (!generateAsm && !generateC && !generateIr && !showAST)
+            {
+                std::cout << "✅ عرض الرموز المميزة تم بنجاح!" << std::endl;
+                return 0;
+            }
+        }
+
+        std::cout << "✅ التحليل اللغوي تم بنجاح! (" << tokens.size() << " رمز)" << std::endl;
 
         // التحليل النحوي
         Parser parser(tokens);
@@ -133,50 +183,102 @@ int main(int argc, char *argv[])
 
         if (!program)
         {
-            std::cerr << "❌ خطأ نحوي: فشل في تحليل البرنامج" << std::endl;
+            std::cerr << "❌ فشل التحليل النحوي." << std::endl;
             return 1;
         }
 
         std::cout << "✅ التحليل النحوي تم بنجاح!" << std::endl;
 
+        // عرض شجرة الاشتقاق النحوي إذا طلب المستخدم
+        if (showAST)
+        {
+            std::cout << "🌳 شجرة الاشتقاق النحوي (AST):" << std::endl;
+            std::cout << "=============================" << std::endl;
+
+            // استخدام الدالة العادية مباشرة
+            parser.printAST(std::unique_ptr<ASTNode>(static_cast<ASTNode *>(program.get())));
+            parser.printProgramStructure(program.get());
+
+            if (!generateAsm && !generateC && !generateIr)
+            {
+                std::cout << "✅ عرض الشجرة النحوية تم بنجاح!" << std::endl;
+                return 0;
+            }
+        }
         // الترجمة
         Compiler compiler;
         auto instructions = compiler.compile(std::move(program));
 
+        if (instructions.empty())
+        {
+            std::cerr << "⚠️  لم يتم توليد أي تعليمات. قد يكون البرنامج فارغاً." << std::endl;
+        }
+
         std::cout << "🔧 جاري توليد المخرجات..." << std::endl;
 
+        // توليد أسماء الملفات الناتجة
+        std::string baseName = filename;
+        size_t last_dot = filename.find_last_of('.');
+        if (last_dot != std::string::npos)
+        {
+            baseName = filename.substr(0, last_dot);
+        }
+
+        // إضافة لاحقة لتجنب الكتابة فوق الملف الأصلي
+        baseName = baseName + "_output";
+
         // توليد المخرجات المطلوبة
-        std::string baseName = filename.substr(0, filename.find_last_of('.'));
+        bool generatedAnyOutput = false;
 
         if (generateIr)
         {
             std::string irFile = baseName + "_intermediate.txt";
             compiler.generateIntermediateCode(irFile);
-            std::cout << "📄 الكود الوسيط: " << irFile << std::endl;
+            std::cout << "📄 تم توليد الكود الوسيط: " << irFile << std::endl;
+            generatedAnyOutput = true;
         }
 
         if (generateC)
         {
             std::string cFile = baseName + ".c";
             compiler.generateCCode(cFile);
-            std::cout << "📄 كود C: " << cFile << std::endl;
+            std::cout << "📄 تم توليد كود C: " << cFile << std::endl;
+            generatedAnyOutput = true;
         }
 
         if (generateAsm)
         {
             std::string asmFile = baseName + ".asm";
             compiler.generateAssembly(asmFile);
-            std::cout << "📄 كود التجميع: " << asmFile << std::endl;
+            std::cout << "📄 تم توليد كود التجميع: " << asmFile << std::endl;
+            generatedAnyOutput = true;
         }
 
-        // عرض إحصائيات
-        compiler.displayInstructions();
+        // عرض إحصائيات وتعليمات وسيطة
+        if (!instructions.empty())
+        {
+            compiler.displayInstructions();
+        }
 
-        std::cout << "🎉 الترجمة تمت بنجاح!" << std::endl;
+        if (generatedAnyOutput)
+        {
+            std::cout << "🎉 الترجمة تمت بنجاح!" << std::endl;
+            std::cout << "📊 الملفات الناتجة:" << std::endl;
+            if (generateIr)
+                std::cout << "   - " << baseName << "_intermediate.txt (الكود الوسيط)" << std::endl;
+            if (generateC)
+                std::cout << "   - " << baseName << ".c (كود C)" << std::endl;
+            if (generateAsm)
+                std::cout << "   - " << baseName << ".asm (كود Assembly)" << std::endl;
+        }
+        else
+        {
+            std::cout << "ℹ️  لم يتم توليد أي مخرجات. تحقق من الخيارات المحددة." << std::endl;
+        }
     }
     catch (const std::exception &e)
     {
-        std::cerr << "❌ خطأ: " << e.what() << std::endl;
+        std::cerr << "❌ خطأ استثنائي: " << e.what() << std::endl;
         return 1;
     }
 

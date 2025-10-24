@@ -1,18 +1,38 @@
-@echo off & echo Building Arabic Compiler... 
 @echo off
-echo بناء المترجم العربي...
+chcp 65001 >nul
+echo ===========================================
+echo    مترجم اللغة العربية - بناء المشروع
+echo ===========================================
 
-g++ -std=c++17 -o ArabicCompiler.exe ^
-    src\Lexer.cpp ^
-    src\Parser.cpp ^
-    src\Compiler.cpp ^
-    src\main.cpp
-
-if %errorlevel% equ 0 (
-    echo ✅ تم بناء المترجم بنجاح!
-    echo الملف: ArabicCompiler.exe
-) else (
-    echo ❌ فشل بناء المترجم
+if not exist "build" (
+    echo إنشاء مجلد البناء...
+    mkdir build
 )
 
+cd build
+
+echo تكوين المشروع باستخدام CMake...
+cmake ..
+
+if %errorlevel% neq 0 (
+    echo ❌ فشل تكوين المشروع!
+    exit /b 1
+)
+
+echo بناء المشروع...
+cmake --build . --config Release
+
+if %errorlevel% equ 0 (
+    echo.
+    echo ✅ تم بناء المترجم بنجاح!
+    echo 📁 الملف التنفيذي: build\ArabicCompiler.exe
+    echo.
+    echo 🚀 يمكنك الآن استخدام:
+    echo   ArabicCompiler.exe examples\hello.arabic
+) else (
+    echo ❌ فشل بناء المشروع!
+    exit /b 1
+)
+
+cd ..
 pause
