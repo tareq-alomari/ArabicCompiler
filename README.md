@@ -79,6 +79,10 @@ cmake --build .
 
 # نسخ الملف التنفيذي للمترجم
 cp ArabicCompiler.exe ../
+
+Or 
+
+build.bat
 ```
 
 ### 2. بناء بيئة التطوير (C#)
