@@ -407,6 +407,10 @@ void Compiler::generateAssembly(const std::string &filename)
     file << ".globl main" << std::endl;
     file << "main:" << std::endl;
 
+    // لتتبع آخر عملية مقارنة
+    std::string lastCmpLeft;
+    std::string lastCmpRight;
+
     for (const auto &instr : instructions)
     {
         file << "    ";
@@ -418,12 +422,25 @@ void Compiler::generateAssembly(const std::string &filename)
             if (!instr.operand2.empty() && instr.operand2.rfind("str_", 0) == 0)
             {
                 file << "la $t0, " << instr.operand2 << std::endl;
+                file << "    sw $t0, " << instr.operand1 << std::endl;
             }
             else
             {
-                file << "li $t0, " << instr.operand2 << std::endl;
+                bool isNumber = !instr.operand2.empty() &&
+                                 (std::isdigit(static_cast<unsigned char>(instr.operand2[0])) ||
+                                  ((instr.operand2[0] == '-' || instr.operand2[0] == '+') && instr.operand2.size() > 1));
+                if (isNumber)
+                {
+                    file << "li $t0, " << instr.operand2 << std::endl;
+                    file << "    sw $t0, " << instr.operand1 << std::endl;
+                }
+                else
+                {
+                    // اعتبرها متغيرًا/مؤقتًا: حمّل قيمته
+                    file << "lw $t0, " << instr.operand2 << std::endl;
+                    file << "    sw $t0, " << instr.operand1 << std::endl;
+                }
             }
-            file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
         case InstructionType::STORE:
             file << "lw $t0, " << instr.operand2 << std::endl;
@@ -485,6 +502,42 @@ void Compiler::generateAssembly(const std::string &filename)
             break;
         case InstructionType::LABEL:
             file << instr.operand1 << ":" << std::endl;
+            break;
+        case InstructionType::CMP:
+            // خزن أسماء المتغيرات للمقارنة لاحقًا
+            lastCmpLeft = instr.operand1;
+            lastCmpRight = instr.operand2;
+            file << "# CMP " << instr.operand1 << ", " << instr.operand2 << std::endl;
+            break;
+        case InstructionType::JE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    beq $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JNE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    bne $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JG:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    bgt $t1, $t2, " << instr.operand1 << std::endl; // مافي MIPS قياسي لكن اغلب المجمعات تدعم
+            break;
+        case InstructionType::JL:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    blt $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JGE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    bge $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JLE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    ble $t1, $t2, " << instr.operand1 << std::endl;
             break;
         case InstructionType::HALT:
             file << "li $v0, 10" << std::endl;
