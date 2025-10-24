@@ -30,14 +30,16 @@ main:
     li $v0, 5
     syscall
     sw $v0, العمر
-    li $t0, العمر
+    lw $t0, العمر
     sw $t0, t1
     li $t0, 18
     sw $t0, t2
     li $t0, 0
     sw $t0, t3
     # CMP t1, t2
-    # JGE L2
+    lw $t1, t1
+    lw $t2, t2
+    bge $t1, $t2, L2
     j L3
     L2:
     li $t0, 1

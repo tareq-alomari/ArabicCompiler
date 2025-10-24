@@ -43,14 +43,16 @@ main:
     lw $t0, t3
     sw $t0, العداد
     L0:
-    li $t0, العداد
+    lw $t0, العداد
     sw $t0, t4
     li $t0, 10
     sw $t0, t5
     li $t0, 0
     sw $t0, t6
     # CMP t4, t5
-    # JLE L2
+    lw $t1, t4
+    lw $t2, t5
+    ble $t1, $t2, L2
     j L3
     L2:
     li $t0, 1
@@ -58,9 +60,9 @@ main:
     L3:
     lw $t0, t6
     beqz $t0, L1
-    li $t0, المجموع
+    lw $t0, المجموع
     sw $t0, t7
-    li $t0, العداد
+    lw $t0, العداد
     sw $t0, t8
     lw $t1, t7
     lw $t2, t8
@@ -68,7 +70,7 @@ main:
     sw $t0, t9
     lw $t0, t9
     sw $t0, المجموع
-    li $t0, العداد
+    lw $t0, العداد
     sw $t0, t10
     li $t0, 1
     sw $t0, t11
@@ -86,7 +88,7 @@ main:
     li $v0, 4
     la $a0, newline
     syscall
-    li $t0, المجموع
+    lw $t0, المجموع
     sw $t0, t13
     li $v0, 1
     lw $a0, t13

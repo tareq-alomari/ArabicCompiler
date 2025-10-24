@@ -1,5 +1,11 @@
-tokens_example1 1 0.00921316
-build_all_example1 1 0.00783372
-build_all_example2 1 0.0113458
-build_all_example3 1 0.00572837
+tokens_example1 3 0.00256613
+build_all_example1 3 0.00221371
+build_all_example2 3 0.00126643
+build_all_example3 3 0.00159908
+example1_ir 1 0.0214861
+example1_c 1 0.0203407
+example2_ir 1 0.0294933
+example2_asm 1 0.0332464
+example3_ir 1 0.0372212
+example3_asm 1 0.0181057
 ---

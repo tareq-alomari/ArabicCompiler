@@ -26,6 +26,55 @@ add_custom_command(TARGET ArabicCompiler POST_BUILD
     COMMENT "نسخ الملف القابل للتنفيذ"
 )
 
+# -----------------
+# Testing (CTest)
+# -----------------
+include(CTest)
+if(BUILD_TESTING)
+  message(STATUS "Enabling tests")
+  add_test(NAME example1_ir
+           COMMAND ${CMAKE_COMMAND}
+                   -DARG_BIN=$<TARGET_FILE:ArabicCompiler>
+                   -DINPUT=${CMAKE_SOURCE_DIR}/../Examples/example1.arabic
+                   -DGEN_IR=ON
+                   -P ${CMAKE_SOURCE_DIR}/tests/RunOne.cmake)
+
+  add_test(NAME example1_c
+           COMMAND ${CMAKE_COMMAND}
+                   -DARG_BIN=$<TARGET_FILE:ArabicCompiler>
+                   -DINPUT=${CMAKE_SOURCE_DIR}/../Examples/example1.arabic
+                   -DGEN_C=ON
+                   -P ${CMAKE_SOURCE_DIR}/tests/RunOne.cmake)
+
+  add_test(NAME example2_ir
+           COMMAND ${CMAKE_COMMAND}
+                   -DARG_BIN=$<TARGET_FILE:ArabicCompiler>
+                   -DINPUT=${CMAKE_SOURCE_DIR}/../Examples/example2.arabic
+                   -DGEN_IR=ON
+                   -P ${CMAKE_SOURCE_DIR}/tests/RunOne.cmake)
+
+  add_test(NAME example2_asm
+           COMMAND ${CMAKE_COMMAND}
+                   -DARG_BIN=$<TARGET_FILE:ArabicCompiler>
+                   -DINPUT=${CMAKE_SOURCE_DIR}/../Examples/example2.arabic
+                   -DGEN_ASM=ON
+                   -P ${CMAKE_SOURCE_DIR}/tests/RunOne.cmake)
+
+  add_test(NAME example3_ir
+           COMMAND ${CMAKE_COMMAND}
+                   -DARG_BIN=$<TARGET_FILE:ArabicCompiler>
+                   -DINPUT=${CMAKE_SOURCE_DIR}/../Examples/example3.arabic
+                   -DGEN_IR=ON
+                   -P ${CMAKE_SOURCE_DIR}/tests/RunOne.cmake)
+
+  add_test(NAME example3_asm
+           COMMAND ${CMAKE_COMMAND}
+                   -DARG_BIN=$<TARGET_FILE:ArabicCompiler>
+                   -DINPUT=${CMAKE_SOURCE_DIR}/../Examples/example3.arabic
+                   -DGEN_ASM=ON
+                   -P ${CMAKE_SOURCE_DIR}/tests/RunOne.cmake)
+endif()
+
 # =====================
 # اختبارات باستخدام CTest
 # =====================

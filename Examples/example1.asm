@@ -38,7 +38,7 @@ main:
     li $v0, 5
     syscall
     sw $v0, س
-    li $t0, س
+    lw $t0, س
     sw $t0, t2
     li $t0, 2
     sw $t0, t3
@@ -60,7 +60,7 @@ main:
     li $v0, 4
     la $a0, newline
     syscall
-    li $t0, ن
+    lw $t0, ن
     sw $t0, t7
     li $v0, 1
     lw $a0, t7
