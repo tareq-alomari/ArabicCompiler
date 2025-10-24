@@ -1,0 +1,592 @@
+Start testing: Oct 24 01:51 UTC
+----------------------------------------------------------
+1/4 Testing: tokens_example1
+1/4 Test: tokens_example1
+Command: "/workspace/Compiler/build/ArabicCompiler" "/workspace/Compiler/../Examples/example1.arabic" "--tokens"
+Directory: /workspace/Compiler/build
+"tokens_example1" start time: Oct 24 01:51 UTC
+Output:
+----------------------------------------------------------
+📁 جاري تحليل الملف: /workspace/Compiler/../Examples/example1.arabic
+=== تحليل الترميز ===
+طول النص: 214 حرف
+Position 19: Hex=0xd8 Char='?'
+Position 20: Hex=0xa8 Char='?'
+Position 21: Hex=0xd8 Char='?'
+Position 22: Hex=0xb1 Char='?'
+Position 23: Hex=0xd9 Char='?'
+Position 24: Hex=0x86 Char='?'
+Position 25: Hex=0xd8 Char='?'
+Position 26: Hex=0xa7 Char='?'
+Position 27: Hex=0xd9 Char='?'
+Position 28: Hex=0x85 Char='?'
+Position 29: Hex=0xd8 Char='?'
+Position 30: Hex=0xac Char='?'
+Position 32: Hex=0xd8 Char='?'
+Position 33: Hex=0xa3 Char='?'
+Position 34: Hex=0xd8 Char='?'
+Position 35: Hex=0xb3 Char='?'
+Position 36: Hex=0xd8 Char='?'
+Position 37: Hex=0xa7 Char='?'
+Position 38: Hex=0xd8 Char='?'
+Position 39: Hex=0xb3 Char='?'
+Position 40: Hex=0xd9 Char='?'
+Position 41: Hex=0x8a Char='?'
+Position 42: Hex=0xd8 Char='?'
+Position 43: Hex=0x9b Char='?'
+Position 46: Hex=0xd9 Char='?'
+Position 47: Hex=0x85 Char='?'
+Position 48: Hex=0xd8 Char='?'
+Position 49: Hex=0xaa Char='?'
+عدد الأحرف العربية المكتشفة: 28
+=== انتهى تحليل الترميز ===
+
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=19 Line=2 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=32 Line=2 Column=14
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=42 Line=2 Column=24
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=46 Line=4 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=57 Line=4 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=62 Line=4 Column=17
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=70 Line=4 Column=25
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=73 Line=5 Column=1
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=84 Line=5 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=89 Line=5 Column=17
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=97 Line=5 Column=25
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=101 Line=7 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=134 Line=7 Column=34
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=137 Line=8 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=146 Line=8 Column=10
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=149 Line=8 Column=13
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=153 Line=10 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=158 Line=10 Column=6
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=168 Line=10 Column=16
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=171 Line=11 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=197 Line=11 Column=27
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=200 Line=12 Column=1
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=209 Line=12 Column=10
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=212 Line=12 Column=13
+🎯 الرموز المميزة:
+=================
+السطر 2, العمود 13: PROGRAM -> 'برنامج'
+السطر 2, العمود 24: IDENTIFIER -> 'أساسي'
+السطر 2, العمود 26: SEMICOLON -> '؛'
+السطر 4, العمود 11: VARIABLE -> 'متغير'
+السطر 4, العمود 14: IDENTIFIER -> 'س'
+السطر 4, العمود 16: COLON -> ':'
+السطر 4, العمود 25: INTEGER -> 'صحيح'
+السطر 4, العمود 27: SEMICOLON -> '؛'
+السطر 5, العمود 11: VARIABLE -> 'متغير'
+السطر 5, العمود 14: IDENTIFIER -> 'ن'
+السطر 5, العمود 16: COLON -> ':'
+السطر 5, العمود 25: INTEGER -> 'صحيح'
+السطر 5, العمود 27: SEMICOLON -> '؛'
+السطر 7, العمود 9: PRINT -> 'اطبع'
+السطر 7, العمود 10: LPAREN -> '('
+السطر 7, العمود 33: STRING_LITERAL -> 'أدخل رقمًا: '
+السطر 7, العمود 34: RPAREN -> ')'
+السطر 7, العمود 36: SEMICOLON -> '؛'
+السطر 8, العمود 9: READ -> 'اقرأ'
+السطر 8, العمود 10: LPAREN -> '('
+السطر 8, العمود 12: IDENTIFIER -> 'س'
+السطر 8, العمود 13: RPAREN -> ')'
+السطر 8, العمود 15: SEMICOLON -> '؛'
+السطر 10, العمود 3: IDENTIFIER -> 'ن'
+السطر 10, العمود 5: ASSIGN -> '='
+السطر 10, العمود 8: IDENTIFIER -> 'س'
+السطر 10, العمود 10: MULTIPLY -> '*'
+السطر 10, العمود 12: NUMBER -> '2'
+السطر 10, العمود 14: PLUS -> '+'
+السطر 10, العمود 16: NUMBER -> '5'
+السطر 10, العمود 18: SEMICOLON -> '؛'
+السطر 11, العمود 9: PRINT -> 'اطبع'
+السطر 11, العمود 10: LPAREN -> '('
+السطر 11, العمود 26: STRING_LITERAL -> 'الناتج: '
+السطر 11, العمود 27: RPAREN -> ')'
+السطر 11, العمود 29: SEMICOLON -> '؛'
+السطر 12, العمود 9: PRINT -> 'اطبع'
+السطر 12, العمود 10: LPAREN -> '('
+السطر 12, العمود 12: IDENTIFIER -> 'ن'
+السطر 12, العمود 13: RPAREN -> ')'
+السطر 12, العمود 15: SEMICOLON -> '؛'
+السطر 12, العمود 15: END_OF_FILE -> ''
+
+✅ التحليل اللغوي تم بنجاح!
+[DBG] Parser::parse() starting with 42 tokens
+[DBG] program name='أساسي' next token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('س) at line=4, col=14
+[DBG] name='س' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('ن) at line=5, col=14
+[DBG] name='ن' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=7
+[DBG] parseStatement at token=PRINT ('اطبع) line=7
+[DBG] parsing statement, current token=READ ('اقرأ) at line=8
+[DBG] parseStatement at token=READ ('اقرأ) line=8
+[DBG] parsing statement, current token=IDENTIFIER ('ن) at line=10
+[DBG] parseStatement at token=IDENTIFIER ('ن) line=10
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=11
+[DBG] parseStatement at token=PRINT ('اطبع) line=11
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=12
+[DBG] parseStatement at token=PRINT ('اطبع) line=12
+✅ التحليل النحوي تم بنجاح!
+🔧 جاري توليد المخرجات...
+✅ تم توليد كود التجميع في: /workspace/Compiler/../Examples/example1.asm
+📄 كود التجميع: /workspace/Compiler/../Examples/example1.asm
+
+🔧 الكود الوسيط المولد:
+====================
+  0: LOAD t0, 0
+  1: STORE س, t0
+  2: LOAD t1, 0
+  3: STORE ن, t1
+  4: PRINT STRING, str_0
+  5: READ س
+  6: LOAD t2, س
+  7: LOAD t3, 2
+  8: MUL t4, t2, t3
+  9: LOAD t5, 5
+ 10: ADD t6, t4, t5
+ 11: STORE ن, t6
+ 12: PRINT STRING, str_1
+ 13: LOAD t7, ن
+ 14: PRINT VALUE, t7
+ 15: HALT
+
+📊 إحصائيات:
+عدد التعليمات: 16
+عدد المتغيرات المؤقتة: 8
+عدد العلامات: 0
+🎉 الترجمة تمت بنجاح!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Passed.
+"tokens_example1" end time: Oct 24 01:51 UTC
+"tokens_example1" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: build_all_example1
+2/4 Test: build_all_example1
+Command: "/workspace/Compiler/build/ArabicCompiler" "/workspace/Compiler/../Examples/example1.arabic" "--all"
+Directory: /workspace/Compiler/build
+"build_all_example1" start time: Oct 24 01:51 UTC
+Output:
+----------------------------------------------------------
+📁 جاري تحليل الملف: /workspace/Compiler/../Examples/example1.arabic
+=== تحليل الترميز ===
+طول النص: 214 حرف
+Position 19: Hex=0xd8 Char='?'
+Position 20: Hex=0xa8 Char='?'
+Position 21: Hex=0xd8 Char='?'
+Position 22: Hex=0xb1 Char='?'
+Position 23: Hex=0xd9 Char='?'
+Position 24: Hex=0x86 Char='?'
+Position 25: Hex=0xd8 Char='?'
+Position 26: Hex=0xa7 Char='?'
+Position 27: Hex=0xd9 Char='?'
+Position 28: Hex=0x85 Char='?'
+Position 29: Hex=0xd8 Char='?'
+Position 30: Hex=0xac Char='?'
+Position 32: Hex=0xd8 Char='?'
+Position 33: Hex=0xa3 Char='?'
+Position 34: Hex=0xd8 Char='?'
+Position 35: Hex=0xb3 Char='?'
+Position 36: Hex=0xd8 Char='?'
+Position 37: Hex=0xa7 Char='?'
+Position 38: Hex=0xd8 Char='?'
+Position 39: Hex=0xb3 Char='?'
+Position 40: Hex=0xd9 Char='?'
+Position 41: Hex=0x8a Char='?'
+Position 42: Hex=0xd8 Char='?'
+Position 43: Hex=0x9b Char='?'
+Position 46: Hex=0xd9 Char='?'
+Position 47: Hex=0x85 Char='?'
+Position 48: Hex=0xd8 Char='?'
+Position 49: Hex=0xaa Char='?'
+عدد الأحرف العربية المكتشفة: 28
+=== انتهى تحليل الترميز ===
+
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=19 Line=2 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=32 Line=2 Column=14
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=42 Line=2 Column=24
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=46 Line=4 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=57 Line=4 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=62 Line=4 Column=17
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=70 Line=4 Column=25
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=73 Line=5 Column=1
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=84 Line=5 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=89 Line=5 Column=17
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=97 Line=5 Column=25
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=101 Line=7 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=134 Line=7 Column=34
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=137 Line=8 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=146 Line=8 Column=10
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=149 Line=8 Column=13
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=153 Line=10 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=158 Line=10 Column=6
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=168 Line=10 Column=16
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=171 Line=11 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=197 Line=11 Column=27
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=200 Line=12 Column=1
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=209 Line=12 Column=10
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=212 Line=12 Column=13
+✅ التحليل اللغوي تم بنجاح!
+[DBG] Parser::parse() starting with 42 tokens
+[DBG] program name='أساسي' next token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('س) at line=4, col=14
+[DBG] name='س' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('ن) at line=5, col=14
+[DBG] name='ن' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=7
+[DBG] parseStatement at token=PRINT ('اطبع) line=7
+[DBG] parsing statement, current token=READ ('اقرأ) at line=8
+[DBG] parseStatement at token=READ ('اقرأ) line=8
+[DBG] parsing statement, current token=IDENTIFIER ('ن) at line=10
+[DBG] parseStatement at token=IDENTIFIER ('ن) line=10
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=11
+[DBG] parseStatement at token=PRINT ('اطبع) line=11
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=12
+[DBG] parseStatement at token=PRINT ('اطبع) line=12
+✅ التحليل النحوي تم بنجاح!
+🔧 جاري توليد المخرجات...
+✅ تم توليد الكود الوسيط في: /workspace/Compiler/../Examples/example1_intermediate.txt
+📄 الكود الوسيط: /workspace/Compiler/../Examples/example1_intermediate.txt
+✅ تم توليد كود C في: /workspace/Compiler/../Examples/example1.c
+📄 كود C: /workspace/Compiler/../Examples/example1.c
+✅ تم توليد كود التجميع في: /workspace/Compiler/../Examples/example1.asm
+📄 كود التجميع: /workspace/Compiler/../Examples/example1.asm
+
+🔧 الكود الوسيط المولد:
+====================
+  0: LOAD t0, 0
+  1: STORE س, t0
+  2: LOAD t1, 0
+  3: STORE ن, t1
+  4: PRINT STRING, str_0
+  5: READ س
+  6: LOAD t2, س
+  7: LOAD t3, 2
+  8: MUL t4, t2, t3
+  9: LOAD t5, 5
+ 10: ADD t6, t4, t5
+ 11: STORE ن, t6
+ 12: PRINT STRING, str_1
+ 13: LOAD t7, ن
+ 14: PRINT VALUE, t7
+ 15: HALT
+
+📊 إحصائيات:
+عدد التعليمات: 16
+عدد المتغيرات المؤقتة: 8
+عدد العلامات: 0
+🎉 الترجمة تمت بنجاح!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[الترجمة تمت بنجاح]
+"build_all_example1" end time: Oct 24 01:51 UTC
+"build_all_example1" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: build_all_example2
+3/4 Test: build_all_example2
+Command: "/workspace/Compiler/build/ArabicCompiler" "/workspace/Compiler/../Examples/example2.arabic" "--all"
+Directory: /workspace/Compiler/build
+"build_all_example2" start time: Oct 24 01:51 UTC
+Output:
+----------------------------------------------------------
+📁 جاري تحليل الملف: /workspace/Compiler/../Examples/example2.arabic
+=== تحليل الترميز ===
+طول النص: 269 حرف
+Position 21: Hex=0xd8 Char='?'
+Position 22: Hex=0xa8 Char='?'
+Position 23: Hex=0xd8 Char='?'
+Position 24: Hex=0xb1 Char='?'
+Position 25: Hex=0xd9 Char='?'
+Position 26: Hex=0x86 Char='?'
+Position 27: Hex=0xd8 Char='?'
+Position 28: Hex=0xa7 Char='?'
+Position 29: Hex=0xd9 Char='?'
+Position 30: Hex=0x85 Char='?'
+Position 31: Hex=0xd8 Char='?'
+Position 32: Hex=0xac Char='?'
+Position 34: Hex=0xd8 Char='?'
+Position 35: Hex=0xb4 Char='?'
+Position 36: Hex=0xd8 Char='?'
+Position 37: Hex=0xb1 Char='?'
+Position 38: Hex=0xd8 Char='?'
+Position 39: Hex=0xb7 Char='?'
+Position 40: Hex=0xd9 Char='?'
+Position 41: Hex=0x8a Char='?'
+Position 42: Hex=0xd8 Char='?'
+Position 43: Hex=0x9b Char='?'
+Position 46: Hex=0xd9 Char='?'
+Position 47: Hex=0x85 Char='?'
+Position 48: Hex=0xd8 Char='?'
+Position 49: Hex=0xaa Char='?'
+عدد الأحرف العربية المكتشفة: 26
+=== انتهى تحليل الترميز ===
+
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=21 Line=2 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=34 Line=2 Column=14
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=42 Line=2 Column=22
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=46 Line=4 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=57 Line=4 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=70 Line=4 Column=25
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=78 Line=4 Column=33
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=82 Line=6 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=113 Line=6 Column=32
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=116 Line=7 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=125 Line=7 Column=10
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=136 Line=7 Column=21
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=140 Line=9 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=148 Line=9 Column=9
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=166 Line=9 Column=27
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=177 Line=10 Column=5
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=204 Line=10 Column=32
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=207 Line=11 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=220 Line=12 Column=5
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=247 Line=12 Column=32
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=250 Line=13 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=261 Line=13 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=267 Line=13 Column=18
+✅ التحليل اللغوي تم بنجاح!
+[DBG] Parser::parse() starting with 40 tokens
+[DBG] program name='شرطي' next token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('العمر) at line=4, col=22
+[DBG] name='العمر' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=6
+[DBG] parseStatement at token=PRINT ('اطبع) line=6
+[DBG] parsing statement, current token=READ ('اقرأ) at line=7
+[DBG] parseStatement at token=READ ('اقرأ) line=7
+[DBG] parsing statement, current token=IF ('اذا) at line=9
+[DBG] parseStatement at token=IF ('اذا) line=9
+[DBG] parseStatement at token=PRINT ('اطبع) line=10
+[DBG] parseStatement at token=PRINT ('اطبع) line=12
+✅ التحليل النحوي تم بنجاح!
+🔧 جاري توليد المخرجات...
+✅ تم توليد الكود الوسيط في: /workspace/Compiler/../Examples/example2_intermediate.txt
+📄 الكود الوسيط: /workspace/Compiler/../Examples/example2_intermediate.txt
+✅ تم توليد كود C في: /workspace/Compiler/../Examples/example2.c
+📄 كود C: /workspace/Compiler/../Examples/example2.c
+✅ تم توليد كود التجميع في: /workspace/Compiler/../Examples/example2.asm
+📄 كود التجميع: /workspace/Compiler/../Examples/example2.asm
+
+🔧 الكود الوسيط المولد:
+====================
+  0: LOAD t0, 0
+  1: STORE العمر, t0
+  2: PRINT STRING, str_0
+  3: READ العمر
+  4: LOAD t1, العمر
+  5: LOAD t2, 18
+  6: LOAD t3, 0
+  7: CMP t1, t2
+  8: JGE L2
+  9: JMP L3
+ 10: L2:
+ 11: LOAD t3, 1
+ 12: L3:
+ 13: JZ t3, L0
+ 14: PRINT STRING, str_1
+ 15: JMP L1
+ 16: L0:
+ 17: PRINT STRING, str_2
+ 18: L1:
+ 19: HALT
+
+📊 إحصائيات:
+عدد التعليمات: 20
+عدد المتغيرات المؤقتة: 4
+عدد العلامات: 4
+🎉 الترجمة تمت بنجاح!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[الترجمة تمت بنجاح]
+"build_all_example2" end time: Oct 24 01:51 UTC
+"build_all_example2" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: build_all_example3
+4/4 Test: build_all_example3
+Command: "/workspace/Compiler/build/ArabicCompiler" "/workspace/Compiler/../Examples/example3.arabic" "--all"
+Directory: /workspace/Compiler/build
+"build_all_example3" start time: Oct 24 01:51 UTC
+Output:
+----------------------------------------------------------
+📁 جاري تحليل الملف: /workspace/Compiler/../Examples/example3.arabic
+=== تحليل الترميز ===
+طول النص: 407 حرف
+Position 19: Hex=0xd8 Char='?'
+Position 20: Hex=0xa8 Char='?'
+Position 21: Hex=0xd8 Char='?'
+Position 22: Hex=0xb1 Char='?'
+Position 23: Hex=0xd9 Char='?'
+Position 24: Hex=0x86 Char='?'
+Position 25: Hex=0xd8 Char='?'
+Position 26: Hex=0xa7 Char='?'
+Position 27: Hex=0xd9 Char='?'
+Position 28: Hex=0x85 Char='?'
+Position 29: Hex=0xd8 Char='?'
+Position 30: Hex=0xac Char='?'
+Position 32: Hex=0xd8 Char='?'
+Position 33: Hex=0xad Char='?'
+Position 34: Hex=0xd9 Char='?'
+Position 35: Hex=0x84 Char='?'
+Position 36: Hex=0xd9 Char='?'
+Position 37: Hex=0x82 Char='?'
+Position 38: Hex=0xd8 Char='?'
+Position 39: Hex=0xa9 Char='?'
+Position 40: Hex=0xd8 Char='?'
+Position 41: Hex=0x9b Char='?'
+Position 44: Hex=0xd9 Char='?'
+Position 45: Hex=0x85 Char='?'
+Position 46: Hex=0xd8 Char='?'
+Position 47: Hex=0xaa Char='?'
+Position 48: Hex=0xd8 Char='?'
+Position 49: Hex=0xba Char='?'
+عدد الأحرف العربية المكتشفة: 28
+=== انتهى تحليل الترميز ===
+
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=19 Line=2 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=32 Line=2 Column=14
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=40 Line=2 Column=22
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=44 Line=4 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=55 Line=4 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=70 Line=4 Column=27
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=78 Line=4 Column=35
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=81 Line=5 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=92 Line=5 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=109 Line=5 Column=29
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=117 Line=5 Column=37
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=121 Line=7 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=139 Line=7 Column=19
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=142 Line=8 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=158 Line=8 Column=17
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=162 Line=10 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=174 Line=10 Column=13
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=194 Line=10 Column=33
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=205 Line=11 Column=5
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=222 Line=11 Column=22
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=239 Line=11 Column=39
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=251 Line=11 Column=51
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=258 Line=12 Column=5
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=273 Line=12 Column=20
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=289 Line=12 Column=36
+🔍 تصحيح: Char='�' ASCII=217 Hex=0xd9 Position=292 Line=13 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=303 Line=13 Column=12
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=313 Line=13 Column=22
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=317 Line=15 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=378 Line=15 Column=62
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=381 Line=16 Column=1
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=390 Line=16 Column=10
+🔍 تصحيح: Char='�' ASCII=216 Hex=0xd8 Position=405 Line=16 Column=25
+✅ التحليل اللغوي تم بنجاح!
+[DBG] Parser::parse() starting with 54 tokens
+[DBG] program name='حلقة' next token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('العداد) at line=4, col=24
+[DBG] name='العداد' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing declaration, current token=VARIABLE ('متغير)
+[DBG] parseVariableDeclaration: expecting IDENTIFIER, got IDENTIFIER ('المجموع) at line=5, col=26
+[DBG] name='المجموع' next=COLON (':)
+[DBG] saw ':' then token=INTEGER ('صحيح)
+[DBG] skipping token after ':' -> INTEGER ('صحيح)
+[DBG] after type skip, at token=SEMICOLON ('؛)
+[DBG] parsing statement, current token=IDENTIFIER ('المجموع) at line=7
+[DBG] parseStatement at token=IDENTIFIER ('المجموع) line=7
+[DBG] parsing statement, current token=IDENTIFIER ('العداد) at line=8
+[DBG] parseStatement at token=IDENTIFIER ('العداد) line=8
+[DBG] parsing statement, current token=WHILE ('طالما) at line=10
+[DBG] parseStatement at token=WHILE ('طالما) line=10
+[DBG] parseStatement at token=IDENTIFIER ('المجموع) line=11
+[DBG] parseStatement at token=IDENTIFIER ('العداد) line=12
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=15
+[DBG] parseStatement at token=PRINT ('اطبع) line=15
+[DBG] parsing statement, current token=PRINT ('اطبع) at line=16
+[DBG] parseStatement at token=PRINT ('اطبع) line=16
+✅ التحليل النحوي تم بنجاح!
+🔧 جاري توليد المخرجات...
+✅ تم توليد الكود الوسيط في: /workspace/Compiler/../Examples/example3_intermediate.txt
+📄 الكود الوسيط: /workspace/Compiler/../Examples/example3_intermediate.txt
+✅ تم توليد كود C في: /workspace/Compiler/../Examples/example3.c
+📄 كود C: /workspace/Compiler/../Examples/example3.c
+✅ تم توليد كود التجميع في: /workspace/Compiler/../Examples/example3.asm
+📄 كود التجميع: /workspace/Compiler/../Examples/example3.asm
+
+🔧 الكود الوسيط المولد:
+====================
+  0: LOAD t0, 0
+  1: STORE العداد, t0
+  2: LOAD t1, 0
+  3: STORE المجموع, t1
+  4: LOAD t2, 0
+  5: STORE المجموع, t2
+  6: LOAD t3, 1
+  7: STORE العداد, t3
+  8: L0:
+  9: LOAD t4, العداد
+ 10: LOAD t5, 10
+ 11: LOAD t6, 0
+ 12: CMP t4, t5
+ 13: JLE L2
+ 14: JMP L3
+ 15: L2:
+ 16: LOAD t6, 1
+ 17: L3:
+ 18: JZ t6, L1
+ 19: LOAD t7, المجموع
+ 20: LOAD t8, العداد
+ 21: ADD t9, t7, t8
+ 22: STORE المجموع, t9
+ 23: LOAD t10, العداد
+ 24: LOAD t11, 1
+ 25: ADD t12, t10, t11
+ 26: STORE العداد, t12
+ 27: JMP L0
+ 28: L1:
+ 29: PRINT STRING, str_0
+ 30: LOAD t13, المجموع
+ 31: PRINT VALUE, t13
+ 32: HALT
+
+📊 إحصائيات:
+عدد التعليمات: 33
+عدد المتغيرات المؤقتة: 14
+عدد العلامات: 4
+🎉 الترجمة تمت بنجاح!
+<end of output>
+Test time =   0.01 sec
+----------------------------------------------------------
+Test Pass Reason:
+Required regular expression found. Regex=[الترجمة تمت بنجاح]
+"build_all_example3" end time: Oct 24 01:51 UTC
+"build_all_example3" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 24 01:51 UTC

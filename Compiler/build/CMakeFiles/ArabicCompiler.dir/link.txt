@@ -1,0 +1,1 @@
+/usr/bin/c++ -Xlinker --dependency-file=CMakeFiles/ArabicCompiler.dir/link.d CMakeFiles/ArabicCompiler.dir/src/Lexer.cpp.o CMakeFiles/ArabicCompiler.dir/src/Parser.cpp.o CMakeFiles/ArabicCompiler.dir/src/Compiler.cpp.o CMakeFiles/ArabicCompiler.dir/src/main.cpp.o -o ArabicCompiler

@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <unordered_map>
+#include <unordered_set>
 
 enum class InstructionType
 {
@@ -110,11 +111,16 @@ private:
     std::unordered_map<std::string, std::string> symbolTable;
     int labelCounter;
     int tempVarCounter;
+    // إدارة السلاسل النصية لطباعتها في التجميع و C
+    std::vector<std::string> stringLiterals;
+    std::unordered_map<std::string, std::string> stringToLabel;
 
     std::string generateLabel();
     std::string generateTempVar();
     void emit(InstructionType type, const std::string &op1 = "",
               const std::string &op2 = "", const std::string &op3 = "");
+
+    std::string getStringLabel(const std::string &literal);
 
     void compileProgram(ProgramNode *program);
     void compileStatement(ASTNode *statement);

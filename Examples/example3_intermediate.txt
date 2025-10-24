@@ -1,0 +1,41 @@
+الكود الوسيط المولد:
+====================
+
+  0: LOAD t0, 0
+  1: STORE العداد, t0
+  2: LOAD t1, 0
+  3: STORE المجموع, t1
+  4: LOAD t2, 0
+  5: STORE المجموع, t2
+  6: LOAD t3, 1
+  7: STORE العداد, t3
+  8: L0:
+  9: LOAD t4, العداد
+ 10: LOAD t5, 10
+ 11: LOAD t6, 0
+ 12: CMP t4, t5
+ 13: JLE L2
+ 14: JMP L3
+ 15: L2:
+ 16: LOAD t6, 1
+ 17: L3:
+ 18: JZ t6, L1
+ 19: LOAD t7, المجموع
+ 20: LOAD t8, العداد
+ 21: ADD t9, t7, t8
+ 22: STORE المجموع, t9
+ 23: LOAD t10, العداد
+ 24: LOAD t11, 1
+ 25: ADD t12, t10, t11
+ 26: STORE العداد, t12
+ 27: JMP L0
+ 28: L1:
+ 29: PRINT STRING, str_0
+ 30: LOAD t13, المجموع
+ 31: PRINT VALUE, t13
+ 32: HALT
+
+جدول الرموز:
+============
+المجموع : متغير
+العداد : متغير

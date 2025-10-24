@@ -1,0 +1,24 @@
+الكود الوسيط المولد:
+====================
+
+  0: LOAD t0, 0
+  1: STORE س, t0
+  2: LOAD t1, 0
+  3: STORE ن, t1
+  4: PRINT STRING, str_0
+  5: READ س
+  6: LOAD t2, س
+  7: LOAD t3, 2
+  8: MUL t4, t2, t3
+  9: LOAD t5, 5
+ 10: ADD t6, t4, t5
+ 11: STORE ن, t6
+ 12: PRINT STRING, str_1
+ 13: LOAD t7, ن
+ 14: PRINT VALUE, t7
+ 15: HALT
+
+جدول الرموز:
+============
+ن : متغير
+س : متغير
