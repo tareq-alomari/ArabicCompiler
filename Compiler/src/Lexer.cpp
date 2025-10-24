@@ -153,29 +153,10 @@ void Lexer::skipComment()
 bool Lexer::isArabicChar(char c)
 {
     unsigned char uc = static_cast<unsigned char>(c);
-
-    // نطاقات Unicode للأحرف العربية
-    if ((uc >= 0x0600 && uc <= 0x06FF) || // العربية الأساسية
-        (uc >= 0x0750 && uc <= 0x077F) || // العربية الممتدة
-        (uc >= 0x08A0 && uc <= 0x08FF) || // العربية الممتدة-ب
-        (uc >= 0xFB50 && uc <= 0xFDFF) || // أشكال العرض-أ
-        (uc >= 0xFE70 && uc <= 0xFEFF))   // أشكال العرض-ب
-    {
+    // ملاحظة: لا يمكن التحقق من نطاقات Unicode الصحيحة باستخدام بايت منفرد في UTF-8
+    // لذلك نكتفي هنا بالسماح بأي بايت غير ASCII كجزء من معرف عربي عند الضرورة
+    if (uc >= 0x80)
         return true;
-    }
-
-    // ترميز Windows-1256 (شائع في النصوص العربية)
-    if (uc >= 0xC1 && uc <= 0xFE && uc != 0xD7 && uc != 0xF7)
-    {
-        return true;
-    }
-
-    // ترميز ISO-8859-6
-    if (uc >= 0xA0 && uc <= 0xFF && uc != 0xA1)
-    {
-        return true;
-    }
-
     return false;
 }
 
@@ -260,9 +241,49 @@ Token Lexer::readIdentifier()
     std::string identifier;
 
     // السماح بالأحرف العربية والأرقام وشرطة سفلية
-    while (position < source.length() && isIdentifierChar(peek()))
+    while (position < source.length())
     {
+        // لا تُدخل علامات الترقيم العربية ضمن المعرف
+        if (position + 1 < source.length() &&
+            static_cast<unsigned char>(source[position]) == 0xD8)
+        {
+            unsigned char nextByte = static_cast<unsigned char>(source[position + 1]);
+            if (nextByte == 0x9B /* ؛ */ || nextByte == 0x8C /* ، */)
+            {
+                break;
+            }
+        }
+
+        if (!isIdentifierChar(peek()))
+            break;
+
         identifier += advance();
+    }
+
+    // معالجة حالة التلاصق مع علامات عربية مثل '؛' أو '،' تمت قراءتها خطأً
+    if (identifier.size() >= 2)
+    {
+        unsigned char b1 = static_cast<unsigned char>(identifier[identifier.size() - 2]);
+        unsigned char b2 = static_cast<unsigned char>(identifier[identifier.size() - 1]);
+        if (b1 == 0xD8 && (b2 == 0x9B /* ؛ */ || b2 == 0x8C /* ، */))
+        {
+            // تراجع عن الاستهلاك
+            identifier.resize(identifier.size() - 2);
+            if (position >= 2)
+            {
+                position -= 2;
+                column = std::max(1, column - 2);
+            }
+        }
+    }
+    else if (!identifier.empty() && identifier.back() == ';')
+    {
+        identifier.pop_back();
+        if (position >= 1)
+        {
+            position -= 1;
+            column = std::max(1, column - 1);
+        }
     }
 
     // التحقق إذا كان معرفًا أو كلمة محجوزة
@@ -299,6 +320,29 @@ Token Lexer::getNextToken()
         if ((current < 32 || current > 126) && !std::isspace(static_cast<unsigned char>(current)))
         {
             debugChar(current);
+        }
+
+        // دعم بعض علامات الترقيم العربية متعددة البايت (UTF-8)
+        // \xD8\x9B => U+061B ARABIC SEMICOLON '؛'
+        // \xD8\x8C => U+060C ARABIC COMMA '،'
+        unsigned char ucCurrent = static_cast<unsigned char>(current);
+        if (ucCurrent == 0xD8 && position + 1 < source.length())
+        {
+            unsigned char nextByte = static_cast<unsigned char>(source[position + 1]);
+            if (nextByte == 0x9B)
+            {
+                // Arabic semicolon
+                advance();
+                advance();
+                return Token(TokenType::SEMICOLON, "؛", line, column);
+            }
+            if (nextByte == 0x8C)
+            {
+                // Arabic comma
+                advance();
+                advance();
+                return Token(TokenType::COMMA, "،", line, column);
+            }
         }
 
         // الأرقام
@@ -440,7 +484,45 @@ std::vector<Token> Lexer::tokenize()
 
     while (token.type != TokenType::END_OF_FILE)
     {
-        tokens.push_back(token);
+        // معالجة خاصة: إذا كان المعرف منتهٍ بعلامة ترقيم عربية ملتصقة، نفصلها كرمز مستقل
+        bool splitDone = false;
+        if (token.type == TokenType::IDENTIFIER)
+        {
+            const std::string &val = token.value;
+            if (val.size() >= 2)
+            {
+                unsigned char b1 = static_cast<unsigned char>(val[val.size() - 2]);
+                unsigned char b2 = static_cast<unsigned char>(val[val.size() - 1]);
+                if (b1 == 0xD8 && b2 == 0x9B) // '؛'
+                {
+                    Token idTok(TokenType::IDENTIFIER, val.substr(0, val.size() - 2), token.line, token.column);
+                    Token semiTok(TokenType::SEMICOLON, "؛", token.line, token.column + static_cast<int>(val.size() - 2));
+                    tokens.push_back(idTok);
+                    tokens.push_back(semiTok);
+                    splitDone = true;
+                }
+                else if (b1 == 0xD8 && b2 == 0x8C) // '،'
+                {
+                    Token idTok(TokenType::IDENTIFIER, val.substr(0, val.size() - 2), token.line, token.column);
+                    Token commaTok(TokenType::COMMA, "،", token.line, token.column + static_cast<int>(val.size() - 2));
+                    tokens.push_back(idTok);
+                    tokens.push_back(commaTok);
+                    splitDone = true;
+                }
+            }
+            if (!splitDone && !val.empty() && val.back() == ';')
+            {
+                Token idTok(TokenType::IDENTIFIER, val.substr(0, val.size() - 1), token.line, token.column);
+                Token semiTok(TokenType::SEMICOLON, ";", token.line, token.column + static_cast<int>(val.size() - 1));
+                tokens.push_back(idTok);
+                tokens.push_back(semiTok);
+                splitDone = true;
+            }
+        }
+        if (!splitDone)
+        {
+            tokens.push_back(token);
+        }
         if (token.type == TokenType::ERROR)
         {
             std::cout << "💥 خطأ في التحليل اللغوي: " << token.value << " في السطر " << token.line << std::endl;
@@ -448,6 +530,7 @@ std::vector<Token> Lexer::tokenize()
         }
         token = getNextToken();
     }
-
+    // أضف رمز نهاية الملف لضمان سلامة المحلل النحوي
+    tokens.push_back(token);
     return tokens;
 }

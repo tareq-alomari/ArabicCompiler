@@ -106,6 +106,11 @@ int main(int argc, char *argv[])
         if (showTokens)
         {
             printTokens(tokens);
+            // إذا كان الهدف فقط عرض الرموز المميزة، ننهي هنا بنجاح
+            if (!generateAsm && !generateC && !generateIr)
+            {
+                return 0;
+            }
         }
 
         // التحقق من الأخطاء اللغوية

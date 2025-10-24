@@ -20,7 +20,9 @@ Token Parser::consume(TokenType type, const std::string &message)
 {
     if (check(type))
         return advance();
-
+    std::cout << "[ERR] consume failed: expected=" << Token(type, "", 0, 0).typeToString()
+              << ", got=" << peek().typeToString() << " ('" << peek().value << ")"
+              << " at line=" << peek().line << ", col=" << peek().column << std::endl;
     throw ParseError(peek(), message);
 }
 
@@ -83,6 +85,7 @@ std::unique_ptr<ProgramNode> Parser::parse()
 {
     try
     {
+        std::cout << "[DBG] Parser::parse() starting with " << tokens.size() << " tokens" << std::endl;
         return parseProgram();
     }
     catch (const ParseError &error)
@@ -99,22 +102,34 @@ std::unique_ptr<ProgramNode> Parser::parseProgram()
 
     consume(TokenType::PROGRAM, "توقع كلمة 'برنامج'");
     program->name = consume(TokenType::IDENTIFIER, "توقع اسم البرنامج").value;
+    std::cout << "[DBG] program name='" << program->name << "' next token="
+              << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
+
+    // فاصل اختياري بعد ترويسة البرنامج (قد تكون ";" أو "؛")
+    if (match(TokenType::SEMICOLON))
+    {
+        // لا شيء
+    }
 
     // تحليل التعريفات
     while (check(TokenType::VARIABLE) || check(TokenType::CONSTANT) ||
            check(TokenType::PROCEDURE))
     {
+        std::cout << "[DBG] parsing declaration, current token=" << peek().typeToString()
+                  << " ('" << peek().value << ")" << std::endl;
         program->declarations.push_back(parseDeclaration());
     }
 
     // تحليل الجمل
     while (!check(TokenType::END) && !isAtEnd())
     {
+        std::cout << "[DBG] parsing statement, current token=" << peek().typeToString()
+                  << " ('" << peek().value << ") at line=" << peek().line << std::endl;
         program->statements.push_back(parseStatement());
     }
 
-    consume(TokenType::END, "توقع كلمة 'نهاية'");
-    consume(TokenType::END, "توقع كلمة 'نهاية' للبرنامج");
+    // في هذه اللغة لا يوجد 'نهاية' للبرنامج ككل في الأمثلة
+    // لذا لا نتوقع 'نهاية' هنا وننهي عند نهاية الملف
 
     return program;
 }
@@ -139,14 +154,34 @@ std::unique_ptr<VariableDeclarationNode> Parser::parseVariableDeclaration()
 {
     auto declaration = std::make_unique<VariableDeclarationNode>();
 
+    std::cout << "[DBG] parseVariableDeclaration: expecting IDENTIFIER, got "
+              << peek().typeToString() << " ('" << peek().value << ") at line="
+              << peek().line << ", col=" << peek().column << std::endl;
     declaration->name = consume(TokenType::IDENTIFIER, "توقع اسم المتغير").value;
+    std::cout << "[DBG] name='" << declaration->name << "' next="
+              << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
+
+    // نوع اختياري: ": نوع" مثل ": صحيح" أو ": حقيقي"...
+    if (match(TokenType::COLON))
+    {
+        std::cout << "[DBG] saw ':' then token=" << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
+        // كن متساهلًا: تخطَّ كل شيء حتى '=' أو ';' (نوع وتعليقات محتملة)
+        while (!check(TokenType::ASSIGN) && !check(TokenType::SEMICOLON) && !isAtEnd())
+        {
+            std::cout << "[DBG] skipping token after ':' -> " << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
+            advance();
+        }
+        std::cout << "[DBG] after type skip, at token=" << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
+    }
 
     if (match(TokenType::ASSIGN))
     {
         declaration->initialValue = parseExpression();
     }
 
+    // debug: قبل استهلاك الفاصلة المنقوطة
     consume(TokenType::SEMICOLON, "توقع ';' بعد تعريف المتغير");
+    // debug: بعد استهلاك الفاصلة المنقوطة
 
     return declaration;
 }
@@ -156,9 +191,16 @@ std::unique_ptr<ConstantDeclarationNode> Parser::parseConstantDeclaration()
     auto declaration = std::make_unique<ConstantDeclarationNode>();
 
     declaration->name = consume(TokenType::IDENTIFIER, "توقع اسم الثابت").value;
+    // نوع اختياري للثابت
+    if (match(TokenType::COLON))
+    {
+        while (!check(TokenType::ASSIGN) && !check(TokenType::SEMICOLON) && !isAtEnd())
+        {
+            advance();
+        }
+    }
     consume(TokenType::ASSIGN, "توقع '=' بعد اسم الثابت");
     declaration->value = parseExpression();
-
     consume(TokenType::SEMICOLON, "توقع ';' بعد تعريف الثابت");
 
     return declaration;
@@ -166,8 +208,11 @@ std::unique_ptr<ConstantDeclarationNode> Parser::parseConstantDeclaration()
 
 std::unique_ptr<ASTNode> Parser::parseStatement()
 {
+    std::cout << "[DBG] parseStatement at token=" << peek().typeToString()
+              << " ('" << peek().value << ") line=" << peek().line << std::endl;
     if (check(TokenType::IDENTIFIER))
     {
+        // قد تكون جملة إسناد (identifier = expr;)
         return parseAssignment();
     }
     else if (match(TokenType::PRINT))
@@ -190,8 +235,15 @@ std::unique_ptr<ASTNode> Parser::parseStatement()
     {
         return parseRepeatStatement();
     }
+    else if (match(TokenType::SEMICOLON))
+    {
+        // تجاهل الفواصل المنقوطة الفارغة بين الجمل
+        return std::make_unique<VariableNode>();
+    }
     else
     {
+        std::cout << "[DBG] parseStatement no match for token=" << peek().typeToString()
+                  << " ('" << peek().value << ") line=" << peek().line << std::endl;
         throw ParseError(peek(), "توقع جملة صالحة");
     }
 }
@@ -223,7 +275,16 @@ std::unique_ptr<ReadNode> Parser::parseReadStatement()
 {
     auto readStmt = std::make_unique<ReadNode>();
 
-    readStmt->variableName = consume(TokenType::IDENTIFIER, "توقع اسم المتغير للقراءة").value;
+    // دعم الصيغتين: اقرأ اسم؛ أو اقرأ(اسم)؛
+    if (match(TokenType::LPAREN))
+    {
+        readStmt->variableName = consume(TokenType::IDENTIFIER, "توقع اسم المتغير للقراءة").value;
+        consume(TokenType::RPAREN, "توقع ')' بعد اسم المتغير");
+    }
+    else
+    {
+        readStmt->variableName = consume(TokenType::IDENTIFIER, "توقع اسم المتغير للقراءة").value;
+    }
     consume(TokenType::SEMICOLON, "توقع ';' بعد جملة القراءة");
 
     return readStmt;
@@ -252,6 +313,9 @@ std::unique_ptr<IfNode> Parser::parseIfStatement()
     }
 
     consume(TokenType::END, "توقع كلمة 'نهاية' لجملة if");
+    // السماح بشكل "نهاية اذا" مع فاصلة منقوطة
+    match(TokenType::IF);
+    match(TokenType::SEMICOLON);
 
     return ifStmt;
 }
@@ -261,6 +325,10 @@ std::unique_ptr<WhileNode> Parser::parseWhileStatement()
     auto whileStmt = std::make_unique<WhileNode>();
 
     whileStmt->condition = parseExpression();
+    // السماح بوجود 'فان' بعد شرط الحلقة كما في الأمثلة
+    match(TokenType::THEN);
+    // السماح بوجود 'فان' بعد الشرط كما في الأمثلة
+    match(TokenType::THEN);
 
     // تحليل جسم الحلقة
     while (!check(TokenType::END) && !isAtEnd())
@@ -269,6 +337,9 @@ std::unique_ptr<WhileNode> Parser::parseWhileStatement()
     }
 
     consume(TokenType::END, "توقع كلمة 'نهاية' لجملة while");
+    // السماح بشكل "نهاية طالما" مع فاصلة منقوطة
+    match(TokenType::WHILE);
+    match(TokenType::SEMICOLON);
 
     return whileStmt;
 }

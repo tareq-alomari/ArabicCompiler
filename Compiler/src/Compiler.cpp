@@ -21,6 +21,19 @@ void Compiler::emit(InstructionType type, const std::string &op1,
     instructions.emplace_back(type, op1, op2, op3);
 }
 
+std::string Compiler::getStringLabel(const std::string &literal)
+{
+    auto it = stringToLabel.find(literal);
+    if (it != stringToLabel.end())
+    {
+        return it->second;
+    }
+    std::string label = "str_" + std::to_string(stringLiterals.size());
+    stringToLabel[literal] = label;
+    stringLiterals.push_back(literal);
+    return label;
+}
+
 std::vector<Instruction> Compiler::compile(std::unique_ptr<ProgramNode> program)
 {
     instructions.clear();
@@ -124,6 +137,17 @@ void Compiler::compileAssignment(AssignmentNode *node)
 
 void Compiler::compilePrint(PrintNode *node)
 {
+    // طباعة السلاسل النصية مباشرة بدون إنشاء مؤقتات
+    if (auto literal = dynamic_cast<LiteralNode *>(node->expression.get()))
+    {
+        if (literal->type == TokenType::STRING_LITERAL)
+        {
+            std::string label = getStringLabel(literal->value);
+            emit(InstructionType::PRINT, "STRING", label);
+            return;
+        }
+    }
+
     std::string temp = compileExpression(node->expression.get());
     emit(InstructionType::PRINT, "VALUE", temp);
 }
@@ -233,29 +257,49 @@ std::string Compiler::compileExpression(ASTNode *expr)
             emit(InstructionType::OR, resultTemp, leftTemp, rightTemp);
             break;
         case TokenType::EQUALS:
-            emit(InstructionType::CMP, leftTemp, rightTemp);
-            emit(InstructionType::JE, resultTemp);
-            break;
         case TokenType::NOT_EQUALS:
-            emit(InstructionType::CMP, leftTemp, rightTemp);
-            emit(InstructionType::JNE, resultTemp);
-            break;
         case TokenType::LESS:
-            emit(InstructionType::CMP, leftTemp, rightTemp);
-            emit(InstructionType::JL, resultTemp);
-            break;
         case TokenType::GREATER:
-            emit(InstructionType::CMP, leftTemp, rightTemp);
-            emit(InstructionType::JG, resultTemp);
-            break;
         case TokenType::LESS_EQUAL:
-            emit(InstructionType::CMP, leftTemp, rightTemp);
-            emit(InstructionType::JLE, resultTemp);
-            break;
         case TokenType::GREATER_EQUAL:
+        {
+            // CMP لا يُنتج قيمة مباشرة، لذا نحاكي تقييمًا بوليانيًا 0/1
+            std::string trueLabel = generateLabel();
+            std::string endLabel = generateLabel();
+            // افتراضيًا النتيجة 0
+            emit(InstructionType::LOAD, resultTemp, "0");
             emit(InstructionType::CMP, leftTemp, rightTemp);
-            emit(InstructionType::JGE, resultTemp);
+
+            // قفزة إلى trueLabel عند تحقق الشرط
+            switch (binaryOp->op)
+            {
+            case TokenType::EQUALS:
+                emit(InstructionType::JE, trueLabel);
+                break;
+            case TokenType::NOT_EQUALS:
+                emit(InstructionType::JNE, trueLabel);
+                break;
+            case TokenType::LESS:
+                emit(InstructionType::JL, trueLabel);
+                break;
+            case TokenType::GREATER:
+                emit(InstructionType::JG, trueLabel);
+                break;
+            case TokenType::LESS_EQUAL:
+                emit(InstructionType::JLE, trueLabel);
+                break;
+            case TokenType::GREATER_EQUAL:
+                emit(InstructionType::JGE, trueLabel);
+                break;
+            default:
+                break;
+            }
+            emit(InstructionType::JMP, endLabel);
+            emit(InstructionType::LABEL, trueLabel);
+            emit(InstructionType::LOAD, resultTemp, "1");
+            emit(InstructionType::LABEL, endLabel);
             break;
+        }
         default:
             throw std::runtime_error("معامل غير مدعوم في التعبير");
         }
@@ -286,7 +330,16 @@ std::string Compiler::compileExpression(ASTNode *expr)
     else if (auto literal = dynamic_cast<LiteralNode *>(expr))
     {
         std::string temp = generateTempVar();
-        emit(InstructionType::LOAD, temp, literal->value);
+        // إذا كانت قيمة نصية، نحفظها كوسم سلسلة، وإلا قيمة مباشرة
+        if (literal->type == TokenType::STRING_LITERAL)
+        {
+            std::string label = getStringLabel(literal->value);
+            emit(InstructionType::LOAD, temp, label);
+        }
+        else
+        {
+            emit(InstructionType::LOAD, temp, literal->value);
+        }
         return temp;
     }
     else if (auto variable = dynamic_cast<VariableNode *>(expr))
@@ -329,10 +382,34 @@ void Compiler::generateAssembly(const std::string &filename)
     file << "int_format: .asciiz \"%d\"" << std::endl;
     file << "str_format: .asciiz \"%s\"" << std::endl;
 
+    // تعريف السلاسل النصية
+    for (size_t i = 0; i < stringLiterals.size(); ++i)
+    {
+        std::string label = "str_" + std::to_string(i);
+        file << label << ": .asciiz \"";
+        // تبسيط: لا نهرب السلاسل بالكامل هنا
+        for (char ch : stringLiterals[i])
+        {
+            if (ch == '"')
+                file << "\\\"";
+            else if (ch == '\\')
+                file << "\\\\";
+            else if (ch == '\n')
+                file << "\\n";
+            else
+                file << ch;
+        }
+        file << "\"" << std::endl;
+    }
+
     file << std::endl
          << ".text" << std::endl;
     file << ".globl main" << std::endl;
     file << "main:" << std::endl;
+
+    // لتتبع آخر عملية مقارنة
+    std::string lastCmpLeft;
+    std::string lastCmpRight;
 
     for (const auto &instr : instructions)
     {
@@ -341,8 +418,29 @@ void Compiler::generateAssembly(const std::string &filename)
         switch (instr.type)
         {
         case InstructionType::LOAD:
-            file << "li $t0, " << instr.operand2 << std::endl;
-            file << "    sw $t0, " << instr.operand1 << std::endl;
+            // إذا كان المعامل تسمية نصية، نحمّل عنوانها
+            if (!instr.operand2.empty() && instr.operand2.rfind("str_", 0) == 0)
+            {
+                file << "la $t0, " << instr.operand2 << std::endl;
+                file << "    sw $t0, " << instr.operand1 << std::endl;
+            }
+            else
+            {
+                bool isNumber = !instr.operand2.empty() &&
+                                 (std::isdigit(static_cast<unsigned char>(instr.operand2[0])) ||
+                                  ((instr.operand2[0] == '-' || instr.operand2[0] == '+') && instr.operand2.size() > 1));
+                if (isNumber)
+                {
+                    file << "li $t0, " << instr.operand2 << std::endl;
+                    file << "    sw $t0, " << instr.operand1 << std::endl;
+                }
+                else
+                {
+                    // اعتبرها متغيرًا/مؤقتًا: حمّل قيمته
+                    file << "lw $t0, " << instr.operand2 << std::endl;
+                    file << "    sw $t0, " << instr.operand1 << std::endl;
+                }
+            }
             break;
         case InstructionType::STORE:
             file << "lw $t0, " << instr.operand2 << std::endl;
@@ -373,9 +471,19 @@ void Compiler::generateAssembly(const std::string &filename)
             file << "    sw $t0, " << instr.operand1 << std::endl;
             break;
         case InstructionType::PRINT:
-            file << "li $v0, 1" << std::endl;
-            file << "    lw $a0, " << instr.operand2 << std::endl;
-            file << "    syscall" << std::endl;
+            // operand1 يحدد النوع: VALUE أو STRING
+            if (instr.operand1 == "STRING")
+            {
+                file << "li $v0, 4" << std::endl;
+                file << "    la $a0, " << instr.operand2 << std::endl;
+                file << "    syscall" << std::endl;
+            }
+            else
+            {
+                file << "li $v0, 1" << std::endl;
+                file << "    lw $a0, " << instr.operand2 << std::endl;
+                file << "    syscall" << std::endl;
+            }
             file << "    li $v0, 4" << std::endl;
             file << "    la $a0, newline" << std::endl;
             file << "    syscall" << std::endl;
@@ -394,6 +502,42 @@ void Compiler::generateAssembly(const std::string &filename)
             break;
         case InstructionType::LABEL:
             file << instr.operand1 << ":" << std::endl;
+            break;
+        case InstructionType::CMP:
+            // خزن أسماء المتغيرات للمقارنة لاحقًا
+            lastCmpLeft = instr.operand1;
+            lastCmpRight = instr.operand2;
+            file << "# CMP " << instr.operand1 << ", " << instr.operand2 << std::endl;
+            break;
+        case InstructionType::JE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    beq $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JNE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    bne $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JG:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    bgt $t1, $t2, " << instr.operand1 << std::endl; // مافي MIPS قياسي لكن اغلب المجمعات تدعم
+            break;
+        case InstructionType::JL:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    blt $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JGE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    bge $t1, $t2, " << instr.operand1 << std::endl;
+            break;
+        case InstructionType::JLE:
+            file << "lw $t1, " << lastCmpLeft << std::endl;
+            file << "    lw $t2, " << lastCmpRight << std::endl;
+            file << "    ble $t1, $t2, " << instr.operand1 << std::endl;
             break;
         case InstructionType::HALT:
             file << "li $v0, 10" << std::endl;
@@ -469,7 +613,14 @@ void Compiler::generateCCode(const std::string &filename)
             file << instr.operand1 << " = " << instr.operand2 << " % " << instr.operand3 << ";";
             break;
         case InstructionType::PRINT:
-            file << "printf(\"%d\\\\n\", " << instr.operand2 << ");";
+            if (instr.operand1 == "STRING")
+            {
+                file << "printf(\"%s\", " << instr.operand2 << ");";
+            }
+            else
+            {
+                file << "printf(\"%d\\n\", " << instr.operand2 << ");";
+            }
             break;
         case InstructionType::READ:
             file << "scanf(\"%d\", &" << instr.operand1 << ");";
@@ -479,6 +630,28 @@ void Compiler::generateCCode(const std::string &filename)
             break;
         case InstructionType::JZ:
             file << "if (!" << instr.operand1 << ") goto " << instr.operand2 << ";";
+            break;
+        case InstructionType::CMP:
+            // لا شيء مباشر في C، يعتمد على قفزات لاحقة
+            file << "/* CMP " << instr.operand1 << ", " << instr.operand2 << " */";
+            break;
+        case InstructionType::JE:
+            file << "if (" << instr.operand1 << ") goto " << instr.operand1 << ";"; // سيتم استبداله أثناء البناء المنطقي
+            break;
+        case InstructionType::JNE:
+            file << "/* JNE label */";
+            break;
+        case InstructionType::JG:
+            file << "/* JG label */";
+            break;
+        case InstructionType::JL:
+            file << "/* JL label */";
+            break;
+        case InstructionType::JGE:
+            file << "/* JGE label */";
+            break;
+        case InstructionType::JLE:
+            file << "/* JLE label */";
             break;
         case InstructionType::LABEL:
             file << instr.operand1 << ":";
