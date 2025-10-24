@@ -10,6 +10,15 @@ Lexer::Lexer(const std::string &source)
     // تحليل الترميز للأغراض التصحيحية
     analyzeEncoding();
 
+    // تخطي BOM إن وجد (UTF-8: EF BB BF)
+    if (this->source.size() >= 3 &&
+        static_cast<unsigned char>(this->source[0]) == 0xEF &&
+        static_cast<unsigned char>(this->source[1]) == 0xBB &&
+        static_cast<unsigned char>(this->source[2]) == 0xBF)
+    {
+        position = 3;
+    }
+
     // تهيئة الكلمات المحجوزة العربية
     keywords = {
         {"برنامج", TokenType::PROGRAM},
@@ -125,6 +134,33 @@ void Lexer::skipWhitespace()
         // تخطي مسافات أخرى غير قياسية
         if (uc == 0xA0)
         { // NO-BREAK SPACE في ترميز Windows-1256
+            advance();
+            continue;
+        }
+
+        // تخطي علامات الاتجاه والفواصل الأسطرية في Unicode (UTF-8)
+        // LRM/RLM: E2 80 8E / 8F
+        // LINE/PARAGRAPH SEPARATOR: E2 80 A8 / A9
+        if (uc == 0xE2 && position + 2 < source.length())
+        {
+            unsigned char b1 = static_cast<unsigned char>(source[position + 1]);
+            unsigned char b2 = static_cast<unsigned char>(source[position + 2]);
+            if (b1 == 0x80 && (b2 == 0x8E || b2 == 0x8F || b2 == 0xA8 || b2 == 0xA9))
+            {
+                advance();
+                advance();
+                advance();
+                continue;
+            }
+        }
+
+        // تخطي BOM داخل النص إذا ظهر
+        if (uc == 0xEF && position + 2 < source.length() &&
+            static_cast<unsigned char>(source[position + 1]) == 0xBB &&
+            static_cast<unsigned char>(source[position + 2]) == 0xBF)
+        {
+            advance();
+            advance();
             advance();
             continue;
         }
@@ -470,8 +506,21 @@ Token Lexer::getNextToken()
         }
 
         // رمز غير معروف
+        // معالجة مرنة لرموز التحكم الشائعة (مثل CR/LF) لتفادي فشل التحليل على أنظمة مختلفة
+        if (current == '\n' || current == '\r')
+        {
+            advance();
+            continue;
+        }
+
         char unknownChar = advance();
-        std::string errorChar(1, unknownChar);
+        std::string errorChar;
+        if (unknownChar == '\n')
+            errorChar = "\\x0a";
+        else if (unknownChar == '\r')
+            errorChar = "\\x0d";
+        else
+            errorChar = std::string(1, unknownChar);
 
         return Token(TokenType::ERROR, "رمز غير متوقع: '" + errorChar + "'", line, column);
     }
