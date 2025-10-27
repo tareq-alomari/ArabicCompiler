@@ -76,6 +76,7 @@ void displayHelp()
     std::cout << "  --tokens  عرض الرموز المميزة" << std::endl;
     std::cout << "  --ast     عرض شجرة الاشتقاق النحوي" << std::endl;
     std::cout << "  --help    عرض هذه المساعدة" << std::endl;
+    std::cout << "  --debug-lexer طباعة معلومات تشخيصية للـ lexer (بايتس)" << std::endl;
     std::cout << std::endl;
     std::cout << "أمثلة:" << std::endl;
     std::cout << "  ArabicCompiler program.arabic --all" << std::endl;
@@ -102,6 +103,7 @@ int main(int argc, char *argv[])
     bool generateIr = false;
     bool showTokens = false;
     bool showAST = false;
+    bool debugLexer = false;
 
     // معالجة الخيارات
     for (int i = 2; i < argc; i++)
@@ -121,6 +123,8 @@ int main(int argc, char *argv[])
             showTokens = true;
         else if (option == "--ast")
             showAST = true;
+        else if (option == "--debug-lexer")
+            debugLexer = true;
         else
         {
             std::cerr << "❌ خيار غير معروف: " << option << std::endl;
@@ -142,7 +146,7 @@ int main(int argc, char *argv[])
         std::cout << "📏 طول النص: " << sourceCode.length() << " حرف" << std::endl;
 
         // التحليل اللغوي
-        Lexer lexer(sourceCode);
+        Lexer lexer(sourceCode, debugLexer);
         auto tokens = lexer.tokenize();
 
         // التحقق من الأخطاء اللغوية

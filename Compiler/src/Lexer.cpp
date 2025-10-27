@@ -6,8 +6,8 @@
 #include <sstream> // Required for stringstream
 
 // في Lexer.cpp - إصلاح تهيئة الكلمات المحجوزة
-Lexer::Lexer(const std::string &source)
-    : source(source), position(0), line(1), column(1)
+Lexer::Lexer(const std::string &source, bool debugFlag)
+    : source(source), position(0), line(1), column(1), debug(debugFlag)
 {
     // استخدام UTF-8 للكلمات المحجوزة
     keywords = {
@@ -32,6 +32,8 @@ Lexer::Lexer(const std::string &source)
 
 void Lexer::analyzeEncoding()
 {
+    if (!debug)
+        return;
     std::cout << "=== تحليل الترميز ===" << std::endl;
     std::cout << "طول النص: " << source.length() << " بايت" << std::endl;
 
@@ -65,6 +67,8 @@ void Lexer::analyzeEncoding()
 
 void Lexer::debugChar(char c)
 {
+    if (!debug)
+        return;
     unsigned char uc = static_cast<unsigned char>(c);
     std::cout << "🔍 تصحيح قراءة حرف: Char='";
     if (uc >= 32 && uc < 127)
@@ -94,7 +98,18 @@ char Lexer::advance()
     if (position >= source.length())
         return '\0';
     char c = source[position++];
-    if (c == '\n')
+    // Normalize CR/LF handling: treat CR, LF, or CRLF as a single newline
+    if (c == '\r')
+    {
+        // If CRLF, consume LF as part of the newline
+        if (position < source.length() && source[position] == '\n')
+        {
+            position++; // consume LF
+        }
+        line++;
+        column = 1;
+    }
+    else if (c == '\n')
     {
         line++;
         column = 1;
@@ -113,29 +128,31 @@ void Lexer::skipWhitespace()
         char c = peek();
         unsigned char uc = static_cast<unsigned char>(c);
 
-        // ✅ إصلاح: تجاهل رموز السطر الجديد بشكل صريح
-        if (c == '\n' || c == '\r')
+        // Explicitly handle ASCII whitespace characters to avoid locale issues
+        if (c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f' || c == '\v')
         {
             advance();
             continue;
         }
-
-        if (std::isspace(uc))
+        // Windows-1256 NO-BREAK SPACE
+        if (uc == 0xA0)
         {
             advance();
             continue;
         }
-        if (uc == 0xA0) // Windows-1256 NO-BREAK SPACE
-        {
-            advance();
-            continue;
-        }
+        // UTF-8 BOM sequence
         if (position + 2 < source.length() && uc == 0xEF &&
             static_cast<unsigned char>(source[position + 1]) == 0xBB &&
             static_cast<unsigned char>(source[position + 2]) == 0xBF)
         {
             advance();
             advance();
+            advance();
+            continue;
+        }
+        // fallback to isspace for other categories (safe with unsigned char)
+        if (std::isspace(static_cast<unsigned char>(c)))
+        {
             advance();
             continue;
         }
@@ -152,6 +169,14 @@ void Lexer::skipComment()
         while (position < source.length() && peek() != '\n')
         {
             advance();
+        }
+        // Consume the newline after the comment (handle CRLF and LF)
+        if (position < source.length())
+        {
+            if (peek() == '\r')
+                advance();
+            if (peek() == '\n')
+                advance();
         }
     }
 }
@@ -284,10 +309,23 @@ Token Lexer::readIdentifier()
         char c = peek();
         unsigned char uc = static_cast<unsigned char>(c);
 
-        // قبول الأحرف العربية والإنجليزية والأرقام و underscore
-        if (std::isalnum(uc) || uc == '_' ||
-            (uc >= 0xC0 && uc <= 0xFF) || // النطاق العام للأحرف العربية في UTF-8
-            isArabicChar(c))
+        // Stop reading identifier if punctuation is found
+        if (c == ';' || c == ',' || c == '(' || c == ')' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/')
+        {
+            break;
+        }
+        if (position + 1 < source.length())
+        {
+            unsigned char byte1 = uc;
+            unsigned char byte2 = static_cast<unsigned char>(source[position + 1]);
+            if (byte1 == 0xD8 && (byte2 == 0x9B || byte2 == 0x8C))
+            { // Arabic Semicolon or Comma
+                break;
+            }
+        }
+
+        // Consume valid identifier characters (letters, numbers, non-ASCII)
+        if (std::isalnum(uc) || uc == '_' || (uc >= 0x80))
         {
             identifier_val += advance();
         }
@@ -297,7 +335,7 @@ Token Lexer::readIdentifier()
         }
     }
 
-    // البحث في الكلمات المحجوزة
+    // Check for keywords
     auto it = keywords.find(identifier_val);
     if (it != keywords.end())
     {
@@ -320,8 +358,15 @@ Token Lexer::getNextToken()
 {
     while (position < source.length())
     {
-        skipWhitespace();
-        skipComment();
+        // Keep skipping whitespace and comments until we reach something meaningful
+        while (true)
+        {
+            size_t before = position;
+            skipWhitespace();
+            skipComment();
+            if (position == before)
+                break; // nothing consumed
+        }
 
         if (position >= source.length())
         {
@@ -331,6 +376,28 @@ Token Lexer::getNextToken()
         char current = peek();
         unsigned char ucCurrent = static_cast<unsigned char>(current);
         int tokenStartColumn = column;
+
+        // Correctly handle multi-byte UTF-8 Arabic punctuation before identifier check
+        if (position + 1 < source.length())
+        {
+            unsigned char byte1 = static_cast<unsigned char>(source[position]);
+            unsigned char byte2 = static_cast<unsigned char>(source[position + 1]);
+
+            // Arabic Semicolon ؛ is 0xD8 0x9B in UTF-8
+            if (byte1 == 0xD8 && byte2 == 0x9B)
+            {
+                advance();
+                advance();
+                return Token(TokenType::SEMICOLON, "؛", line, tokenStartColumn);
+            }
+            // Arabic Comma ، is 0xD8 0x8C in UTF-8
+            if (byte1 == 0xD8 && byte2 == 0x8C)
+            {
+                advance();
+                advance();
+                return Token(TokenType::COMMA, "،", line, tokenStartColumn);
+            }
+        }
 
         // Handle Windows-1256 specific punctuation FIRST
         if (ucCurrent == 0xBA)
@@ -463,6 +530,24 @@ Token Lexer::getNextToken()
             std::stringstream ss_err; // Use the correct name
             ss_err << "\\x" << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(current));
             errorVal += ss_err.str();
+        }
+        // Print surrounding byte context for diagnostics
+        try
+        {
+            size_t ctxStart = position >= 8 ? position - 8 : 0;
+            size_t ctxEnd = std::min(position + 8, source.length());
+            std::stringstream ctx;
+            ctx << "\n[DBG] Context bytes around error: ";
+            for (size_t i = ctxStart; i < ctxEnd; ++i)
+            {
+                ctx << std::hex << std::setw(2) << std::setfill('0') << (static_cast<int>(static_cast<unsigned char>(source[i]))) << " ";
+            }
+            ctx << std::dec << "\n";
+            std::cerr << ctx.str();
+        }
+        catch (...)
+        {
+            // ignore diagnostics failures
         }
         errorVal += "'";
         return Token(TokenType::ERROR, errorVal, line, tokenStartColumn);

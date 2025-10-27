@@ -1,0 +1,59 @@
+الكود الوسيط المولد:
+====================
+
+  0: LOAD t0, 15
+  1: STORE رقم1, t0
+  2: LOAD t1, 3
+  3: STORE رقم2, t1
+  4: LOAD t2, 0
+  5: STORE ناتج, t2
+  6: LOAD t3, رقم1
+  7: LOAD t4, رقم2
+  8: ADD t5, t3, t4
+  9: STORE ناتج, t5
+ 10: PRINT STRING, str_0
+ 11: LOAD t6, ناتج
+ 12: PRINT VALUE, t6
+ 13: LOAD t7, رقم1
+ 14: LOAD t8, رقم2
+ 15: SUB t9, t7, t8
+ 16: STORE ناتج, t9
+ 17: PRINT STRING, str_1
+ 18: LOAD t10, ناتج
+ 19: PRINT VALUE, t10
+ 20: LOAD t11, رقم1
+ 21: LOAD t12, رقم2
+ 22: MUL t13, t11, t12
+ 23: STORE ناتج, t13
+ 24: PRINT STRING, str_2
+ 25: LOAD t14, ناتج
+ 26: PRINT VALUE, t14
+ 27: LOAD t15, رقم1
+ 28: LOAD t16, رقم2
+ 29: DIV t17, t15, t16
+ 30: STORE ناتج, t17
+ 31: PRINT STRING, str_3
+ 32: LOAD t18, ناتج
+ 33: PRINT VALUE, t18
+ 34: LOAD t19, رقم1
+ 35: LOAD t20, رقم2
+ 36: MOD t21, t19, t20
+ 37: STORE ناتج, t21
+ 38: PRINT STRING, str_4
+ 39: LOAD t22, ناتج
+ 40: PRINT VALUE, t22
+ 41: HALT
+
+جدول الرموز:
+============
+رقم1 : متغير
+رقم2 : متغير
+ناتج : متغير
+
+السلاسل النصية:
+==============
+str_0: "الجمع: "
+str_1: "الطرح: "
+str_2: "الضرب: "
+str_3: "القسمة: "
+str_4: "الباقي: "

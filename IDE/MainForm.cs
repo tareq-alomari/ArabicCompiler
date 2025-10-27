@@ -5,27 +5,49 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Text;
 using System.ComponentModel;
+using System.Text.RegularExpressions;
+using Timer = System.Windows.Forms.Timer;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace ArabicIDE
 {
     public partial class MainForm : Form
     {
-        private RichTextBox? editor;
-        private RichTextBox? outputBox;
-        private ComboBox? outputTypeComboBox;
-        private ToolStripButton? runButton;
+        // runtime-initialized paths (initialized in constructor)
+        private string exeDir = "";
+        private string? repoRoot = null;
+        private string script = "";
         private ToolStripButton? openButton;
         private ToolStripButton? saveButton;
         private ToolStripButton? saveAsButton;
         private ToolStripButton? newButton;
         private ToolStripButton? compileButton;
+        private ToolStripButton? runButton;
+        private ToolStripButton? runAllButton;
+        private ToolStripButton? debugLexerButton;
+        private ComboBox? outputTypeComboBox;
+        private RichTextBox? editor;
+        private RichTextBox? outputBox;
+        private string settingsFile;
         private ToolStripStatusLabel? statusLabel;
         private ToolStripStatusLabel? lineLabel;
         private StatusStrip? statusStrip;
 
-        private string compilerPath = "ArabicCompiler.exe";
+    private string compilerPath = "";
         private string currentFile = "";
         private bool isModified = false;
+
+        private System.Windows.Forms.Timer? syntaxHighlightingTimer; // تم التحديد الصريح للنوع
+        private bool isHighlighting = false;
+
+        // Define colors
+        private Color keywordColor = Color.Blue;
+        private Color identifierColor = Color.Black;
+        private Color stringColor = Color.Brown;
+        private Color numberColor = Color.Green;
+        private Color commentColor = Color.Gray;
 
         public MainForm()
         {
@@ -34,6 +56,42 @@ namespace ArabicIDE
             
             InitializeComponent();
             SetupComponents();
+            // initialize runtime paths (exeDir, repoRoot, script)
+            exeDir = Path.GetDirectoryName(Application.ExecutablePath) ?? Directory.GetCurrentDirectory();
+
+            // Find repository root by walking up until we find a 'scripts' folder (max 6 levels)
+            string dir = exeDir;
+            for (int i = 0; i < 6; i++)
+            {
+                string candidate = Path.Combine(dir, "scripts");
+                if (Directory.Exists(candidate))
+                {
+                    repoRoot = Directory.GetParent(candidate)?.FullName; // parent of scripts
+                    break;
+                }
+                var parent = Directory.GetParent(dir);
+                if (parent == null) break;
+                dir = parent.FullName;
+            }
+            // fallback to known relative path (project root assumption)
+            if (repoRoot == null)
+            {
+                repoRoot = Path.GetFullPath(Path.Combine(exeDir, "..", "..", ".."));
+            }
+
+            script = Path.Combine(repoRoot, "scripts", "run_end_to_end.ps1");
+            // settings file path
+            settingsFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ide_settings.json");
+            // prefer built compiler in common locations
+            var candidates = new[] {
+                Path.Combine(repoRoot ?? exeDir, "Compiler", "build", "Release", "ArabicCompiler.exe"),
+                Path.Combine(repoRoot ?? exeDir, "Compiler", "build", "ArabicCompiler.exe"),
+                Path.Combine(repoRoot ?? exeDir, "Compiler", "ArabicCompiler.exe"),
+                Path.Combine(exeDir, "ArabicCompiler.exe"),
+                Path.Combine(repoRoot ?? exeDir, "ArabicCompiler.exe")
+            };
+            compilerPath = candidates.FirstOrDefault(p => File.Exists(p)) ?? "ArabicCompiler.exe";
+            LoadSettings();
             UpdateTitle();
             SetupSyntaxHighlighting();
         }
@@ -87,11 +145,21 @@ namespace ArabicIDE
             runButton = CreateToolStripButton("ترجمة وتنفيذ", "▶️", "F5");
             compileButton = CreateToolStripButton("ترجمة فقط", "🔧", "Ctrl+B");
 
+            debugLexerButton = CreateToolStripButton("تشخيص Lexer", "🐞", "");
+            // Make it toggleable
+            debugLexerButton.CheckOnClick = true;
+            debugLexerButton.CheckedChanged += (s, e) => SaveSettings();
+
+            runAllButton = CreateToolStripButton("تشغيل الأمثلة", "📦", "تشغيل جميع الأمثلة والاطلاع على السجلات");
+            runAllButton.Click += RunAllExamples_Click;
+
             runButton!.Click += RunButton_Click;
             compileButton!.Click += CompileButton_Click;
 
             mainToolStrip.Items.Add(runButton);
             mainToolStrip.Items.Add(compileButton);
+            mainToolStrip.Items.Add(debugLexerButton);
+            mainToolStrip.Items.Add(runAllButton);
             mainToolStrip.Items.Add(new ToolStripSeparator());
 
             mainToolStrip.Items.Add(new ToolStripLabel("نوع الإخراج:"));
@@ -158,6 +226,9 @@ namespace ArabicIDE
             outputBox.BackColor = Color.FromArgb(30, 30, 30);
             outputBox.ForeColor = Color.LightGreen;
             outputBox.ReadOnly = true;
+            // Allow detecting file:// links so users can click to open logs
+            outputBox.DetectUrls = true;
+            outputBox.LinkClicked += OutputBox_LinkClicked;
             outputBox.WordWrap = false;
             outputBox.ScrollBars = RichTextBoxScrollBars.Both;
 
@@ -209,14 +280,14 @@ namespace ArabicIDE
 ناتج = س * 2 + 5؛
 
 اذا ناتج > 15 فان
-    اطبع ""الناتج كبير: ""؛
+    اطبع ""الناتج كبير: "";
     اطبع ناتج؛
 وإلا
-    اطبع ""الناتج صغير: ""؛
+    اطبع ""الناتج صغير: "";
     اطبع ناتج؛
-نهاية؛
+نهاية;
 
-اطبع ""نهاية البرنامج""؛";
+اطبع ""نهاية البرنامج"";";
         }
 
         private void SetupShortcuts()
@@ -227,7 +298,77 @@ namespace ArabicIDE
 
         private void SetupSyntaxHighlighting()
         {
-            // يمكن إضافة تلوين النصوص هنا لاحقاً
+            syntaxHighlightingTimer = new System.Windows.Forms.Timer(); // استخدام النوع الصريح
+            syntaxHighlightingTimer.Interval = 500; // 0.5 second delay
+            syntaxHighlightingTimer.Tick += (sender, e) => {
+                syntaxHighlightingTimer.Stop();
+                HighlightSyntax();
+            };
+        }
+
+        private void HighlightSyntax()
+        {
+            if (isHighlighting || editor == null) return;
+
+            isHighlighting = true;
+
+            try
+            {
+                // Save state
+                int selectionStart = editor.SelectionStart;
+                int selectionLength = editor.SelectionLength;
+
+                // RichTextBox doesn't expose BeginUpdate/EndUpdate. Use SuspendLayout/ResumeLayout
+                // to reduce layout work during syntax highlighting.
+                editor.SuspendLayout();
+
+                // 1. Default color
+                editor.SelectAll();
+                editor.SelectionColor = identifierColor;
+
+                // 2. Comments
+                MatchCollection commentMatches = Regex.Matches(editor.Text, @"//[^\n]*");
+                foreach (Match m in commentMatches)
+                {
+                    editor.Select(m.Index, m.Length);
+                    editor.SelectionColor = commentColor;
+                }
+
+                // 3. Strings
+                MatchCollection stringMatches = Regex.Matches(editor.Text, "\"[^\"\n]*\"");
+                foreach (Match m in stringMatches)
+                {
+                    editor.Select(m.Index, m.Length);
+                    editor.SelectionColor = stringColor;
+                }
+
+                // 4. Keywords
+                string[] keywords = { "برنامج", "اذا", "فان", "وإلا", "اطبع", "اقرأ", "طالما", "كرر", "حتى", "نهاية", "متغير", "ثابت", "إجراء", "صحيح", "حقيقي", "منطقي", "خيط", "و", "أو" };
+                string keywordPattern = "\\b(" + string.Join("|", keywords) + ")\\b";
+                MatchCollection keywordMatches = Regex.Matches(editor.Text, keywordPattern);
+                foreach (Match m in keywordMatches)
+                {
+                    editor.Select(m.Index, m.Length);
+                    editor.SelectionColor = keywordColor;
+                }
+
+                // 5. Numbers
+                MatchCollection numberMatches = Regex.Matches(editor.Text, @"\b\d+(\.\d+)?\b");
+                foreach (Match m in numberMatches)
+                {
+                    editor.Select(m.Index, m.Length);
+                    editor.SelectionColor = numberColor;
+                }
+
+                // Restore state
+                editor.Select(selectionStart, selectionLength);
+                editor.SelectionColor = identifierColor; // Restore color at cursor
+            }
+            finally
+            {
+                editor.ResumeLayout();
+                isHighlighting = false;
+            }
         }
 
         private void UpdateTitle()
@@ -286,7 +427,7 @@ namespace ArabicIDE
             editor!.Text = GetDefaultCode();
             isModified = false;
             UpdateTitle();
-            statusLabel!.Text = "جاهز";
+            statusLabel!.Text = "تم إنشاء ملف جديد";
             UpdateLineInfo();
         }
 
@@ -446,6 +587,42 @@ namespace ArabicIDE
             CompileProgram(editor!.Text, runAfterCompile);
         }
 
+        private void LoadSettings()
+        {
+            try
+            {
+                if (File.Exists(settingsFile))
+                {
+                    string json = File.ReadAllText(settingsFile, Encoding.UTF8);
+                    var doc = JsonDocument.Parse(json);
+                    if (doc.RootElement.TryGetProperty("debugLexer", out var dj))
+                    {
+                        bool dbg = dj.GetBoolean();
+                        if (debugLexerButton != null)
+                            debugLexerButton.Checked = dbg;
+                    }
+                }
+            }
+            catch
+            {
+                // ignore errors
+            }
+        }
+
+        private void SaveSettings()
+        {
+            try
+            {
+                var obj = new { debugLexer = debugLexerButton != null && debugLexerButton.Checked };
+                var json = JsonSerializer.Serialize(obj, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(settingsFile, json, Encoding.UTF8);
+            }
+            catch
+            {
+                // ignore
+            }
+        }
+
         private void CompileProgram(string code, bool runAfterCompile)
         {
             statusLabel!.Text = "جاري الترجمة...";
@@ -518,10 +695,20 @@ namespace ArabicIDE
         {
             using (var process = new Process())
             {
+                string args = $"\"{inputFile}\" {options}";
+                if (debugLexerButton != null && debugLexerButton.Checked)
+                {
+                    args += " --debug-lexer";
+                }
+                // show which compiler binary is used
+                if (outputBox != null)
+                {
+                    outputBox.AppendText($"\n↪ استخدام المترجم: {compilerPath} {args}\n\n");
+                }
                 process.StartInfo = new ProcessStartInfo
                 {
                     FileName = compilerPath,
-                    Arguments = $"\"{inputFile}\" {options}",
+                    Arguments = args,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
@@ -642,7 +829,7 @@ namespace ArabicIDE
                     process.Start();
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
-                    process.WaitForExit(20000); // 20 ثانية
+                    process.WaitForExit(20000); // 20 seconds
 
                     if (!string.IsNullOrWhiteSpace(output))
                         outputBox!.AppendText($"\n\n=== مخرجات بناء GCC ===\n{output.Trim()}");
@@ -678,7 +865,7 @@ namespace ArabicIDE
         {
             if (!File.Exists(exeFile)) return;
 
-            statusLabel!.Text = "جاري تنفيذ البرنامج...";
+            statusLabel!.Text = "جاري تنفيذ البرنامج في نافذة جديدة...";
             Application.DoEvents();
 
             try
@@ -699,17 +886,15 @@ namespace ArabicIDE
                     process.Start();
                     string output = process.StandardOutput.ReadToEnd();
                     string error = process.StandardError.ReadToEnd();
-                    process.WaitForExit(10000); // 10 ثواني
+                    process.WaitForExit(10000); // 10 seconds
 
-                    outputBox!.AppendText($"\n\n=== تنفيذ البرنامج ===\n{output.Trim()}");
+                    if (!string.IsNullOrWhiteSpace(output))
+                        outputBox!.AppendText($"\n\n=== تنفيذ البرنامج ===\n{output}");
+                    if (!string.IsNullOrWhiteSpace(error))
+                        outputBox!.AppendText($"\n\n=== أخطاء تنفيذ البرنامج ===\n{error}");
 
-                    if (!string.IsNullOrEmpty(error.Trim()))
-                    {
-                        outputBox.AppendText($"\n=== أخطاء التنفيذ ===\n{error.Trim()}");
-                    }
-
-                    statusLabel.Text = process.ExitCode == 0 ? 
-                        "✅ تم تنفيذ البرنامج بنجاح!" : 
+                    statusLabel.Text = process.ExitCode == 0 ?
+                        "✅ تم تنفيذ البرنامج بنجاح!" :
                         "⚠️ انتهى التنفيذ برمز خطأ";
                 }
             }
@@ -747,6 +932,12 @@ namespace ArabicIDE
             {
                 isModified = true;
                 UpdateTitle();
+            }
+
+            if (syntaxHighlightingTimer != null)
+            {
+                syntaxHighlightingTimer.Stop();
+                syntaxHighlightingTimer.Start();
             }
         }
 
@@ -792,6 +983,329 @@ namespace ArabicIDE
             }
         }
 
+        private void RunAllExamples_Click(object? sender, EventArgs e)
+        {
+            // Fire-and-forget the async runner but keep UI responsive
+            _ = RunAllExamplesAsync();
+        }
+
+        private async Task RunAllExamplesAsync()
+        {
+            if (runAllButton != null)
+                runAllButton.Enabled = false;
+
+            try
+            {
+                statusLabel!.Text = "جاري تشغيل جميع الأمثلة...";
+                outputBox!.Clear();
+
+                string exeDir = Path.GetDirectoryName(Application.ExecutablePath) ?? Directory.GetCurrentDirectory();
+                string repoRoot = Path.GetFullPath(Path.Combine(exeDir, ".."));
+                // run end-to-end script (compile .arabic -> build C -> run)
+                string script = Path.Combine(repoRoot, "scripts", "run_end_to_end.ps1");
+                string logsDir = Path.Combine(repoRoot, "build_tests_logs");
+
+                if (!File.Exists(script))
+                {
+                    // If the PowerShell script is missing, fall back to an internal managed runner
+                    outputBox.AppendText($"⚠️ لم يتم العثور على السكربت: {script}. سيتم استخدام المُنفّذ الداخلي بدلاً منه.\n");
+                    await RunEndToEndInternalAsync(repoRoot, logsDir);
+                    statusLabel.Text = "تم تشغيل الأمثلة (المنفذ الداخلي) - انظر الإخراج";
+                    return;
+                }
+
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{script}\"",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
+
+                using (var proc = Process.Start(psi))
+                {
+                    string sout = await proc.StandardOutput.ReadToEndAsync();
+                    string serr = await proc.StandardError.ReadToEndAsync();
+                    proc.WaitForExit();
+
+                    if (!string.IsNullOrWhiteSpace(sout))
+                        outputBox.AppendText("=== سكربت: المخرجات ===\n" + sout + "\n");
+                    if (!string.IsNullOrWhiteSpace(serr))
+                        outputBox.AppendText("=== سكربت: الأخطاء ===\n" + serr + "\n");
+
+                    string summaryFile = Path.Combine(logsDir, "summary.txt");
+                    if (File.Exists(summaryFile))
+                    {
+                        outputBox.AppendText("\n=== Summary ===\n");
+
+                        // Read lines and append a clickable file:// link per summary entry
+                        var lines = File.ReadAllLines(summaryFile, Encoding.UTF8);
+                        foreach (var l in lines)
+                        {
+                            if (string.IsNullOrWhiteSpace(l)) continue;
+                            // expect format: name: status
+                            var parts = l.Split(':', 2);
+                            string name = parts[0].Trim();
+                            string status = parts.Length > 1 ? parts[1].Trim() : "";
+                            string logFile = Path.Combine(logsDir, name + ".log");
+
+                            if (File.Exists(logFile))
+                            {
+                                // Use file:// URI so RichTextBox auto-detects it as a link
+                                var uri = new Uri(logFile).AbsoluteUri;
+                                outputBox.AppendText($"{name}: {status} ");
+                                outputBox.AppendText(uri + "\n");
+                            }
+                            else
+                            {
+                                outputBox.AppendText($"{name}: {status} (log missing)\n");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        outputBox.AppendText($"\nلم يتم العثور على ملف الملخص: {summaryFile}\n");
+                    }
+
+                    statusLabel.Text = "تم تشغيل الأمثلة - انظر الإخراج";
+                }
+            }
+            catch (Exception ex)
+            {
+                outputBox!.AppendText($"\n\n❌ خطأ أثناء تشغيل الأمثلة: {ex.Message}");
+                statusLabel!.Text = "خطأ في تشغيل الأمثلة";
+            }
+            finally
+            {
+                if (runAllButton != null)
+                    runAllButton.Enabled = true;
+            }
+        }
+
+        private void OutputBox_LinkClicked(object sender, LinkClickedEventArgs e)
+        {
+            try
+            {
+                string link = e.LinkText;
+                // Support file:// URIs
+                if (link.StartsWith("file://", StringComparison.OrdinalIgnoreCase))
+                {
+                    var uri = new Uri(link);
+                    string path = uri.LocalPath;
+                    if (File.Exists(path))
+                    {
+                        ShowLogViewer(Path.GetFileName(path), File.ReadAllText(path, Encoding.UTF8));
+                        return;
+                    }
+                }
+
+                // Fallback: if it's a local path
+                if (File.Exists(link))
+                {
+                    ShowLogViewer(Path.GetFileName(link), File.ReadAllText(link, Encoding.UTF8));
+                    return;
+                }
+
+                MessageBox.Show($"لا يمكن فتح الرابط: {link}", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"خطأ عند فتح السجل: {ex.Message}", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ShowLogViewer(string title, string content)
+        {
+            var dlg = new Form();
+            dlg.Text = "سجل: " + title;
+            dlg.Size = new Size(900, 600);
+            dlg.StartPosition = FormStartPosition.CenterParent;
+
+            var rtb = new RichTextBox();
+            rtb.Dock = DockStyle.Fill;
+            rtb.Font = new Font("Consolas", 10);
+            rtb.ReadOnly = true;
+            rtb.BackColor = Color.FromArgb(20, 20, 20);
+            rtb.ForeColor = Color.LightGreen;
+            rtb.WordWrap = false;
+            rtb.Text = content;
+
+            dlg.Controls.Add(rtb);
+            dlg.ShowDialog(this);
+        }
+
+        private async Task RunEndToEndInternalAsync(string repoRoot, string logsDir)
+        {
+            try
+            {
+                Directory.CreateDirectory(logsDir);
+
+                // Locate compiler
+                string[] candidates = new[] {
+                    Path.Combine(repoRoot, "Compiler", "ArabicCompiler.exe"),
+                    Path.Combine(repoRoot, "Compiler", "build", "Release", "ArabicCompiler.exe"),
+                    Path.Combine(repoRoot, "Compiler", "build", "ArabicCompiler.exe"),
+                    Path.Combine(repoRoot, "ArabicCompiler.exe")
+                };
+                string compiler = candidates.FirstOrDefault(p => File.Exists(p));
+                if (compiler == null)
+                {
+                    outputBox!.AppendText("❌ لم يتم العثور على ArabicCompiler.exe في المسارات المتوقعة. تأكد من بناء المترجم أولاً.\n");
+                    return;
+                }
+
+                var summary = new List<string>();
+                string examplesDir = Path.Combine(repoRoot, "Examples");
+                var files = Directory.GetFiles(examplesDir, "*.arabic");
+                foreach (var src in files)
+                {
+                    string baseName = Path.GetFileNameWithoutExtension(src);
+                    string logFile = Path.Combine(logsDir, baseName + ".log");
+                    var lines = new List<string>();
+                    lines.Add($"Source: {src}");
+                    lines.Add($"Started: {DateTime.UtcNow:o}");
+
+                    try
+                    {
+                        outputBox.AppendText($"↳ تشغيل المترجم على: {baseName}...\n");
+                        // Run ArabicCompiler
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = compiler,
+                            Arguments = $"\"{src}\" --c --asm --ir",
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true,
+                            CreateNoWindow = true,
+                            StandardOutputEncoding = Encoding.UTF8,
+                            StandardErrorEncoding = Encoding.UTF8
+                        };
+                        using (var p = Process.Start(psi))
+                        {
+                            string sout = await p.StandardOutput.ReadToEndAsync();
+                            string serr = await p.StandardError.ReadToEndAsync();
+                            p.WaitForExit();
+                            lines.Add($"ArabicCompiler exit code: {p.ExitCode}");
+                            lines.Add("ArabicCompiler stdout:");
+                            lines.AddRange(sout.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                            lines.Add("ArabicCompiler stderr:");
+                            lines.AddRange(serr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+
+                            if (p.ExitCode != 0)
+                            {
+                                lines.Add("Result: compile-source-failed");
+                                summary.Add($"{baseName}: compile-source-failed");
+                                File.WriteAllLines(logFile, lines, Encoding.UTF8);
+                                continue;
+                            }
+                        }
+
+                        string baseOut = Path.Combine(Path.GetDirectoryName(src) ?? examplesDir, baseName + "_output");
+                        string cfile = baseOut + ".c";
+                        if (!File.Exists(cfile))
+                        {
+                            lines.Add("Result: c-not-generated");
+                            summary.Add($"{baseName}: c-not-generated");
+                            File.WriteAllLines(logFile, lines, Encoding.UTF8);
+                            continue;
+                        }
+
+                        // Compile with gcc if available
+                        string exeTarget = Path.Combine(logsDir, baseName + ".exe");
+                        var gccPsi = new ProcessStartInfo
+                        {
+                            FileName = "gcc",
+                            Arguments = $"\"{cfile}\" -o \"{exeTarget}\"",
+                            UseShellExecute = false,
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true,
+                            CreateNoWindow = true
+                        };
+                        try
+                        {
+                            using (var gp = Process.Start(gccPsi))
+                            {
+                                string gsout = await gp.StandardOutput.ReadToEndAsync();
+                                string gserr = await gp.StandardError.ReadToEndAsync();
+                                gp.WaitForExit();
+                                if (gp.ExitCode != 0 || !File.Exists(exeTarget))
+                                {
+                                    lines.Add($"gcc failed with exit {gp.ExitCode}");
+                                    lines.AddRange(gserr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                                    summary.Add($"{baseName}: gcc-failed");
+                                    File.WriteAllLines(logFile, lines, Encoding.UTF8);
+                                    continue;
+                                }
+                            }
+                        }
+                        catch (Win32Exception)
+                        {
+                            lines.Add("gcc not found in PATH: skipping native build/run");
+                            summary.Add($"{baseName}: skipped-no-gcc");
+                            File.WriteAllLines(logFile, lines, Encoding.UTF8);
+                            continue;
+                        }
+
+                        // Run the produced exe
+                        try
+                        {
+                            using (var rp = Process.Start(new ProcessStartInfo { FileName = exeTarget, RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false, CreateNoWindow = true }))
+                            {
+                                string rout = await rp.StandardOutput.ReadToEndAsync();
+                                string rerr = await rp.StandardError.ReadToEndAsync();
+                                rp.WaitForExit();
+                                lines.Add($"Program exit code: {rp.ExitCode}");
+                                lines.Add("Program stdout:");
+                                lines.AddRange(rout.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                                lines.Add("Program stderr:");
+                                lines.AddRange(rerr.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries));
+                                if (rp.ExitCode == 0)
+                                {
+                                    lines.Add("Result: ok");
+                                    summary.Add($"{baseName}: ok");
+                                }
+                                else
+                                {
+                                    lines.Add("Result: runtime-failed");
+                                    summary.Add($"{baseName}: runtime-failed");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            lines.Add($"Exception running exe: {ex.Message}");
+                            summary.Add($"{baseName}: runtime-exception");
+                        }
+
+                        File.WriteAllLines(logFile, lines, Encoding.UTF8);
+                    }
+                    catch (Exception ex)
+                    {
+                        lines.Add($"Exception: {ex}");
+                        File.WriteAllLines(logFile, lines, Encoding.UTF8);
+                        summary.Add($"{baseName}: exception");
+                    }
+                }
+
+                // Write summary
+                string summaryFile = Path.Combine(logsDir, "summary.txt");
+                File.WriteAllLines(summaryFile, summary, Encoding.UTF8);
+
+                // Show summary in outputBox
+                outputBox!.AppendText("\n=== Summary ===\n");
+                foreach (var s in summary)
+                {
+                    outputBox.AppendText(s + "\n");
+                }
+            }
+            catch (Exception ex)
+            {
+                outputBox!.AppendText($"\n❌ خطأ في المنفّذ الداخلي: {ex.Message}\n");
+            }
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (!ConfirmSaveChanges())
@@ -802,3 +1316,4 @@ namespace ArabicIDE
         }
     }
 }
+

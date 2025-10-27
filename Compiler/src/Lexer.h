@@ -185,6 +185,7 @@ private:
     size_t position;
     int line;
     int column;
+    bool debug;
     std::unordered_map<std::string, TokenType> keywords;
 
     char peek();
@@ -200,7 +201,7 @@ private:
     void analyzeEncoding();
 
 public:
-    Lexer(const std::string &source);
+    Lexer(const std::string &source, bool debug = false);
     Token getNextToken();
     std::vector<Token> tokenize();
 };

@@ -127,20 +127,21 @@ std::unique_ptr<ProgramNode> Parser::parseProgram()
         // لا شيء - تم استهلاك الفاصلة
     }
 
-    // تحليل التعريفات
-    while (check(TokenType::VARIABLE) || check(TokenType::CONSTANT))
-    {
-        std::cout << "[DBG] parsing declaration, current token=" << peek().typeToString()
-                  << " ('" << peek().value << ")" << std::endl;
-        program->declarations.push_back(parseDeclaration());
-    }
-
-    // تحليل الجمل
+    // تحليل التعريفات والجمل
     while (!isAtEnd() && !check(TokenType::END))
     {
-        std::cout << "[DBG] parsing statement, current token=" << peek().typeToString()
-                  << " ('" << peek().value << ") at line=" << peek().line << std::endl;
-        program->statements.push_back(parseStatement());
+        if (check(TokenType::VARIABLE) || check(TokenType::CONSTANT))
+        {
+            std::cout << "[DBG] parsing declaration, current token=" << peek().typeToString()
+                      << " ('" << peek().value << ")" << std::endl;
+            program->declarations.push_back(parseDeclaration());
+        }
+        else
+        {
+            std::cout << "[DBG] parsing statement, current token=" << peek().typeToString()
+                      << " ('" << peek().value << ") at line=" << peek().line << std::endl;
+            program->statements.push_back(parseStatement());
+        }
     }
 
     // قبول كلمة "نهاية" اختيارية في النهاية
@@ -310,29 +311,38 @@ std::unique_ptr<ReadNode> Parser::parseReadStatement()
 std::unique_ptr<IfNode> Parser::parseIfStatement()
 {
     auto ifStmt = std::make_unique<IfNode>();
-
     ifStmt->condition = parseExpression();
     consume(TokenType::THEN, "توقع كلمة 'فان' بعد الشرط");
 
-    // تحليل فرع then
-    while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd())
-    {
+    while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd()) {
         ifStmt->thenBranch.push_back(parseStatement());
     }
 
-    if (match(TokenType::ELSE))
-    {
-        // تحليل فرع else
-        while (!check(TokenType::END) && !isAtEnd())
-        {
-            ifStmt->elseBranch.push_back(parseStatement());
+    IfNode* currentIf = ifStmt.get();
+
+    while (match(TokenType::ELSE)) {
+        if (match(TokenType::IF)) {
+            // Else if
+            auto elseIfNode = std::make_unique<IfNode>();
+            elseIfNode->condition = parseExpression();
+            consume(TokenType::THEN, "توقع كلمة 'فان' بعد الشرط");
+
+            while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd()) {
+                elseIfNode->thenBranch.push_back(parseStatement());
+            }
+            
+            currentIf->elseBranch.push_back(std::move(elseIfNode));
+            currentIf = static_cast<IfNode*>(currentIf->elseBranch.back().get());
+        } else {
+            // Else
+            while (!check(TokenType::END) && !isAtEnd()) {
+                currentIf->elseBranch.push_back(parseStatement());
+            }
+            break; // No more 'else' or 'else if' after a final 'else'
         }
     }
 
     consume(TokenType::END, "توقع كلمة 'نهاية' لجملة if");
-
-    // السماح بشكل "نهاية اذا" مع فاصلة منقوطة
-    match(TokenType::IF);
     match(TokenType::SEMICOLON);
 
     return ifStmt;
