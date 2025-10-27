@@ -7,6 +7,10 @@
 #include <iostream>
 #include "Lexer.h"
 
+// Forward declarations to resolve circular dependencies
+struct VariableNode;
+struct IndexAccessNode;
+
 // أنواع العقد في الشجرة التجريدية
 enum class NodeType
 {
@@ -19,10 +23,12 @@ enum class NodeType
     IF,
     WHILE,
     REPEAT,
+    FOR,
     BINARY_OP,
     UNARY_OP,
     LITERAL,
     VARIABLE,
+    INDEX_ACCESS, // Accessing an array element, e.g., a[i]
     EXPRESSION
 };
 
@@ -65,12 +71,20 @@ struct VariableDeclarationNode : public ASTNode
     std::string name;
     std::unique_ptr<ASTNode> initialValue;
 
+    // نوع المتغير (قد يكون Primitive أو Array أو Record)
+    std::unique_ptr<ASTNode> typeNode; // will point to a Type node (we reuse ASTNode hierarchy)
+
+    VariableDeclarationNode() { type = NodeType::VARIABLE_DECL; }
     VariableDeclarationNode(const std::string &n)
-        : name(n) { type = NodeType::VARIABLE_DECL; }
+        : name(n), typeNode(nullptr) { type = NodeType::VARIABLE_DECL; }
 
     std::string toString() const override
     {
         std::string result = "تعريف متغير: " + name;
+        if (typeNode)
+        {
+            result += " : " + typeNode->toString();
+        }
         if (initialValue)
         {
             result += " = [قيمة ابتدائية]";
@@ -89,6 +103,7 @@ struct ConstantDeclarationNode : public ASTNode
     std::string name;
     std::unique_ptr<ASTNode> value;
 
+    ConstantDeclarationNode() { type = NodeType::CONSTANT_DECL; }
     ConstantDeclarationNode(const std::string &n)
         : name(n) { type = NodeType::CONSTANT_DECL; }
 
@@ -105,18 +120,16 @@ struct ConstantDeclarationNode : public ASTNode
 
 struct AssignmentNode : public ASTNode
 {
-    std::string variableName;
+    std::unique_ptr<ASTNode> left; // Can be a VariableNode or IndexAccessNode
     std::unique_ptr<ASTNode> value;
 
-    AssignmentNode(const std::string &var) : variableName(var)
+    AssignmentNode() { type = NodeType::ASSIGNMENT; }
+    AssignmentNode(std::unique_ptr<ASTNode> l) : left(std::move(l))
     {
         type = NodeType::ASSIGNMENT;
     }
 
-    std::string toString() const override
-    {
-        return "تعيين: " + variableName + " = [تعبير]";
-    }
+    std::string toString() const override;
 
     std::string getTypeName() const override
     {
@@ -143,6 +156,7 @@ struct PrintNode : public ASTNode
 struct ReadNode : public ASTNode
 {
     std::string variableName;
+    ReadNode() { type = NodeType::READ; }
     ReadNode(const std::string &var) : variableName(var)
     {
         type = NodeType::READ;
@@ -217,6 +231,37 @@ struct RepeatNode : public ASTNode
     std::string getTypeName() const override
     {
         return "RepeatNode";
+    }
+};
+
+struct ForNode : public ASTNode
+{
+    std::string iteratorName;
+    std::unique_ptr<ASTNode> startValue;
+    std::unique_ptr<ASTNode> endValue;
+    std::unique_ptr<ASTNode> stepValue; // Can be nullptr
+    std::vector<std::unique_ptr<ASTNode>> body;
+
+    ForNode()
+    {
+        type = NodeType::FOR;
+    }
+
+    std::string toString() const override
+    {
+        std::string result = "حلقة تكرار (For): " + iteratorName;
+        result += " من [بداية] الى [نهاية]";
+        if (stepValue)
+        {
+            result += " اضف [خطوة]";
+        }
+        result += " جسم(" + std::to_string(body.size()) + " جملة)";
+        return result;
+    }
+
+    std::string getTypeName() const override
+    {
+        return "ForNode";
     }
 };
 
@@ -327,10 +372,10 @@ struct LiteralNode : public ASTNode
     TokenType literalType;
     std::string value;
 
-    LiteralNode(TokenType type, const std::string &val)
-        : literalType(type), value(val)
+    LiteralNode(TokenType literalTypeParam, const std::string &val)
+        : literalType(literalTypeParam), value(val)
     {
-        type = NodeType::LITERAL;
+        this->type = NodeType::LITERAL;
     }
 
     std::string toString() const override
@@ -388,6 +433,76 @@ struct VariableNode : public ASTNode
     {
         return "VariableNode";
     }
+};
+
+struct IndexAccessNode : public ASTNode
+{
+    std::unique_ptr<ASTNode> variable; // The array variable
+    std::unique_ptr<ASTNode> index;    // The index expression
+
+    IndexAccessNode()
+    {
+        type = NodeType::INDEX_ACCESS;
+    }
+
+    std::string toString() const override;
+
+    std::string getTypeName() const override
+    {
+        return "IndexAccessNode";
+    }
+};
+
+// Type nodes
+struct TypeNode : public ASTNode
+{
+    TypeNode() { type = NodeType::EXPRESSION; }
+    virtual ~TypeNode() = default;
+};
+
+struct PrimitiveTypeNode : public TypeNode
+{
+    std::string name; // e.g., 'صحيح', 'خيط'
+    PrimitiveTypeNode(const std::string &n) : name(n) {}
+    std::string toString() const override { return "نوع: " + name; }
+    std::string getTypeName() const override { return "PrimitiveTypeNode"; }
+};
+
+struct ArrayTypeNode : public TypeNode
+{
+    std::unique_ptr<TypeNode> elementType;
+    int length;
+    ArrayTypeNode() : elementType(nullptr), length(0) {}
+    std::string toString() const override
+    {
+        return "قائمة[" + std::to_string(length) + "] من " + (elementType ? elementType->toString() : "?");
+    }
+    std::string getTypeName() const override { return "ArrayTypeNode"; }
+};
+
+struct FieldDecl
+{
+    std::string name;
+    std::unique_ptr<TypeNode> type;
+};
+
+struct RecordTypeNode : public TypeNode
+{
+    std::vector<FieldDecl> fields;
+    RecordTypeNode() {}
+    std::string toString() const override
+    {
+        std::string s = "سجل{";
+        for (size_t i = 0; i < fields.size(); ++i)
+        {
+            s += fields[i].name + ":" + (fields[i].type ? fields[i].type->toString() : "?");
+            if (i + 1 < fields.size())
+                s += ", ";
+        }
+        s += "}";
+        return s;
+    }
+    std::string getTypeName() const override { return "RecordTypeNode"; }
 };
 
 // دالة مساعدة لعرض AST
@@ -474,6 +589,26 @@ public:
             }
             print(repeatStmt->condition, newPrefix, true);
         }
+        else if (auto forStmt = dynamic_cast<ForNode *>(node.get()))
+        {
+            std::cout << newPrefix << "├── iterator: " << forStmt->iteratorName << std::endl;
+            print(forStmt->startValue, newPrefix, false);
+            print(forStmt->endValue, newPrefix, false);
+            if (forStmt->stepValue)
+            {
+                print(forStmt->stepValue, newPrefix, false);
+            }
+            // Print body
+            if (!forStmt->body.empty())
+            {
+                std::cout << newPrefix << "└── body:" << std::endl;
+                for (size_t i = 0; i < forStmt->body.size(); i++)
+                {
+                    bool lastBody = (i == forStmt->body.size() - 1);
+                    print(forStmt->body[i], newPrefix + "    ", lastBody);
+                }
+            }
+        }
         else if (auto binaryOp = dynamic_cast<BinaryOpNode *>(node.get()))
         {
             print(binaryOp->left, newPrefix, false);
@@ -499,10 +634,16 @@ public:
         }
         else if (auto assignment = dynamic_cast<AssignmentNode *>(node.get()))
         {
+            print(assignment->left, newPrefix, false);
             if (assignment->value)
             {
                 print(assignment->value, newPrefix, true);
             }
+        }
+        else if (auto indexAccess = dynamic_cast<IndexAccessNode *>(node.get()))
+        {
+            print(indexAccess->variable, newPrefix, false);
+            print(indexAccess->index, newPrefix, true);
         }
         else if (auto printStmt = dynamic_cast<PrintNode *>(node.get()))
         {

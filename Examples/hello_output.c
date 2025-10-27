@@ -6,14 +6,12 @@
 
 int main() {
     int عمر = 0;
-    int اسم = 0;
+    char* اسم = NULL;
     int t0 = 0;
     int t1 = 0;
     int t2 = 0;
     int t3 = 0;
     int t4 = 0;
-    int t5 = 0;
-    int t6 = 0;
     char* str_0 = "أحمد";
     char* str_1 = "مرحباً بك ";
     char* str_2 = "عمرك هو: ";
@@ -26,21 +24,19 @@ int main() {
     t1 = 25;
     عمر = t1;
     printf("%s\n", str_1);
-    t2 = اسم;
-    printf("%d\n", t2);
+    printf("%s\n", اسم);
     printf("%s\n", str_2);
-    t3 = عمر;
-    printf("%d\n", t3);
-    t4 = عمر;
-    t5 = 18;
-    t6 = 0;
-    /* CMP t4, t5 */
+    printf("%d\n", عمر);
+    t2 = عمر;
+    t3 = 18;
+    t4 = 0;
+    /* CMP t2, t3 */
     // JG L2;
     goto L3;
     L2:
-    t6 = 1;
+    t4 = 1;
     L3:
-    if (!t6) goto L0;
+    if (!t4) goto L0;
     printf("%s\n", str_3);
     goto L1;
     L0:

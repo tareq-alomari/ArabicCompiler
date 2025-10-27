@@ -9,6 +9,7 @@ set(SOURCE_FILES
     src/Lexer.cpp
     src/Parser.cpp
     src/Compiler.cpp
+    src/AST.cpp
     src/main.cpp
 )
 

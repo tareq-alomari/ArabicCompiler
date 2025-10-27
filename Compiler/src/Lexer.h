@@ -23,14 +23,20 @@ enum class TokenType
     REAL,
     BOOLEAN,
     STRING,
+    TYPE,
+    ARRAY,
+    RECORD,
     THEN,
     END,
+    TO,
+    ADD,
 
     // المعرفات والقيم
     IDENTIFIER,
     NUMBER,
     STRING_LITERAL,
     REAL_LITERAL,
+    CHAR_LITERAL,
 
     // العلامات
     ASSIGN,
@@ -106,10 +112,20 @@ struct Token
             return "BOOLEAN";
         case TokenType::STRING:
             return "STRING";
+        case TokenType::TYPE:
+            return "TYPE";
+        case TokenType::ARRAY:
+            return "ARRAY";
+        case TokenType::RECORD:
+            return "RECORD";
         case TokenType::THEN:
             return "THEN";
         case TokenType::END:
             return "END";
+        case TokenType::TO:
+            return "TO";
+        case TokenType::ADD:
+            return "ADD";
         case TokenType::IDENTIFIER:
             return "IDENTIFIER";
         case TokenType::NUMBER:
@@ -118,6 +134,8 @@ struct Token
             return "STRING_LITERAL";
         case TokenType::REAL_LITERAL:
             return "REAL_LITERAL";
+        case TokenType::CHAR_LITERAL:
+            return "CHAR_LITERAL";
         case TokenType::ASSIGN:
             return "ASSIGN";
         case TokenType::SEMICOLON:

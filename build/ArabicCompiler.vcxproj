@@ -403,6 +403,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\Lexer.cpp" />
     <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\Parser.cpp" />
     <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\Compiler.cpp" />
+    <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\AST.cpp" />
     <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\main.cpp" />
   </ItemGroup>
   <ItemGroup />

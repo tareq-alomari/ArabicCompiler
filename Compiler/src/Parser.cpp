@@ -2,7 +2,9 @@
 #include <iostream>
 #include <memory>
 
-Parser::Parser(const std::vector<Token> &tokens) : tokens(tokens), current(0) {}
+Parser::Parser(const std::vector<Token> &tokens) : tokens(tokens), current(0)
+{
+}
 
 bool Parser::match(TokenType type)
 {
@@ -185,11 +187,10 @@ std::unique_ptr<VariableDeclarationNode> Parser::parseVariableDeclaration()
     if (match(TokenType::COLON))
     {
         std::cout << "[DBG] saw ':' then token=" << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
-        // تخطي النوع
-        while (!check(TokenType::ASSIGN) && !check(TokenType::SEMICOLON) && !isAtEnd())
+        declaration->typeNode = parseType();
+        if (declaration->typeNode)
         {
-            std::cout << "[DBG] skipping token after ':' -> " << peek().typeToString() << " ('" << peek().value << ")" << std::endl;
-            advance();
+            std::cout << "[DBG] parsed structured type: '" << declaration->typeNode->toString() << "'" << std::endl;
         }
     }
 
@@ -250,9 +251,27 @@ std::unique_ptr<ASTNode> Parser::parseStatement()
     {
         return parseWhileStatement();
     }
-    else if (match(TokenType::REPEAT))
+    else if (check(TokenType::REPEAT))
     {
-        return parseRepeatStatement();
+        // Lookahead to distinguish between FOR and REPEAT-UNTIL
+        bool isFor = false;
+        if (current + 2 < tokens.size() &&
+            tokens[current + 1].type == TokenType::IDENTIFIER &&
+            tokens[current + 2].type == TokenType::ASSIGN)
+        {
+            isFor = true;
+        }
+
+        if (isFor)
+        {
+            advance(); // Consume 'كرر'
+            return parseForStatement();
+        }
+        else
+        {
+            advance(); // Consume 'كرر'
+            return parseRepeatStatement();
+        }
     }
     else if (match(TokenType::SEMICOLON))
     {
@@ -267,13 +286,36 @@ std::unique_ptr<ASTNode> Parser::parseStatement()
     }
 }
 
-std::unique_ptr<AssignmentNode> Parser::parseAssignment()
+std::unique_ptr<ASTNode> Parser::parseAssignment()
 {
-    auto assignment = std::make_unique<AssignmentNode>();
+    // The left-hand side can be a variable or an array access.
+    // We know from parseStatement that the current token is an IDENTIFIER.
+    auto var_node = std::make_unique<VariableNode>(consume(TokenType::IDENTIFIER, "خطأ: توقع اسم متغير للتعيين").value);
 
-    assignment->variableName = consume(TokenType::IDENTIFIER, "توقع اسم المتغير").value;
+    std::unique_ptr<ASTNode> left_node;
+
+    // Check if it's an array access
+    if (match(TokenType::LBRACKET))
+    {
+        auto index_access_node = std::make_unique<IndexAccessNode>();
+        index_access_node->variable = std::move(var_node);
+        index_access_node->index = parseExpression();
+        consume(TokenType::RBRACKET, "توقع ']' بعد فهرس القائمة");
+        left_node = std::move(index_access_node);
+    }
+    else
+    {
+        // It's a simple variable assignment
+        left_node = std::move(var_node);
+    }
+
     consume(TokenType::ASSIGN, "توقع '=' في التعيين");
-    assignment->value = parseExpression();
+    auto value_node = parseExpression();
+
+    auto assignment = std::make_unique<AssignmentNode>();
+    assignment->left = std::move(left_node);
+    assignment->value = std::move(value_node);
+
     consume(TokenType::SEMICOLON, "توقع ';' بعد الجملة");
 
     return assignment;
@@ -314,28 +356,35 @@ std::unique_ptr<IfNode> Parser::parseIfStatement()
     ifStmt->condition = parseExpression();
     consume(TokenType::THEN, "توقع كلمة 'فان' بعد الشرط");
 
-    while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd()) {
+    while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd())
+    {
         ifStmt->thenBranch.push_back(parseStatement());
     }
 
-    IfNode* currentIf = ifStmt.get();
+    IfNode *currentIf = ifStmt.get();
 
-    while (match(TokenType::ELSE)) {
-        if (match(TokenType::IF)) {
+    while (match(TokenType::ELSE))
+    {
+        if (match(TokenType::IF))
+        {
             // Else if
             auto elseIfNode = std::make_unique<IfNode>();
             elseIfNode->condition = parseExpression();
             consume(TokenType::THEN, "توقع كلمة 'فان' بعد الشرط");
 
-            while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd()) {
+            while (!check(TokenType::ELSE) && !check(TokenType::END) && !isAtEnd())
+            {
                 elseIfNode->thenBranch.push_back(parseStatement());
             }
-            
+
             currentIf->elseBranch.push_back(std::move(elseIfNode));
-            currentIf = static_cast<IfNode*>(currentIf->elseBranch.back().get());
-        } else {
+            currentIf = static_cast<IfNode *>(currentIf->elseBranch.back().get());
+        }
+        else
+        {
             // Else
-            while (!check(TokenType::END) && !isAtEnd()) {
+            while (!check(TokenType::END) && !isAtEnd())
+            {
                 currentIf->elseBranch.push_back(parseStatement());
             }
             break; // No more 'else' or 'else if' after a final 'else'
@@ -387,6 +436,37 @@ std::unique_ptr<RepeatNode> Parser::parseRepeatStatement()
     consume(TokenType::SEMICOLON, "توقع ';' بعد جملة repeat");
 
     return repeatStmt;
+}
+
+std::unique_ptr<ForNode> Parser::parseForStatement()
+{
+    auto forNode = std::make_unique<ForNode>();
+
+    // Parse: <iterator> = <start_expr>
+    forNode->iteratorName = consume(TokenType::IDENTIFIER, "توقع اسم متغير التكرار في حلقة for").value;
+    consume(TokenType::ASSIGN, "توقع '=' بعد اسم متغير التكرار");
+    forNode->startValue = parseExpression();
+
+    // Parse: الى <end_expr>
+    consume(TokenType::TO, "توقع كلمة 'الى' في حلقة for");
+    forNode->endValue = parseExpression();
+
+    // Parse optional step: [اضف <step_expr>]
+    if (match(TokenType::ADD))
+    {
+        forNode->stepValue = parseExpression();
+    }
+
+    // Parse loop body until 'نهاية'
+    while (!check(TokenType::END) && !isAtEnd())
+    {
+        forNode->body.push_back(parseStatement());
+    }
+
+    consume(TokenType::END, "توقع كلمة 'نهاية' لإنهاء حلقة for");
+    match(TokenType::SEMICOLON); // Optional semicolon
+
+    return forNode;
 }
 
 std::unique_ptr<ASTNode> Parser::parseExpression()
@@ -449,7 +529,7 @@ std::unique_ptr<ASTNode> Parser::parseFactor()
 std::unique_ptr<ASTNode> Parser::parsePrimary()
 {
     if (match(TokenType::NUMBER) || match(TokenType::REAL_LITERAL) ||
-        match(TokenType::STRING_LITERAL))
+        match(TokenType::STRING_LITERAL) || match(TokenType::CHAR_LITERAL))
     {
         auto literal = std::make_unique<LiteralNode>(previous().type, previous().value);
         return literal;
@@ -457,8 +537,16 @@ std::unique_ptr<ASTNode> Parser::parsePrimary()
 
     if (match(TokenType::IDENTIFIER))
     {
-        auto variable = std::make_unique<VariableNode>(previous().value);
-        return variable;
+        auto var = std::make_unique<VariableNode>(previous().value);
+        if (match(TokenType::LBRACKET))
+        {
+            auto indexAccess = std::make_unique<IndexAccessNode>();
+            indexAccess->variable = std::move(var);
+            indexAccess->index = parseExpression();
+            consume(TokenType::RBRACKET, "توقع ']' بعد فهرس القائمة");
+            return indexAccess;
+        }
+        return var;
     }
 
     if (match(TokenType::LPAREN))
@@ -476,6 +564,72 @@ std::unique_ptr<ASTNode> Parser::parsePrimary()
     }
 
     throw ParseError(peek(), "توقع تعبير صالح");
+}
+
+// Parse a type specification: primitive, array, or record
+std::unique_ptr<TypeNode> Parser::parseType()
+{
+    // Array: قائمة [ number ] من <type>
+    if (match(TokenType::ARRAY))
+    {
+        auto arr = std::make_unique<ArrayTypeNode>();
+        consume(TokenType::LBRACKET, "توقع '[' بعد كلمة 'قائمة'");
+        Token sizeTok = consume(TokenType::NUMBER, "توقع طول القائمة (عدد)");
+        try
+        {
+            arr->length = std::stoi(sizeTok.value);
+        }
+        catch (...)
+        {
+            arr->length = 0;
+        }
+        consume(TokenType::RBRACKET, "توقع ']' بعد طول القائمة");
+        // optional 'من' keyword (lexer may treat it as IDENTIFIER)
+        if (check(TokenType::IDENTIFIER) && peek().value == "من")
+            advance();
+        // element type
+        auto elemType = parseType();
+        if (elemType)
+            arr->elementType = std::move(elemType);
+        return arr;
+    }
+
+    // Record: سجل { field: type; ... }
+    if (match(TokenType::RECORD))
+    {
+        consume(TokenType::LBRACE, "توقع '{' بعد كلمة 'سجل'");
+        auto rec = std::make_unique<RecordTypeNode>();
+        while (!check(TokenType::RBRACE) && !isAtEnd())
+        {
+            // field: IDENTIFIER : type ;
+            std::string fieldName = consume(TokenType::IDENTIFIER, "توقع اسم الحقل في السجل").value;
+            consume(TokenType::COLON, "توقع ':' بعد اسم الحقل");
+            auto fieldType = parseType();
+            consume(TokenType::SEMICOLON, "توقع ';' بعد تعريف الحقل");
+            FieldDecl fd;
+            fd.name = fieldName;
+            fd.type = std::move(fieldType);
+            rec->fields.push_back(std::move(fd));
+        }
+        consume(TokenType::RBRACE, "توقع '}' انهاء تعريف السجل");
+        return rec;
+    }
+
+    // Primitive types or user-defined type names
+    if (match(TokenType::INTEGER) || match(TokenType::REAL) || match(TokenType::BOOLEAN) || match(TokenType::STRING))
+    {
+        auto prim = std::make_unique<PrimitiveTypeNode>(previous().value);
+        return prim;
+    }
+
+    if (match(TokenType::IDENTIFIER))
+    {
+        auto prim = std::make_unique<PrimitiveTypeNode>(previous().value);
+        return prim;
+    }
+
+    // If nothing matched, return nullptr (caller should handle)
+    return nullptr;
 }
 
 // دوال مساعدة للتصحيح - الإصدار المصحح

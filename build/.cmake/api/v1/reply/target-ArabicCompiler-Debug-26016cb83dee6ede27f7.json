@@ -2,10 +2,10 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "RelWithDebInfo/ArabicCompiler.exe"
+			"path" : "Debug/ArabicCompiler.exe"
 		},
 		{
-			"path" : "RelWithDebInfo/ArabicCompiler.pdb"
+			"path" : "Debug/ArabicCompiler.pdb"
 		}
 	],
 	"backtrace" : 1,
@@ -27,7 +27,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 15,
+				"line" : 16,
 				"parent" : 0
 			}
 		]
@@ -38,7 +38,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG -std:c++17"
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 -std:c++17"
 				}
 			],
 			"language" : "CXX",
@@ -55,7 +55,8 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -71,7 +72,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG",
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1",
 				"role" : "flags"
 			},
 			{
@@ -105,7 +106,8 @@
 				0,
 				1,
 				2,
-				3
+				3,
+				4
 			]
 		}
 	],
@@ -127,6 +129,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/Compiler.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/AST.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

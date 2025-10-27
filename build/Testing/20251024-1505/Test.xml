@@ -19,17 +19,17 @@
 	ProcessorCacheSize="-1"
 	NumberOfLogicalCPU="4"
 	NumberOfPhysicalCPU="2"
-	TotalVirtualMemory="8163"
+	TotalVirtualMemory="8602"
 	TotalPhysicalMemory="3782"
 	LogicalProcessorsPerPhysical="2"
 	ProcessorClockFrequency="2594"
 	>
 	<Testing>
-		<StartDateTime>Oct 27 00:15 السعودية - التوقيت الرسمي</StartDateTime>
-		<StartTestTime>1761513346</StartTestTime>
+		<StartDateTime>Oct 28 00:25 السعودية - التوقيت الرسمي</StartDateTime>
+		<StartTestTime>1761600351</StartTestTime>
 		<TestList/>
-		<EndDateTime>Oct 27 00:15 السعودية - التوقيت الرسمي</EndDateTime>
-		<EndTestTime>1761513348</EndTestTime>
+		<EndDateTime>Oct 28 00:25 السعودية - التوقيت الرسمي</EndDateTime>
+		<EndTestTime>1761600351</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

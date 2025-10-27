@@ -10,6 +10,9 @@
     <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\Compiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\AST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\IT\Compiler\ArabicCompiler\Compiler\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

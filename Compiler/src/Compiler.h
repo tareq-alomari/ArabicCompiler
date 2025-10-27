@@ -35,7 +35,9 @@ enum class InstructionType
     JGE,
     JLE,
     OR,
-    AND
+    AND,
+    LOAD_INDEXED, // op1 = op2[op3] -> target = base[index]
+    STORE_INDEXED // op1[op2] = op3 -> base[index] = source
 };
 
 struct Instruction
@@ -120,6 +122,10 @@ struct Instruction
                 return "AND " + operand1 + ", " + operand2;
             else
                 return "AND " + operand1 + ", " + operand2 + ", " + operand3;
+        case InstructionType::LOAD_INDEXED:
+            return "LOAD_INDEXED " + operand1 + ", " + operand2 + "[" + operand3 + "]";
+        case InstructionType::STORE_INDEXED:
+            return "STORE_INDEXED " + operand1 + "[" + operand2 + "]" + ", " + operand3;
         default:
             return "UNKNOWN";
         }
@@ -131,6 +137,7 @@ class Compiler
 private:
     std::vector<Instruction> instructions;
     std::unordered_map<std::string, std::string> symbolTable;
+    std::unordered_map<std::string, std::string> recordDefs; // structName -> C struct definition body
     int labelCounter;
     int tempVarCounter;
     std::vector<std::string> stringLiterals;
@@ -153,7 +160,9 @@ private:
     void compileIf(IfNode *node);
     void compileWhile(WhileNode *node);
     void compileRepeat(RepeatNode *node);
+    void compileFor(ForNode *node);
     std::string compileExpression(ASTNode *expr);
+    std::string compileIndexAccess(IndexAccessNode *node);
 
 public:
     Compiler();

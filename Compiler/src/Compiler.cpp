@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cctype>
 #include <stdexcept>
+#include <cstring>
 
 Compiler::Compiler() : labelCounter(0), tempVarCounter(0) {}
 
@@ -133,8 +134,18 @@ void Compiler::compileStatement(ASTNode *statement)
     {
         compileRepeat(repeatStmt);
     }
+    else if (auto forStmt = dynamic_cast<ForNode *>(statement))
+    {
+        compileFor(forStmt);
+    }
     else
     {
+        // Ignore __empty__ nodes which are just semicolons
+        if (auto varNode = dynamic_cast<VariableNode *>(statement))
+        {
+            if (varNode->name == "__empty__")
+                return;
+        }
         std::cerr << "⚠️  نوع جملة غير معروف في compileStatement: " << statement->getTypeName() << std::endl;
     }
 }
@@ -143,20 +154,97 @@ void Compiler::compileVariableDeclaration(VariableDeclarationNode *node)
 {
     if (!node)
         return;
-
-    // تخزين المتغير في جدول الرموز
-    symbolTable[node->name] = "متغير";
-
-    if (node->initialValue)
+    if (node->typeNode)
     {
-        std::string temp = compileExpression(node->initialValue.get());
-        emit(InstructionType::STORE, node->name, temp);
+        // Determine C type representation from explicit type
+        if (auto prim = dynamic_cast<PrimitiveTypeNode *>(node->typeNode.get()))
+        {
+            std::string cname = "int";
+            if (prim->name == "صحيح") cname = "int";
+            else if (prim->name == "حقيقي") cname = "double";
+            else if (prim->name == "خيط") cname = "char*";
+            else if (prim->name == "منطقي") cname = "int";
+            else cname = "int"; // fallback
+            symbolTable[node->name] = std::string("primitive:") + cname;
+        }
+        else if (auto arr = dynamic_cast<ArrayTypeNode *>(node->typeNode.get()))
+        {
+            std::string elemC = "int";
+            if (arr->elementType)
+            {
+                if (auto pe = dynamic_cast<PrimitiveTypeNode *>(arr->elementType.get()))
+                {
+                    if (pe->name == "صحيح") elemC = "int";
+                    else if (pe->name == "حقيقي") elemC = "double";
+                    else if (pe->name == "خيط") elemC = "char*";
+                }
+            }
+            symbolTable[node->name] = std::string("array:") + elemC + ":" + std::to_string(arr->length);
+        }
+        else if (auto rec = dynamic_cast<RecordTypeNode *>(node->typeNode.get()))
+        {
+            std::string structName = "struct_" + node->name;
+            std::stringstream ss;
+            ss << "struct " << structName << " {\n";
+            for (const auto &f : rec->fields)
+            {
+                std::string fctype = "int";
+                if (f.type)
+                {
+                    if (auto pf = dynamic_cast<PrimitiveTypeNode *>(f.type.get()))
+                    {
+                        if (pf->name == "صحيح") fctype = "int";
+                        else if (pf->name == "حقيقي") fctype = "double";
+                        else if (pf->name == "خيط") fctype = "char*";
+                    }
+                }
+                ss << "    " << fctype << " " << f.name << ";\n";
+            }
+            ss << "};\n";
+            recordDefs[structName] = ss.str();
+            symbolTable[node->name] = std::string("record:") + structName;
+        }
+        else
+        {
+            symbolTable[node->name] = "primitive:int";
+        }
     }
     else
     {
-        // تهيئة بالقيمة الافتراضية
-        std::string temp = generateTempVar();
-        emit(InstructionType::LOAD, temp, "0");
+        // No explicit type, so infer from initial value
+        if (node->initialValue)
+        {
+            if (auto literal = dynamic_cast<LiteralNode *>(node->initialValue.get()))
+            {
+                if (literal->literalType == TokenType::STRING_LITERAL)
+                {
+                    symbolTable[node->name] = "primitive:char*";
+                }
+                else if (literal->literalType == TokenType::REAL_LITERAL)
+                {
+                    symbolTable[node->name] = "primitive:double";
+                }
+                else
+                {
+                    symbolTable[node->name] = "primitive:int"; // Default for NUMBER or other literals
+                }
+            }
+            else
+            {
+                symbolTable[node->name] = "primitive:int"; // Default for complex expressions
+            }
+        }
+        else
+        {
+            // No initial value and no type, default to int
+            symbolTable[node->name] = "primitive:int";
+        }
+    }
+
+    // handle initialization if present
+    if (node->initialValue)
+    {
+        std::string temp = compileExpression(node->initialValue.get());
         emit(InstructionType::STORE, node->name, temp);
     }
 }
@@ -175,11 +263,39 @@ void Compiler::compileConstantDeclaration(ConstantDeclarationNode *node)
 
 void Compiler::compileAssignment(AssignmentNode *node)
 {
-    if (!node)
+    if (!node || !node->left || !node->value)
         return;
 
-    std::string temp = compileExpression(node->value.get());
-    emit(InstructionType::STORE, node->variableName, temp);
+    // First, compile the right-hand side to get the value to store
+    std::string valueTemp = compileExpression(node->value.get());
+
+    // Now, figure out where to store it
+    if (auto varNode = dynamic_cast<VariableNode*>(node->left.get()))
+    {
+        // Simple assignment: var = value
+        emit(InstructionType::STORE, varNode->name, valueTemp);
+    }
+    else if (auto indexAccessNode = dynamic_cast<IndexAccessNode*>(node->left.get()))
+    {
+        // Array assignment: array[index] = value
+
+        // Get the array name
+        VariableNode* arrayVarNode = dynamic_cast<VariableNode*>(indexAccessNode->variable.get());
+        if (!arrayVarNode) {
+            throw std::runtime_error("الوصول للفهرس في جملة التعيين يجب أن يكون لمتغير مباشر");
+        }
+        std::string arrayName = arrayVarNode->name;
+
+        // Compile the index expression
+        std::string indexTemp = compileExpression(indexAccessNode->index.get());
+
+        // Emit the store instruction
+        emit(InstructionType::STORE_INDEXED, arrayName, indexTemp, valueTemp);
+    }
+    else
+    {
+        throw std::runtime_error("هدف تعيين غير صالح");
+    }
 }
 
 void Compiler::compilePrint(PrintNode *node)
@@ -193,13 +309,18 @@ void Compiler::compilePrint(PrintNode *node)
     // طباعة السلاسل النصية مباشرة
     if (auto literal = dynamic_cast<LiteralNode *>(node->expression.get()))
     {
-        // *** الإصلاح: استخدام literalType بدلاً من type ***
         if (literal->literalType == TokenType::STRING_LITERAL)
         {
             std::string label = getStringLabel(literal->value);
             emit(InstructionType::PRINT, "STRING", label);
             return;
         }
+    }
+    // Handle variables directly to use type information from symbol table
+    else if (auto variable = dynamic_cast<VariableNode *>(node->expression.get()))
+    {
+        emit(InstructionType::PRINT, "VARIABLE", variable->name);
+        return;
     }
 
     std::string temp = compileExpression(node->expression.get());
@@ -310,6 +431,63 @@ void Compiler::compileRepeat(RepeatNode *node)
     std::string conditionTemp = compileExpression(node->condition.get());
     // في حلقة repeat-until، نكرر حتى يصبح الشرط صحيحاً
     emit(InstructionType::JZ, conditionTemp, startLabel);
+}
+
+void Compiler::compileFor(ForNode *node)
+{
+    if (!node)
+        return;
+
+    // 1. Initialize the iterator variable
+    symbolTable[node->iteratorName] = "primitive:int"; // Ensure it's an integer
+    std::string startValTemp = compileExpression(node->startValue.get());
+    emit(InstructionType::STORE, node->iteratorName, startValTemp);
+
+    std::string loopStartLabel = generateLabel();
+    std::string loopEndLabel = generateLabel();
+
+    // 2. Start of the loop
+    emit(InstructionType::LABEL, loopStartLabel);
+
+    // 3. Condition check
+    std::string iteratorTemp = generateTempVar();
+    emit(InstructionType::LOAD, iteratorTemp, node->iteratorName);
+    std::string endValTemp = compileExpression(node->endValue.get());
+
+    emit(InstructionType::CMP, iteratorTemp, endValTemp);
+    emit(InstructionType::JG, loopEndLabel); // Jump if iterator > endValue
+
+    // 4. Compile loop body
+    for (auto &stmt : node->body)
+    {
+        if (stmt)
+        {
+            compileStatement(stmt.get());
+        }
+    }
+
+    // 5. Increment step
+    std::string stepValTemp;
+    if (node->stepValue)
+    {
+        stepValTemp = compileExpression(node->stepValue.get());
+    }
+    else
+    {
+        stepValTemp = generateTempVar();
+        emit(InstructionType::LOAD, stepValTemp, "1"); // Default step is 1
+    }
+
+    emit(InstructionType::LOAD, iteratorTemp, node->iteratorName); // Reload iterator value
+    std::string newIteratorTemp = generateTempVar();
+    emit(InstructionType::ADD, newIteratorTemp, iteratorTemp, stepValTemp);
+    emit(InstructionType::STORE, node->iteratorName, newIteratorTemp);
+
+    // 6. Jump back to the start
+    emit(InstructionType::JMP, loopStartLabel);
+
+    // 7. End of the loop
+    emit(InstructionType::LABEL, loopEndLabel);
 }
 
 std::string Compiler::compileExpression(ASTNode *expr)
@@ -431,7 +609,6 @@ std::string Compiler::compileExpression(ASTNode *expr)
     {
         std::string temp = generateTempVar();
 
-        // *** الإصلاح: استخدام literalType بدلاً من type ***
         if (literal->literalType == TokenType::STRING_LITERAL)
         {
             std::string label = getStringLabel(literal->value);
@@ -449,8 +626,33 @@ std::string Compiler::compileExpression(ASTNode *expr)
         emit(InstructionType::LOAD, temp, variable->name);
         return temp;
     }
+    else if (auto indexAccess = dynamic_cast<IndexAccessNode *>(expr))
+    {
+        return compileIndexAccess(indexAccess);
+    }
 
     throw std::runtime_error("نوع تعبير غير مدعوم: " + std::string(expr->getTypeName()));
+}
+
+std::string Compiler::compileIndexAccess(IndexAccessNode *node)
+{
+    if (!node || !node->variable || !node->index)
+    {
+        throw std::runtime_error("عقدة وصول للفهرس غير مكتملة");
+    }
+
+    VariableNode *varNode = dynamic_cast<VariableNode *>(node->variable.get());
+    if (!varNode)
+    {
+        throw std::runtime_error("الوصول للفهرس لا يدعم إلا المتغيرات المباشرة حاليًا");
+    }
+
+    std::string arrayName = varNode->name;
+    std::string indexTemp = compileExpression(node->index.get());
+    std::string resultTemp = generateTempVar();
+
+    emit(InstructionType::LOAD_INDEXED, resultTemp, arrayName, indexTemp);
+    return resultTemp;
 }
 
 void Compiler::generateAssembly(const std::string &filename)
@@ -692,12 +894,52 @@ void Compiler::generateCCode(const std::string &filename)
     file << "#include <stdlib.h>" << std::endl
          << std::endl;
 
+    // Emit struct definitions for records
+    for (const auto &kv : recordDefs)
+    {
+        file << kv.second << std::endl;
+    }
+
     file << "int main() {" << std::endl;
 
     // تعريف المتغيرات
     for (const auto &symbol : symbolTable)
     {
-        file << "    int " << symbol.first << " = 0;" << std::endl;
+        const std::string &name = symbol.first;
+        const std::string &meta = symbol.second;
+        if (meta.rfind("primitive:", 0) == 0)
+        {
+            std::string ctype = meta.substr(strlen("primitive:"));
+            if (ctype == "char*")
+                file << "    " << ctype << " " << name << " = NULL;" << std::endl;
+            else
+                file << "    " << ctype << " " << name << " = 0;" << std::endl;
+        }
+        else if (meta.rfind("array:", 0) == 0)
+        {
+            // format: array:<elemC>:<len>
+            auto rest = meta.substr(strlen("array:"));
+            auto colonPos = rest.find(':');
+            if (colonPos != std::string::npos)
+            {
+                std::string elemC = rest.substr(0, colonPos);
+                std::string len = rest.substr(colonPos + 1);
+                file << "    " << elemC << " " << name << "[" << len << "];" << std::endl;
+            }
+            else
+            {
+                file << "    int " << name << " = 0; // malformed array meta" << std::endl;
+            }
+        }
+        else if (meta.rfind("record:", 0) == 0)
+        {
+            std::string structName = meta.substr(strlen("record:"));
+            file << "    struct " << structName << " " << name << ";" << std::endl;
+        }
+        else
+        {
+            file << "    int " << name << " = 0;" << std::endl;
+        }
     }
 
     // تعريف المتغيرات المؤقتة
@@ -713,6 +955,8 @@ void Compiler::generateCCode(const std::string &filename)
     }
 
     file << std::endl;
+
+    std::string lastCmpLeft, lastCmpRight;
 
     for (const auto &instr : instructions)
     {
@@ -746,7 +990,20 @@ void Compiler::generateCCode(const std::string &filename)
             {
                 file << "printf(\"%s\\n\", " << instr.operand2 << ");";
             }
-            else
+            else if (instr.operand1 == "VARIABLE")
+            {
+                const auto &varName = instr.operand2;
+                auto it = symbolTable.find(varName);
+                if (it != symbolTable.end() && it->second == "primitive:char*")
+                {
+                    file << "printf(\"%s\\n\", " << varName << ");";
+                }
+                else
+                {
+                    file << "printf(\"%d\\n\", " << varName << ");";
+                }
+            }
+            else // VALUE for complex expressions, assume numeric
             {
                 file << "printf(\"%d\\n\", " << instr.operand2 << ");";
             }
@@ -761,13 +1018,35 @@ void Compiler::generateCCode(const std::string &filename)
             file << "if (!" << instr.operand1 << ") goto " << instr.operand2 << ";";
             break;
         case InstructionType::CMP:
+            lastCmpLeft = instr.operand1;
+            lastCmpRight = instr.operand2;
             file << "/* CMP " << instr.operand1 << ", " << instr.operand2 << " */";
             break;
         case InstructionType::JE:
-            file << "/* JE " << instr.operand1 << " - مقارنة للمساواة */";
+            file << "if (" << lastCmpLeft << " == " << lastCmpRight << ") goto " << instr.operand1 << ";";
             break;
         case InstructionType::JNE:
-            file << "/* JNE " << instr.operand1 << " - مقارنة لعدم المساواة */";
+            file << "if (" << lastCmpLeft << " != " << lastCmpRight << ") goto " << instr.operand1 << ";";
+            break;
+        case InstructionType::JG:
+            file << "if (" << lastCmpLeft << " > " << lastCmpRight << ") goto " << instr.operand1 << ";";
+            break;
+        case InstructionType::JL:
+            file << "if (" << lastCmpLeft << " < " << lastCmpRight << ") goto " << instr.operand1 << ";";
+            break;
+        case InstructionType::JGE:
+            file << "if (" << lastCmpLeft << " >= " << lastCmpRight << ") goto " << instr.operand1 << ";";
+            break;
+        case InstructionType::JLE:
+            file << "if (" << lastCmpLeft << " <= " << lastCmpRight << ") goto " << instr.operand1 << ";";
+            break;
+        case InstructionType::LOAD_INDEXED:
+            // op1 = op2[op3] -> target = base[index]
+            file << instr.operand1 << " = " << instr.operand2 << "[" << instr.operand3 << "];";
+            break;
+        case InstructionType::STORE_INDEXED:
+            // op1[op2] = op3 -> base[index] = source
+            file << instr.operand1 << "[" << instr.operand2 << "] = " << instr.operand3 << ";";
             break;
         case InstructionType::LABEL:
             file << instr.operand1 << ":";

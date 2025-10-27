@@ -21,13 +21,18 @@ Lexer::Lexer(const std::string &source, bool debugFlag)
         {"كرر", TokenType::REPEAT},
         {"حتى", TokenType::UNTIL},
         {"نهاية", TokenType::END},
+        {"الى", TokenType::TO},
+        {"اضف", TokenType::ADD},
         {"متغير", TokenType::VARIABLE},
         {"ثابت", TokenType::CONSTANT},
         {"إجراء", TokenType::PROCEDURE},
         {"صحيح", TokenType::INTEGER},
         {"حقيقي", TokenType::REAL},
         {"منطقي", TokenType::BOOLEAN},
-        {"خيط", TokenType::STRING}};
+        {"خيط", TokenType::STRING},
+        {"نوع", TokenType::TYPE},
+        {"قائمة", TokenType::ARRAY},
+        {"سجل", TokenType::RECORD}};
 }
 
 void Lexer::analyzeEncoding()
@@ -48,14 +53,14 @@ void Lexer::analyzeEncoding()
         if (uc >= 0x80 || (uc < 32 && uc != '\n' && uc != '\t' && uc != '\r'))
         {
             std::cout << "Position " << i << ": Hex=0x" << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(uc)
-                      << std::dec << " Char='";
+                      << std::dec << " Char='" ;
             if (uc >= 32 && uc < 127)
             {
                 std::cout << source[i];
             }
             else
             {
-                std::cout << "?";
+                std::cout << "?" ;
             }
             std::cout << "'" << std::endl;
         }
@@ -70,14 +75,14 @@ void Lexer::debugChar(char c)
     if (!debug)
         return;
     unsigned char uc = static_cast<unsigned char>(c);
-    std::cout << "🔍 تصحيح قراءة حرف: Char='";
+    std::cout << "🔍 تصحيح قراءة حرف: Char='" ;
     if (uc >= 32 && uc < 127)
     {
         std::cout << c;
     }
     else
     {
-        std::cout << "?";
+        std::cout << "?" ;
     }
     std::cout << "' ASCII=" << static_cast<int>(uc)
               << " Hex=0x" << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(uc) << std::dec
@@ -150,12 +155,6 @@ void Lexer::skipWhitespace()
             advance();
             continue;
         }
-        // fallback to isspace for other categories (safe with unsigned char)
-        if (std::isspace(static_cast<unsigned char>(c)))
-        {
-            advance();
-            continue;
-        }
         break;
     }
 }
@@ -166,8 +165,13 @@ void Lexer::skipComment()
     {
         advance();
         advance();
-        while (position < source.length() && peek() != '\n')
+        while (position < source.length())
         {
+            char c = peek();
+            if (c == '\n' || c == '\r')
+            {
+                break;
+            }
             advance();
         }
         // Consume the newline after the comment (handle CRLF and LF)
@@ -295,7 +299,7 @@ Token Lexer::readString()
     }
 
     advance(); // Skip closing quote
-    return Token(TokenType::STRING_LITERAL, str_val, startLine, startColumn);
+    return Token(TokenType::STRING_LITERAL, str_val, line, startColumn);
 }
 
 Token Lexer::readIdentifier()
@@ -309,6 +313,12 @@ Token Lexer::readIdentifier()
         char c = peek();
         unsigned char uc = static_cast<unsigned char>(c);
 
+        // Stop if a whitespace character is encountered.
+        if (std::isspace(uc))
+        {
+            break;
+        }
+
         // Stop reading identifier if punctuation is found
         if (c == ';' || c == ',' || c == '(' || c == ')' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/')
         {
@@ -318,14 +328,14 @@ Token Lexer::readIdentifier()
         {
             unsigned char byte1 = uc;
             unsigned char byte2 = static_cast<unsigned char>(source[position + 1]);
-            if (byte1 == 0xD8 && (byte2 == 0x9B || byte2 == 0x8C))
+            if (byte1 == 0xD8 && (byte2 == 0x9B || byte2 == 0x8C)) 
             { // Arabic Semicolon or Comma
                 break;
             }
         }
 
         // Consume valid identifier characters (letters, numbers, non-ASCII)
-        if (std::isalnum(uc) || uc == '_' || (uc >= 0x80))
+        if (std::isalnum(uc) || uc == '_' || (uc >= 0x80)) 
         {
             identifier_val += advance();
         }
@@ -352,6 +362,27 @@ bool Lexer::isArabicChar(char c)
     return (uc >= 0xD8 && uc <= 0xDF) || // Arabic presentation forms
            (uc >= 0xFE && uc <= 0xFF) || // Arabic presentation forms
            (uc >= 0x06 && uc <= 0x06);   // Basic Arabic in UTF-8
+}
+
+std::vector<Token> Lexer::tokenize()
+{
+    std::vector<Token> tokens;
+    Token token(TokenType::ERROR, "", 0, 0);
+
+    do
+    {
+        token = getNextToken();
+        tokens.push_back(token);
+
+        if (token.type == TokenType::ERROR)
+        {
+            std::cerr << "🛑 خطأ في التحليل اللغوي: " << token.value
+                      << " في السطر " << token.line << ", العمود التقريبي " << token.column << std::endl;
+            break; // Stop on first error
+        }
+    } while (token.type != TokenType::END_OF_FILE);
+
+    return tokens;
 }
 
 Token Lexer::getNextToken()
@@ -400,13 +431,13 @@ Token Lexer::getNextToken()
         }
 
         // Handle Windows-1256 specific punctuation FIRST
-        if (ucCurrent == 0xBA)
-        { // ؛ Arabic Semicolon
+        if (ucCurrent == 0xBA) // ؛ Arabic Semicolon
+        {
             advance();
             return Token(TokenType::SEMICOLON, ";", line, tokenStartColumn);
         }
-        if (ucCurrent == 0xAC)
-        { // ، Arabic Comma
+        if (ucCurrent == 0xAC) // ، Arabic Comma
+        {
             advance();
             return Token(TokenType::COMMA, ",", line, tokenStartColumn);
         }
@@ -424,11 +455,64 @@ Token Lexer::getNextToken()
             return readString();
         }
 
+        // Character literals using single quotes
+        if (current == '\'')
+        {
+            int startLine = line;
+            int startColumn = column;
+            advance(); // consume opening '
+            if (position >= source.length())
+            {
+                return Token(TokenType::ERROR, "رمز حرفي غير مكتمل", startLine, startColumn);
+            }
+            char ch = peek();
+            // handle escape sequences like '\n' '\'' '\\'
+            std::string val;
+            if (ch == '\\')
+            {
+                advance();
+                if (position >= source.length())
+                    return Token(TokenType::ERROR, "رمز حرفي غير مكتمل بعد \\", startLine, startColumn);
+                char esc = peek();
+                switch (esc)
+                {
+                case 'n':
+                    val = "\n";
+                    break;
+                case 't':
+                    val = "\t";
+                    break;
+                case '\'':
+                    val = "'" ;
+                    break;
+                case '\\':
+                    val = "\\";
+                    break;
+                default:
+                    val = std::string(1, esc);
+                    break;
+                }
+                advance();
+            }
+            else
+            {
+                val = std::string(1, ch);
+                advance();
+            }
+
+            if (peek() != '\'')
+            {
+                return Token(TokenType::ERROR, "سلسلة حرفية غير مغلقة", startLine, startColumn);
+            }
+            advance(); // consume closing '
+            return Token(TokenType::CHAR_LITERAL, val, startLine, startColumn);
+        }
+
         // Identifiers and Keywords
         unsigned char ucCurrentForCheck = ucCurrent;
         if (std::isalpha(ucCurrentForCheck) ||
-            current == '_' ||
-            ((ucCurrentForCheck >= 0xC1 && ucCurrentForCheck <= 0xDA) || (ucCurrentForCheck >= 0xDC && ucCurrentForCheck <= 0xEE)))
+            current == '_'
+            || ((ucCurrentForCheck >= 0xC1 && ucCurrentForCheck <= 0xDA) || (ucCurrentForCheck >= 0xDC && ucCurrentForCheck <= 0xEE)))
         {
             return readIdentifier();
         }
@@ -503,7 +587,7 @@ Token Lexer::getNextToken()
             return Token(TokenType::COLON, ":", line, tokenStartColumn);
         case '.':
             return Token(TokenType::DOT, ".", line, tokenStartColumn);
-        case '(':
+        case '(': 
             return Token(TokenType::LPAREN, "(", line, tokenStartColumn);
         case ')':
             return Token(TokenType::RPAREN, ")", line, tokenStartColumn);
@@ -519,11 +603,11 @@ Token Lexer::getNextToken()
         } // End switch
 
         // If none matched, it's an unknown character
-        std::string errorVal = "رمز غير متوقع: '";
+        std::string errorVal = "رمز غير متوقع: '" ;
         // *** الإصلاح 4: استخدام اسم المتغير الصحيح ss_err ***
         if (current >= 32 && current < 127)
         {
-            errorVal += current;
+            errorVal.push_back(current);
         }
         else
         {
@@ -549,31 +633,10 @@ Token Lexer::getNextToken()
         {
             // ignore diagnostics failures
         }
-        errorVal += "'";
+        errorVal += "'" ;
         return Token(TokenType::ERROR, errorVal, line, tokenStartColumn);
 
     } // End while loop
 
     return Token(TokenType::END_OF_FILE, "", line, column);
-}
-
-std::vector<Token> Lexer::tokenize()
-{
-    std::vector<Token> tokens;
-    Token token(TokenType::ERROR, "", 0, 0);
-
-    do
-    {
-        token = getNextToken();
-        tokens.push_back(token);
-
-        if (token.type == TokenType::ERROR)
-        {
-            std::cerr << "🛑 خطأ في التحليل اللغوي: " << token.value
-                      << " في السطر " << token.line << ", العمود التقريبي " << token.column << std::endl;
-            break; // Stop on first error
-        }
-    } while (token.type != TokenType::END_OF_FILE);
-
-    return tokens;
 }
