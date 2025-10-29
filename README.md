@@ -1,5 +1,7 @@
 # Arabic Programming Language IDE - بيئة تطوير متكاملة للغة العربية
-
+# جزء من متطلبات مادة تصميم المترجمات
+# الدكتور ألاكاديمي د | خالد محمد الكحسه 
+# المساعد العملي م | أحمد الراشدي
 ![Arabic IDE](https://img.shields.io/badge/Language-Arabic-green)
 ![.NET](https://img.shields.io/badge/.NET-6.0-blue)
 ![C++](https://img.shields.io/badge/C++-17-red)
@@ -228,7 +230,7 @@ STORE ناتج, t3
 
 ---
 
-**المطور**: فريق اDemosoft 
+**المطور**: فريق 
 **الإصدار**: 1.0.0  
 **تاريخ الإصدار**: ديسمبر 2025  
 **الحالة**: قيد التطوير النشط
