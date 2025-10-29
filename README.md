@@ -9,6 +9,7 @@
 بيئة تطوير متكاملة (IDE) تمكن المبرمجين من كتابة وتنفيذ البرامج بلغة البرمجة العربية. تدعم الترجمة إلى عدة لغات برمجة وتوفر واجهة مستخدم كاملة باللغة العربية.
 
 <img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/aa214c23-f25e-42fa-9f0d-969a19a05426" />
+<img width="1600" height="900" alt="Image" src="https://github.com/user-attachments/assets/565947fd-df23-4534-b103-474bf6c22087" />
 
 ## ✨ المميزات الرئيسية
 
