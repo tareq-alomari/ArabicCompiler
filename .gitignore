@@ -8,6 +8,14 @@ obj/
 *.out
 *.app
 
+# CMake artifacts
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+CTestTestfile.cmake
+_deps/
+
 # Compiler output files
 *_output.c
 *_output.asm

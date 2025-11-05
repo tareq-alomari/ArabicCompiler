@@ -11,14 +11,14 @@ NC='\033[0m' # No Color
 
 # Get the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-COMPILER="$SCRIPT_DIR/Compiler/ArabicCompiler_mac"
+COMPILER="$SCRIPT_DIR/Compiler/build/ArabicCompiler"
 
 # Check if compiler exists
 if [ ! -f "$COMPILER" ]; then
     echo -e "${RED}❌ خطأ: المترجم غير موجود في: $COMPILER${NC}"
     echo -e "${YELLOW}يرجى بناء المترجم أولاً باستخدام:${NC}"
     echo "  cd $SCRIPT_DIR/Compiler"
-    echo "  clang++ -std=c++17 -o ArabicCompiler_mac src/*.cpp"
+    echo "  ./build.sh"
     exit 1
 fi
 

@@ -2,894 +2,226 @@
 ---
 events:
   -
-    kind: "message-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:212 (message)"
-      - "CMakeLists.txt:2 (project)"
-    message: |
-      The system is: Windows - 10.0.19045 - AMD64
-  -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:12 (find_program)"
       - "CMakeLists.txt:2 (project)"
-    mode: "file"
-    variable: "src_in"
-    description: "Path to a file."
+    mode: "program"
+    variable: "CMAKE_UNAME"
+    description: "Path to a program."
     settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
       CMAKE_FIND_USE_CMAKE_PATH: true
       CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "CMakeCCompilerId.c.in"
+      - "uname"
     candidate_directories:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
-    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerId.c.in"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    searched_directories:
+      - "/usr/local/bin/uname"
+      - "/System/Cryptexes/App/usr/bin/uname"
+    found: "/usr/bin/uname"
     search_context:
       ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineSystem.cmake:212 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
-      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler:  
-      Build flags: 
-      Id flags:  
-      
-      The output was:
-      0
-      Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
-      Copyright (C) Microsoft Corporation. All rights reserved.
-      
-      Build started 13/05/47 01:59:42 ص.
-      Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
-      PrepareForBuild:
-        Creating directory "Debug\\".
-        Creating directory "Debug\\CompilerIdC.tlog\\".
-      InitializeBuildStatus:
-        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-      ClCompile:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
-        CMakeCCompilerId.c
-      Link:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
-        CompilerIdC.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdC\\CompilerIdC.exe
-      PostBuildEvent:
-        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
-        :VCEnd
-        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64\\cl.exe
-      FinalizeBuildStatus:
-        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
-        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
-      Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
-      
-      Build succeeded.
-          0 Warning(s)
-          0 Error(s)
-      
-      Time Elapsed 00:00:01.06
-      
-      
-      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
-      
-      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
-      
-      The C compiler identification is MSVC, found in:
-        D:/ArabicCompiler-main/Compiler/build/CMakeFiles/4.1.1/CompilerIdC/CompilerIdC.exe
-      
+      The system is: Darwin - 25.0.0 - arm64
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeUnixFindMake.cmake:5 (find_program)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
-    variable: "_CMAKE_TOOL_WITH_PATH"
+    variable: "CMAKE_MAKE_PROGRAM"
     description: "Path to a program."
     settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "link"
+      - "gmake"
+      - "make"
+      - "smake"
     candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
     searched_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.com"
-    found: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.exe"
+      - "/usr/local/bin/gmake"
+      - "/System/Cryptexes/App/usr/bin/gmake"
+      - "/usr/bin/gmake"
+      - "/bin/gmake"
+      - "/usr/sbin/gmake"
+      - "/sbin/gmake"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/gmake"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/gmake"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/gmake"
+      - "/Library/TeX/texbin/gmake"
+      - "/opt/homebrew/bin/gmake"
+      - "/Users/salahmac/.local/bin/gmake"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/gmake"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/gmake"
+      - "/Users/salahmac/.cargo/bin/gmake"
+      - "/Users/salahmac/.lmstudio/bin/gmake"
+      - "/usr/local/bin/make"
+      - "/System/Cryptexes/App/usr/bin/make"
+    found: "/usr/bin/make"
     search_context:
       ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompiler.cmake:73 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:69 (_cmake_find_compiler)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
-    variable: "_CMAKE_TOOL_WITH_PATH"
-    description: "Path to a program."
+    variable: "CMAKE_CXX_COMPILER"
+    description: "CXX compiler"
     settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "lld-link"
+      - "c++"
+      - "g++"
+      - "cl"
+      - "bcc"
+      - "icpx"
+      - "icx"
+      - "clang++"
     candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
     searched_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.com"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.exe"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link"
-      - "C:/Program Files/Python313/Scripts/lld-link.com"
-      - "C:/Program Files/Python313/Scripts/lld-link.exe"
-      - "C:/Program Files/Python313/Scripts/lld-link"
-      - "C:/Program Files/Python313/lld-link.com"
-      - "C:/Program Files/Python313/lld-link.exe"
-      - "C:/Program Files/Python313/lld-link"
-      - "C:/Program Files/Python310/Scripts/lld-link.com"
-      - "C:/Program Files/Python310/Scripts/lld-link.exe"
-      - "C:/Program Files/Python310/Scripts/lld-link"
-      - "C:/Program Files/Python310/lld-link.com"
-      - "C:/Program Files/Python310/lld-link.exe"
-      - "C:/Program Files/Python310/lld-link"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.com"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.exe"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link"
-      - "C:/Windows/System32/lld-link.com"
-      - "C:/Windows/System32/lld-link.exe"
-      - "C:/Windows/System32/lld-link"
-      - "C:/Windows/lld-link.com"
-      - "C:/Windows/lld-link.exe"
-      - "C:/Windows/lld-link"
-      - "C:/Windows/System32/wbem/lld-link.com"
-      - "C:/Windows/System32/wbem/lld-link.exe"
-      - "C:/Windows/System32/wbem/lld-link"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
-      - "C:/Windows/System32/OpenSSH/lld-link.com"
-      - "C:/Windows/System32/OpenSSH/lld-link.exe"
-      - "C:/Windows/System32/OpenSSH/lld-link"
-      - "C:/Program Files/dotnet/lld-link.com"
-      - "C:/Program Files/dotnet/lld-link.exe"
-      - "C:/Program Files/dotnet/lld-link"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link"
-      - "C:/MinGW/bin/lld-link.com"
-      - "C:/MinGW/bin/lld-link.exe"
-      - "C:/MinGW/bin/lld-link"
-      - "C:/Program Files/Java/jdk-23/bin/lld-link.com"
-      - "C:/Program Files/Java/jdk-23/bin/lld-link.exe"
-      - "C:/Program Files/Java/jdk-23/bin/lld-link"
-      - "C:/ProgramData/chocolatey/bin/lld-link.com"
-      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
-      - "C:/ProgramData/chocolatey/bin/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link"
-      - "C:/Program Files/Git/cmd/lld-link.com"
-      - "C:/Program Files/Git/cmd/lld-link.exe"
-      - "C:/Program Files/Git/cmd/lld-link"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.com"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.exe"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.com"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link"
-      - "C:/Users/MK/.dotnet/tools/lld-link.com"
-      - "C:/Users/MK/.dotnet/tools/lld-link.exe"
-      - "C:/Users/MK/.dotnet/tools/lld-link"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
-      - "D:/ArabicCompiler-main/Compiler/C/lld-link.com"
-      - "D:/ArabicCompiler-main/Compiler/C/lld-link.exe"
-      - "D:/ArabicCompiler-main/Compiler/C/lld-link"
-      - "C:/flutter/bin/lld-link.com"
-      - "C:/flutter/bin/lld-link.exe"
-      - "C:/flutter/bin/lld-link"
-      - "C:/Program Files/nodejs/lld-link.com"
-      - "C:/Program Files/nodejs/lld-link.exe"
-      - "C:/Program Files/nodejs/lld-link"
-      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.com"
-      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.exe"
-      - "D:/Programs Unvercity/antlr4-master/bin/lld-link"
-      - "C:/Program Files/CMake/bin/lld-link.com"
-      - "C:/Program Files/CMake/bin/lld-link.exe"
-      - "C:/Program Files/CMake/bin/lld-link"
-      - "C:/mingw64/bin/lld-link.com"
-      - "C:/mingw64/bin/lld-link.exe"
-      - "C:/mingw64/bin/lld-link"
-      - "C:/xampp/php/lld-link.com"
-      - "C:/xampp/php/lld-link.exe"
-      - "C:/xampp/php/lld-link"
-      - "C:/Users/MK/composer/lld-link.com"
-      - "C:/Users/MK/composer/lld-link.exe"
-      - "C:/Users/MK/composer/lld-link"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.com"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.exe"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link"
-      - "C:/Users/MK/AppData/Roaming/npm/lld-link.com"
-      - "C:/Users/MK/AppData/Roaming/npm/lld-link.exe"
-      - "C:/Users/MK/AppData/Roaming/npm/lld-link"
-    found: false
+      - "/usr/local/bin/c++"
+      - "/System/Cryptexes/App/usr/bin/c++"
+    found: "/usr/bin/c++"
     search_context:
       ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
-      - "CMakeLists.txt:2 (project)"
-    mode: "program"
-    variable: "CMAKE_LINKER"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "link"
-    candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
-    searched_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.com"
-    found: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
-      - "CMakeLists.txt:2 (project)"
-    mode: "program"
-    variable: "CMAKE_MT"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "mt"
-    candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
-    searched_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/mt.com"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/mt.exe"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/mt"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt"
-      - "C:/Program Files/Python313/Scripts/mt.com"
-      - "C:/Program Files/Python313/Scripts/mt.exe"
-      - "C:/Program Files/Python313/Scripts/mt"
-      - "C:/Program Files/Python313/mt.com"
-      - "C:/Program Files/Python313/mt.exe"
-      - "C:/Program Files/Python313/mt"
-      - "C:/Program Files/Python310/Scripts/mt.com"
-      - "C:/Program Files/Python310/Scripts/mt.exe"
-      - "C:/Program Files/Python310/Scripts/mt"
-      - "C:/Program Files/Python310/mt.com"
-      - "C:/Program Files/Python310/mt.exe"
-      - "C:/Program Files/Python310/mt"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/mt.com"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/mt.exe"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/mt"
-      - "C:/Windows/System32/mt.com"
-      - "C:/Windows/System32/mt.exe"
-      - "C:/Windows/System32/mt"
-      - "C:/Windows/mt.com"
-      - "C:/Windows/mt.exe"
-      - "C:/Windows/mt"
-      - "C:/Windows/System32/wbem/mt.com"
-      - "C:/Windows/System32/wbem/mt.exe"
-      - "C:/Windows/System32/wbem/mt"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt"
-      - "C:/Windows/System32/OpenSSH/mt.com"
-      - "C:/Windows/System32/OpenSSH/mt.exe"
-      - "C:/Windows/System32/OpenSSH/mt"
-      - "C:/Program Files/dotnet/mt.com"
-      - "C:/Program Files/dotnet/mt.exe"
-      - "C:/Program Files/dotnet/mt"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/mt.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/mt.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/mt"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/mt.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/mt.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/mt"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/mt.com"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/mt.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/mt"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt.com"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt.exe"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/mt.com"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/mt.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/mt"
-      - "C:/MinGW/bin/mt.com"
-      - "C:/MinGW/bin/mt.exe"
-      - "C:/MinGW/bin/mt"
-      - "C:/Program Files/Java/jdk-23/bin/mt.com"
-      - "C:/Program Files/Java/jdk-23/bin/mt.exe"
-      - "C:/Program Files/Java/jdk-23/bin/mt"
-      - "C:/ProgramData/chocolatey/bin/mt.com"
-      - "C:/ProgramData/chocolatey/bin/mt.exe"
-      - "C:/ProgramData/chocolatey/bin/mt"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt.com"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt.exe"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt"
-      - "C:/Program Files/Git/cmd/mt.com"
-      - "C:/Program Files/Git/cmd/mt.exe"
-      - "C:/Program Files/Git/cmd/mt"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/mt.com"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/mt.exe"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/mt"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/mt.com"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/mt.exe"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/mt"
-      - "C:/Users/MK/.dotnet/tools/mt.com"
-      - "C:/Users/MK/.dotnet/tools/mt.exe"
-      - "C:/Users/MK/.dotnet/tools/mt"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/mt.com"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/mt.exe"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/mt"
-      - "D:/ArabicCompiler-main/Compiler/C/mt.com"
-      - "D:/ArabicCompiler-main/Compiler/C/mt.exe"
-      - "D:/ArabicCompiler-main/Compiler/C/mt"
-      - "C:/flutter/bin/mt.com"
-      - "C:/flutter/bin/mt.exe"
-      - "C:/flutter/bin/mt"
-      - "C:/Program Files/nodejs/mt.com"
-      - "C:/Program Files/nodejs/mt.exe"
-      - "C:/Program Files/nodejs/mt"
-      - "D:/Programs Unvercity/antlr4-master/bin/mt.com"
-      - "D:/Programs Unvercity/antlr4-master/bin/mt.exe"
-      - "D:/Programs Unvercity/antlr4-master/bin/mt"
-      - "C:/Program Files/CMake/bin/mt.com"
-      - "C:/Program Files/CMake/bin/mt.exe"
-      - "C:/Program Files/CMake/bin/mt"
-      - "C:/mingw64/bin/mt.com"
-      - "C:/mingw64/bin/mt.exe"
-      - "C:/mingw64/bin/mt"
-      - "C:/xampp/php/mt.com"
-      - "C:/xampp/php/mt.exe"
-      - "C:/xampp/php/mt"
-      - "C:/Users/MK/composer/mt.com"
-      - "C:/Users/MK/composer/mt.exe"
-      - "C:/Users/MK/composer/mt"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/mt.com"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/mt.exe"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/mt"
-      - "C:/Users/MK/AppData/Roaming/npm/mt.com"
-      - "C:/Users/MK/AppData/Roaming/npm/mt.exe"
-      - "C:/Users/MK/AppData/Roaming/npm/mt"
-    found: false
-    search_context:
-      ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
-      - "CMakeLists.txt:2 (project)"
-    mode: "program"
-    variable: "CMAKE_AR"
-    description: "Path to a program."
-    settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
-      CMAKE_FIND_USE_CMAKE_PATH: false
-      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
-      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
-      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
-      CMAKE_FIND_USE_INSTALL_PREFIX: true
-    names:
-      - "lib"
-    candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
-    searched_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lib.com"
-    found: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lib.exe"
-    search_context:
-      ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
-  -
-    kind: "find-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     mode: "file"
     variable: "src_in"
     description: "Path to a file."
     settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
       CMAKE_FIND_USE_CMAKE_PATH: true
       CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
@@ -898,752 +230,1048 @@ events:
     names:
       - "CMakeCXXCompilerId.cpp.in"
     candidate_directories:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
-    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
+      - "/opt/homebrew/share/cmake/Modules/"
+    found: "/opt/homebrew/share/cmake/Modules/CMakeCXXCompilerId.cpp.in"
     search_context:
       ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
       - "CMakeLists.txt:2 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler:  
+      Compiler: /usr/bin/c++ 
       Build flags: 
       Id flags:  
       
       The output was:
       0
-      Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
-      Copyright (C) Microsoft Corporation. All rights reserved.
-      
-      Build started 13/05/47 01:59:43 ص.
-      Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
-      PrepareForBuild:
-        Creating directory "Debug\\".
-        Creating directory "Debug\\CompilerIdCXX.tlog\\".
-      InitializeBuildStatus:
-        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-      ClCompile:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
-        CMakeCXXCompilerId.cpp
-      Link:
-        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
-        CompilerIdCXX.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.exe
-      PostBuildEvent:
-        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
-        :VCEnd
-        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64\\cl.exe
-      FinalizeBuildStatus:
-        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
-        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
-      Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
-      
-      Build succeeded.
-          0 Warning(s)
-          0 Error(s)
-      
-      Time Elapsed 00:00:00.76
       
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      The CXX compiler identification is AppleClang, found in:
+        /Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/4.1.2/CompilerIdCXX/a.out
       
-      The CXX compiler identification is MSVC, found in:
-        D:/ArabicCompiler-main/Compiler/build/CMakeFiles/4.1.1/CompilerIdCXX/CompilerIdCXX.exe
-      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerId.cmake:290 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Detecting CXX compiler apple sysroot: "/usr/bin/c++" "-E" "apple-sdk.cpp"
+        # 1 "apple-sdk.cpp"
+        # 1 "<built-in>" 1
+        # 1 "<built-in>" 3
+        # 514 "<built-in>" 3
+        # 1 "<command line>" 1
+        # 1 "<built-in>" 2
+        # 1 "apple-sdk.cpp" 2
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 1 3 4
+        # 89 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 90 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h" 1 3 4
+        # 91 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 207 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h" 1 3 4
+        # 196 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h" 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 197 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 33 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h" 1 3 4
+        # 34 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 2 3 4
+        # 198 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 1 3 4
+        # 34 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 3 4
+        # 1 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h" 1 3 4
+        # 35 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h" 2 3 4
+        # 199 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h" 2 3 4
+        # 208 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h" 2 3 4
+        # 2 "apple-sdk.cpp" 2
+        
+        
+      Found apple sysroot: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
-    variable: "_CMAKE_TOOL_WITH_PATH"
+    variable: "CMAKE_AR"
     description: "Path to a program."
     settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
       CMAKE_FIND_USE_CMAKE_PATH: false
       CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
       CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "lld-link"
+      - "ar"
     candidate_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
-    searched_directories:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.com"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.exe"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link"
-      - "C:/Program Files/Python313/Scripts/lld-link.com"
-      - "C:/Program Files/Python313/Scripts/lld-link.exe"
-      - "C:/Program Files/Python313/Scripts/lld-link"
-      - "C:/Program Files/Python313/lld-link.com"
-      - "C:/Program Files/Python313/lld-link.exe"
-      - "C:/Program Files/Python313/lld-link"
-      - "C:/Program Files/Python310/Scripts/lld-link.com"
-      - "C:/Program Files/Python310/Scripts/lld-link.exe"
-      - "C:/Program Files/Python310/Scripts/lld-link"
-      - "C:/Program Files/Python310/lld-link.com"
-      - "C:/Program Files/Python310/lld-link.exe"
-      - "C:/Program Files/Python310/lld-link"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.com"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.exe"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link"
-      - "C:/Windows/System32/lld-link.com"
-      - "C:/Windows/System32/lld-link.exe"
-      - "C:/Windows/System32/lld-link"
-      - "C:/Windows/lld-link.com"
-      - "C:/Windows/lld-link.exe"
-      - "C:/Windows/lld-link"
-      - "C:/Windows/System32/wbem/lld-link.com"
-      - "C:/Windows/System32/wbem/lld-link.exe"
-      - "C:/Windows/System32/wbem/lld-link"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
-      - "C:/Windows/System32/OpenSSH/lld-link.com"
-      - "C:/Windows/System32/OpenSSH/lld-link.exe"
-      - "C:/Windows/System32/OpenSSH/lld-link"
-      - "C:/Program Files/dotnet/lld-link.com"
-      - "C:/Program Files/dotnet/lld-link.exe"
-      - "C:/Program Files/dotnet/lld-link"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link"
-      - "C:/MinGW/bin/lld-link.com"
-      - "C:/MinGW/bin/lld-link.exe"
-      - "C:/MinGW/bin/lld-link"
-      - "C:/Program Files/Java/jdk-23/bin/lld-link.com"
-      - "C:/Program Files/Java/jdk-23/bin/lld-link.exe"
-      - "C:/Program Files/Java/jdk-23/bin/lld-link"
-      - "C:/ProgramData/chocolatey/bin/lld-link.com"
-      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
-      - "C:/ProgramData/chocolatey/bin/lld-link"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.com"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.exe"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link"
-      - "C:/Program Files/Git/cmd/lld-link.com"
-      - "C:/Program Files/Git/cmd/lld-link.exe"
-      - "C:/Program Files/Git/cmd/lld-link"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.com"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.exe"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.com"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link"
-      - "C:/Users/MK/.dotnet/tools/lld-link.com"
-      - "C:/Users/MK/.dotnet/tools/lld-link.exe"
-      - "C:/Users/MK/.dotnet/tools/lld-link"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
-      - "D:/ArabicCompiler-main/Compiler/C/lld-link.com"
-      - "D:/ArabicCompiler-main/Compiler/C/lld-link.exe"
-      - "D:/ArabicCompiler-main/Compiler/C/lld-link"
-      - "C:/flutter/bin/lld-link.com"
-      - "C:/flutter/bin/lld-link.exe"
-      - "C:/flutter/bin/lld-link"
-      - "C:/Program Files/nodejs/lld-link.com"
-      - "C:/Program Files/nodejs/lld-link.exe"
-      - "C:/Program Files/nodejs/lld-link"
-      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.com"
-      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.exe"
-      - "D:/Programs Unvercity/antlr4-master/bin/lld-link"
-      - "C:/Program Files/CMake/bin/lld-link.com"
-      - "C:/Program Files/CMake/bin/lld-link.exe"
-      - "C:/Program Files/CMake/bin/lld-link"
-      - "C:/mingw64/bin/lld-link.com"
-      - "C:/mingw64/bin/lld-link.exe"
-      - "C:/mingw64/bin/lld-link"
-      - "C:/xampp/php/lld-link.com"
-      - "C:/xampp/php/lld-link.exe"
-      - "C:/xampp/php/lld-link"
-      - "C:/Users/MK/composer/lld-link.com"
-      - "C:/Users/MK/composer/lld-link.exe"
-      - "C:/Users/MK/composer/lld-link"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.com"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.exe"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link"
-      - "C:/Users/MK/AppData/Roaming/npm/lld-link.com"
-      - "C:/Users/MK/AppData/Roaming/npm/lld-link.exe"
-      - "C:/Users/MK/AppData/Roaming/npm/lld-link"
-    found: false
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    found: "/usr/bin/ar"
     search_context:
       ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
   -
     kind: "find-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:574 (enable_language)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:547 (__windows_compiler_msvc_enable_rc)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC-C.cmake:5 (__windows_compiler_msvc)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCInformation.cmake:48 (include)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
       - "CMakeLists.txt:2 (project)"
     mode: "program"
-    variable: "CMAKE_RC_COMPILER"
-    description: "RC compiler"
+    variable: "CMAKE_RANLIB"
+    description: "Path to a program."
     settings:
-      SearchFramework: "NEVER"
-      SearchAppBundle: "NEVER"
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ranlib"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    found: "/usr/bin/ranlib"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_STRIP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "strip"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    found: "/usr/bin/strip"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "ld"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    found: "/usr/bin/ld"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_NM"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "nm"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    found: "/usr/bin/nm"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJDUMP"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objdump"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    found: "/usr/bin/objdump"
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_OBJCOPY"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "objcopy"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    searched_directories:
+      - "/usr/bin/objcopy"
+      - "/usr/local/bin/objcopy"
+      - "/System/Cryptexes/App/usr/bin/objcopy"
+      - "/bin/objcopy"
+      - "/usr/sbin/objcopy"
+      - "/sbin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/objcopy"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/objcopy"
+      - "/Library/TeX/texbin/objcopy"
+      - "/opt/homebrew/bin/objcopy"
+      - "/Users/salahmac/.local/bin/objcopy"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/objcopy"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/objcopy"
+      - "/Users/salahmac/.cargo/bin/objcopy"
+      - "/Users/salahmac/.lmstudio/bin/objcopy"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_READELF"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "readelf"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    searched_directories:
+      - "/usr/bin/readelf"
+      - "/usr/local/bin/readelf"
+      - "/System/Cryptexes/App/usr/bin/readelf"
+      - "/bin/readelf"
+      - "/usr/sbin/readelf"
+      - "/sbin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/readelf"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/readelf"
+      - "/Library/TeX/texbin/readelf"
+      - "/opt/homebrew/bin/readelf"
+      - "/Users/salahmac/.local/bin/readelf"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/readelf"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/readelf"
+      - "/Users/salahmac/.cargo/bin/readelf"
+      - "/Users/salahmac/.lmstudio/bin/readelf"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_DLLTOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "dlltool"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    searched_directories:
+      - "/usr/bin/dlltool"
+      - "/usr/local/bin/dlltool"
+      - "/System/Cryptexes/App/usr/bin/dlltool"
+      - "/bin/dlltool"
+      - "/usr/sbin/dlltool"
+      - "/sbin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/dlltool"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/dlltool"
+      - "/Library/TeX/texbin/dlltool"
+      - "/opt/homebrew/bin/dlltool"
+      - "/Users/salahmac/.local/bin/dlltool"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/dlltool"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/dlltool"
+      - "/Users/salahmac/.cargo/bin/dlltool"
+      - "/Users/salahmac/.lmstudio/bin/dlltool"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_ADDR2LINE"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "addr2line"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    searched_directories:
+      - "/usr/bin/addr2line"
+      - "/usr/local/bin/addr2line"
+      - "/System/Cryptexes/App/usr/bin/addr2line"
+      - "/bin/addr2line"
+      - "/usr/sbin/addr2line"
+      - "/sbin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/addr2line"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/addr2line"
+      - "/Library/TeX/texbin/addr2line"
+      - "/opt/homebrew/bin/addr2line"
+      - "/Users/salahmac/.local/bin/addr2line"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/addr2line"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/addr2line"
+      - "/Users/salahmac/.cargo/bin/addr2line"
+      - "/Users/salahmac/.lmstudio/bin/addr2line"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_TAPI"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "tapi"
+    candidate_directories:
+      - "/usr/bin/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
+    searched_directories:
+      - "/usr/bin/tapi"
+      - "/usr/local/bin/tapi"
+      - "/System/Cryptexes/App/usr/bin/tapi"
+      - "/bin/tapi"
+      - "/usr/sbin/tapi"
+      - "/sbin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/tapi"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/tapi"
+      - "/Library/TeX/texbin/tapi"
+      - "/opt/homebrew/bin/tapi"
+      - "/Users/salahmac/.local/bin/tapi"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/tapi"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/tapi"
+      - "/Users/salahmac/.cargo/bin/tapi"
+      - "/Users/salahmac/.lmstudio/bin/tapi"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Platform/Darwin.cmake:76 (find_program)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeSystemSpecificInformation.cmake:32 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_INSTALL_NAME_TOOL"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "FIRST"
+      SearchAppBundle: "FIRST"
       CMAKE_FIND_USE_CMAKE_PATH: true
       CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
       CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
       CMAKE_FIND_USE_INSTALL_PREFIX: true
     names:
-      - "rc"
+      - "install_name_tool"
     candidate_directories:
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
-      - "C:/Program Files/Python313/Scripts/"
-      - "C:/Program Files/Python313/"
-      - "C:/Program Files/Python310/Scripts/"
-      - "C:/Program Files/Python310/"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
-      - "C:/Windows/System32/"
-      - "C:/Windows/"
-      - "C:/Windows/System32/wbem/"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
-      - "C:/Windows/System32/OpenSSH/"
-      - "C:/Program Files/dotnet/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
-      - "C:/MinGW/bin/"
-      - "C:/Program Files/Java/jdk-23/bin/"
-      - "C:/ProgramData/chocolatey/bin/"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
-      - "C:/Program Files/Git/cmd/"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
-      - "C:/Users/MK/.dotnet/tools/"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
-      - "D:/ArabicCompiler-main/Compiler/C/"
-      - "C:/flutter/bin/"
-      - "C:/Program Files/nodejs/"
-      - "D:/Programs Unvercity/antlr4-master/bin/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/mingw64/bin/"
-      - "C:/xampp/php/"
-      - "C:/Users/MK/composer/"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
-      - "C:/Users/MK/AppData/Roaming/npm/"
-      - "C:/Program Files/bin/"
-      - "C:/Program Files/sbin/"
-      - "C:/Program Files/"
-      - "C:/Program Files (x86)/bin/"
-      - "C:/Program Files (x86)/sbin/"
-      - "C:/Program Files (x86)/"
-      - "C:/Program Files/CMake/bin/"
-      - "C:/Program Files/CMake/sbin/"
-      - "C:/Program Files/CMake/"
-      - "C:/Program Files (x86)/ArabicCompiler/bin/"
-      - "C:/Program Files (x86)/ArabicCompiler/sbin/"
-      - "C:/Program Files (x86)/ArabicCompiler/"
+      - "/usr/local/bin/"
+      - "/System/Cryptexes/App/usr/bin/"
+      - "/usr/bin/"
+      - "/bin/"
+      - "/usr/sbin/"
+      - "/sbin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin/"
+      - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin/"
+      - "/Library/TeX/texbin/"
+      - "/opt/homebrew/bin/"
+      - "/Users/salahmac/.local/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/bin/"
+      - "/opt/homebrew/Caskroom/miniforge/base/condabin/"
+      - "/Users/salahmac/.cargo/bin/"
+      - "/Users/salahmac/.lmstudio/bin/"
     searched_directories:
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.com"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.exe"
-      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc"
-      - "C:/Program Files/Python313/Scripts/rc.com"
-      - "C:/Program Files/Python313/Scripts/rc.exe"
-      - "C:/Program Files/Python313/Scripts/rc"
-      - "C:/Program Files/Python313/rc.com"
-      - "C:/Program Files/Python313/rc.exe"
-      - "C:/Program Files/Python313/rc"
-      - "C:/Program Files/Python310/Scripts/rc.com"
-      - "C:/Program Files/Python310/Scripts/rc.exe"
-      - "C:/Program Files/Python310/Scripts/rc"
-      - "C:/Program Files/Python310/rc.com"
-      - "C:/Program Files/Python310/rc.exe"
-      - "C:/Program Files/Python310/rc"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/rc.com"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/rc.exe"
-      - "C:/Program Files (x86)/VMware/VMware Player/bin/rc"
-      - "C:/Windows/System32/rc.com"
-      - "C:/Windows/System32/rc.exe"
-      - "C:/Windows/System32/rc"
-      - "C:/Windows/rc.com"
-      - "C:/Windows/rc.exe"
-      - "C:/Windows/rc"
-      - "C:/Windows/System32/wbem/rc.com"
-      - "C:/Windows/System32/wbem/rc.exe"
-      - "C:/Windows/System32/wbem/rc"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.com"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.exe"
-      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc"
-      - "C:/Windows/System32/OpenSSH/rc.com"
-      - "C:/Windows/System32/OpenSSH/rc.exe"
-      - "C:/Windows/System32/OpenSSH/rc"
-      - "C:/Program Files/dotnet/rc.com"
-      - "C:/Program Files/dotnet/rc.exe"
-      - "C:/Program Files/dotnet/rc"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/rc.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/rc.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/rc"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/rc.com"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/rc.exe"
-      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/rc"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/rc.com"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/rc.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/rc"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc.com"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc.exe"
-      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/rc.com"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/rc.exe"
-      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/rc"
-      - "C:/MinGW/bin/rc.com"
-      - "C:/MinGW/bin/rc.exe"
-      - "C:/MinGW/bin/rc"
-      - "C:/Program Files/Java/jdk-23/bin/rc.com"
-      - "C:/Program Files/Java/jdk-23/bin/rc.exe"
-      - "C:/Program Files/Java/jdk-23/bin/rc"
-      - "C:/ProgramData/chocolatey/bin/rc.com"
-      - "C:/ProgramData/chocolatey/bin/rc.exe"
-      - "C:/ProgramData/chocolatey/bin/rc"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc.com"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc.exe"
-      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc"
-      - "C:/Program Files/Git/cmd/rc.com"
-      - "C:/Program Files/Git/cmd/rc.exe"
-      - "C:/Program Files/Git/cmd/rc"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/rc.com"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/rc.exe"
-      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/rc"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/rc.com"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/rc.exe"
-      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/rc"
-      - "C:/Users/MK/.dotnet/tools/rc.com"
-      - "C:/Users/MK/.dotnet/tools/rc.exe"
-      - "C:/Users/MK/.dotnet/tools/rc"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/rc.com"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/rc.exe"
-      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/rc"
-      - "D:/ArabicCompiler-main/Compiler/C/rc.com"
-      - "D:/ArabicCompiler-main/Compiler/C/rc.exe"
-      - "D:/ArabicCompiler-main/Compiler/C/rc"
-      - "C:/flutter/bin/rc.com"
-      - "C:/flutter/bin/rc.exe"
-      - "C:/flutter/bin/rc"
-      - "C:/Program Files/nodejs/rc.com"
-      - "C:/Program Files/nodejs/rc.exe"
-      - "C:/Program Files/nodejs/rc"
-      - "D:/Programs Unvercity/antlr4-master/bin/rc.com"
-      - "D:/Programs Unvercity/antlr4-master/bin/rc.exe"
-      - "D:/Programs Unvercity/antlr4-master/bin/rc"
-      - "C:/Program Files/CMake/bin/rc.com"
-      - "C:/Program Files/CMake/bin/rc.exe"
-      - "C:/Program Files/CMake/bin/rc"
-      - "C:/mingw64/bin/rc.com"
-      - "C:/mingw64/bin/rc.exe"
-      - "C:/mingw64/bin/rc"
-      - "C:/xampp/php/rc.com"
-      - "C:/xampp/php/rc.exe"
-      - "C:/xampp/php/rc"
-      - "C:/Users/MK/composer/rc.com"
-      - "C:/Users/MK/composer/rc.exe"
-      - "C:/Users/MK/composer/rc"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/rc.com"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/rc.exe"
-      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/rc"
-      - "C:/Users/MK/AppData/Roaming/npm/rc.com"
-      - "C:/Users/MK/AppData/Roaming/npm/rc.exe"
-      - "C:/Users/MK/AppData/Roaming/npm/rc"
-      - "C:/Program Files/bin/rc.com"
-      - "C:/Program Files/bin/rc.exe"
-      - "C:/Program Files/bin/rc"
-      - "C:/Program Files/sbin/rc.com"
-      - "C:/Program Files/sbin/rc.exe"
-      - "C:/Program Files/sbin/rc"
-      - "C:/Program Files/rc.com"
-      - "C:/Program Files/rc.exe"
-      - "C:/Program Files/rc"
-      - "C:/Program Files (x86)/bin/rc.com"
-      - "C:/Program Files (x86)/bin/rc.exe"
-      - "C:/Program Files (x86)/bin/rc"
-      - "C:/Program Files (x86)/sbin/rc.com"
-      - "C:/Program Files (x86)/sbin/rc.exe"
-      - "C:/Program Files (x86)/sbin/rc"
-      - "C:/Program Files (x86)/rc.com"
-      - "C:/Program Files (x86)/rc.exe"
-      - "C:/Program Files (x86)/rc"
-      - "C:/Program Files/CMake/bin/rc.com"
-      - "C:/Program Files/CMake/bin/rc.exe"
-      - "C:/Program Files/CMake/bin/rc"
-      - "C:/Program Files/CMake/sbin/rc.com"
-      - "C:/Program Files/CMake/sbin/rc.exe"
-      - "C:/Program Files/CMake/sbin/rc"
-      - "C:/Program Files/CMake/rc.com"
-      - "C:/Program Files/CMake/rc.exe"
-      - "C:/Program Files/CMake/rc"
-      - "C:/Program Files (x86)/ArabicCompiler/bin/rc.com"
-      - "C:/Program Files (x86)/ArabicCompiler/bin/rc.exe"
-      - "C:/Program Files (x86)/ArabicCompiler/bin/rc"
-      - "C:/Program Files (x86)/ArabicCompiler/sbin/rc.com"
-      - "C:/Program Files (x86)/ArabicCompiler/sbin/rc.exe"
-      - "C:/Program Files (x86)/ArabicCompiler/sbin/rc"
-      - "C:/Program Files (x86)/ArabicCompiler/rc.com"
-      - "C:/Program Files (x86)/ArabicCompiler/rc.exe"
-      - "C:/Program Files (x86)/ArabicCompiler/rc"
-    found: false
+      - "/usr/local/bin/install_name_tool"
+      - "/System/Cryptexes/App/usr/bin/install_name_tool"
+    found: "/usr/bin/install_name_tool"
     search_context:
       ENV{PATH}:
-        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
-        - "C:\\Program Files\\Python313\\Scripts\\"
-        - "C:\\Program Files\\Python313\\"
-        - "C:\\Program Files\\Python310\\Scripts\\"
-        - "C:\\Program Files\\Python310\\"
-        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
-        - "C:\\Windows\\system32"
-        - "C:\\Windows"
-        - "C:\\Windows\\System32\\Wbem"
-        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
-        - "C:\\Windows\\System32\\OpenSSH\\"
-        - "C:\\Program Files\\dotnet\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
-        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
-        - "C:\\MinGW\\bin"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\ProgramData\\chocolatey\\bin"
-        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
-        - "C:\\Program Files\\Git\\cmd"
-        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C"
-        - "C:\\Program Files\\Java\\jdk-23\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Program Files\\nodejs\\"
-        - "D:\\Programs Unvercity\\antlr4-master\\bin"
-        - "C:\\Program Files\\CMake\\bin"
-        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
-        - "C:\\Users\\MK\\.dotnet\\tools"
-        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
-        - "C:\\mingw64\\bin"
-        - "C:\\MinGW\\bin"
-        - "C:\\xampp\\php"
-        - "C:\\Users\\MK\\composer"
-        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
-        - "C:\\flutter\\bin"
-        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
-      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/ArabicCompiler"
-      CMAKE_SYSTEM_PREFIX_PATH:
-        - "C:/Program Files"
-        - "C:/Program Files (x86)"
-        - "C:/Program Files/CMake"
-        - "C:/Program Files (x86)/ArabicCompiler"
+        - "/usr/local/bin"
+        - "/System/Cryptexes/App/usr/bin"
+        - "/usr/bin"
+        - "/bin"
+        - "/usr/sbin"
+        - "/sbin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin"
+        - "/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin"
+        - "/Library/TeX/texbin"
+        - "/opt/homebrew/bin"
+        - "/Users/salahmac/.local/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/bin"
+        - "/opt/homebrew/Caskroom/miniforge/base/condabin"
+        - "/Users/salahmac/.cargo/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+        - "/Users/salahmac/.lmstudio/bin"
+      CMAKE_INSTALL_PREFIX: "/usr/local"
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:2 (project)"
-    checks:
-      - "Detecting C compiler ABI info"
-    directories:
-      source: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki"
-      binary: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki"
-    cmakeVariables:
-      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
-      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
-      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
-    buildResult:
-      variable: "CMAKE_C_ABI_COMPILED"
-      cached: true
-      stdout: |
-        Change Dir: 'D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki'
-        
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_be6e2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
-        Copyright (C) Microsoft Corporation. All rights reserved.
-        
-        Build started 13/05/47 01:59:45 ص.
-        Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\cmTC_be6e2.vcxproj" on node 1 (default targets).
-        PrepareForBuild:
-          Creating directory "cmTC_be6e2.dir\\Debug\\".
-          Creating directory "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\Debug\\".
-          Creating directory "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\".
-        InitializeBuildStatus:
-          Creating "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-        ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_be6e2.dir\\Debug\\\\" /Fd"cmTC_be6e2.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCCompilerABI.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.30.30705 for x64
-          CMakeCCompilerABI.c
-          Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_be6e2.dir\\Debug\\\\" /Fd"cmTC_be6e2.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCCompilerABI.c"
-        Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /OUT:"D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\Debug\\cmTC_be6e2.exe" /INCREMENTAL /ILK:"cmTC_be6e2.dir\\Debug\\cmTC_be6e2.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki/Debug/cmTC_be6e2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki/Debug/cmTC_be6e2.lib" /MACHINE:X64  /machine:x64 cmTC_be6e2.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_be6e2.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\Debug\\cmTC_be6e2.exe
-        FinalizeBuildStatus:
-          Deleting file "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\unsuccessfulbuild".
-          Touching "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\cmTC_be6e2.lastbuildstate".
-        Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\cmTC_be6e2.vcxproj" (default targets).
-        
-        Build succeeded.
-            0 Warning(s)
-            0 Error(s)
-        
-        Time Elapsed 00:00:00.70
-        
-      exitCode: 0
-  -
-    kind: "message-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:2 (project)"
-    message: |
-      Parsed C implicit link information:
-        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        linker tool for 'C': C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe
-        implicit libs: []
-        implicit objs: []
-        implicit dirs: []
-        implicit fwks: []
-      
-      
-  -
-    kind: "message-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:2 (project)"
-    message: |
-      Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe" "-v"
-      Microsoft (R) Incremental Linker Version 14.30.30705.0
-      Copyright (C) Microsoft Corporation.  All rights reserved.
-  -
-    kind: "try_compile-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz"
-      binary: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz"
+      source: "/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs"
+      binary: "/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
-      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
       CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
-      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: ""
     buildResult:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz'
+        Change Dir: '/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_678be.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
-        Copyright (C) Microsoft Corporation. All rights reserved.
-        
-        Build started 13/05/47 01:59:46 ص.
-        Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\cmTC_678be.vcxproj" on node 1 (default targets).
-        PrepareForBuild:
-          Creating directory "cmTC_678be.dir\\Debug\\".
-          Creating directory "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\Debug\\".
-          Creating directory "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\".
-        InitializeBuildStatus:
-          Creating "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-        ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_678be.dir\\Debug\\\\" /Fd"cmTC_678be.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.30.30705 for x64
-          CMakeCXXCompilerABI.cpp
-          Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_678be.dir\\Debug\\\\" /Fd"cmTC_678be.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
-        Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /OUT:"D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\Debug\\cmTC_678be.exe" /INCREMENTAL /ILK:"cmTC_678be.dir\\Debug\\cmTC_678be.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz/Debug/cmTC_678be.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz/Debug/cmTC_678be.lib" /MACHINE:X64  /machine:x64 cmTC_678be.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_678be.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\Debug\\cmTC_678be.exe
-        FinalizeBuildStatus:
-          Deleting file "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\unsuccessfulbuild".
-          Touching "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\cmTC_678be.lastbuildstate".
-        Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\cmTC_678be.vcxproj" (default targets).
-        
-        Build succeeded.
-            0 Warning(s)
-            0 Error(s)
-        
-        Time Elapsed 00:00:00.70
+        Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_85657/fast
+        /Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_85657.dir/build.make CMakeFiles/cmTC_85657.dir/build
+        Building CXX object CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -arch arm64   -v -Wl,-v -MD -MT CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Apple clang version 17.0.0 (clang-1700.3.19.1)
+        Target: arm64-apple-darwin25.0.0
+        Thread model: posix
+        InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+        clang++: warning: -Wl,-v: 'linker' input unused [-Wunused-command-line-argument]
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"
+         "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=26.0 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs -target-linker-version 1221.4 -v -fcoverage-compilation-dir=/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        clang -cc1 version 17.0.0 (clang-1700.3.19.1) default target arm64-apple-darwin25.0.0
+        ignoring nonexistent directory "/usr/local/include"
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"
+        ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1
+         /Library/Developer/CommandLineTools/usr/lib/clang/17/include
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include
+         /Library/Developer/CommandLineTools/usr/include
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)
+         /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)
+        End of search list.
+        Linking CXX executable cmTC_85657
+        /opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_85657.dir/link.txt --verbose=1
+        Apple clang version 17.0.0 (clang-1700.3.19.1)
+        Target: arm64-apple-darwin25.0.0
+        Thread model: posix
+        InstalledDir: /Library/Developer/CommandLineTools/usr/bin
+         "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.0.0 26.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_85657 -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a
+        @(#)PROGRAM:ld PROJECT:ld-1221.4
+        BUILD 16:29:08 Aug 11 2025
+        configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+        will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+        LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+        TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
+        Library search paths:
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift
+        Framework search paths:
+        	/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks
+        /usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -v -Wl,-v CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_85657
         
       exitCode: 0
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:122 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
-      Parsed CXX implicit link information:
-        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe
-        implicit libs: []
-        implicit objs: []
-        implicit dirs: []
-        implicit fwks: []
+      Effective list of requested architectures (possibly empty)  : ""
+      Effective list of architectures found in the ABI info binary: "arm64"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:217 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
+          add: [/Library/Developer/CommandLineTools/usr/lib/clang/17/include]
+          add: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+          add: [/Library/Developer/CommandLineTools/usr/include]
+        end of search list found
+        collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
+        collapse include dir [/Library/Developer/CommandLineTools/usr/lib/clang/17/include] ==> [/Library/Developer/CommandLineTools/usr/lib/clang/17/include]
+        collapse include dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        collapse include dir [/Library/Developer/CommandLineTools/usr/include] ==> [/Library/Developer/CommandLineTools/usr/include]
+        implicit include dirs: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1;/Library/Developer/CommandLineTools/usr/lib/clang/17/include;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include;/Library/Developer/CommandLineTools/usr/include]
       
       
   -
     kind: "message-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
-      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:2 (project)"
     message: |
-      Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe" "-v"
-      Microsoft (R) Incremental Linker Version 14.30.30705.0
-      Copyright (C) Microsoft Corporation.  All rights reserved.
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
+        ignore line: [Change Dir: '/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs']
+        ignore line: []
+        ignore line: [Run Build Command(s): /opt/homebrew/bin/cmake -E env VERBOSE=1 /usr/bin/make -f Makefile cmTC_85657/fast]
+        ignore line: [/Library/Developer/CommandLineTools/usr/bin/make  -f CMakeFiles/cmTC_85657.dir/build.make CMakeFiles/cmTC_85657.dir/build]
+        ignore line: [Building CXX object CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -arch arm64   -v -Wl -v -MD -MT CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -MF CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o.d -o CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -c /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.3.19.1)]
+        ignore line: [Target: arm64-apple-darwin25.0.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+        ignore line: [clang++: warning: -Wl -v: 'linker' input unused [-Wunused-command-line-argument]]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/usr/bin/../include/c++/v1"]
+        ignore line: [ "/Library/Developer/CommandLineTools/usr/bin/clang" -cc1 -triple arm64-apple-macosx26.0.0 -Wundef-prefix=TARGET_OS_ -Wdeprecated-objc-isa-usage -Werror=deprecated-objc-isa-usage -Werror=implicit-function-declaration -emit-obj -disable-free -clear-ast-before-backend -disable-llvm-verifier -discard-value-names -main-file-name CMakeCXXCompilerABI.cpp -mrelocation-model pic -pic-level 2 -mframe-pointer=non-leaf -fno-strict-return -ffp-contract=on -fno-rounding-math -funwind-tables=1 -fobjc-msgsend-selector-stubs -target-sdk-version=26.0 -fvisibility-inlines-hidden-static-local-var -fdefine-target-os-macros -fno-assume-unique-vtables -fno-modulemap-allow-subdirectory-search -target-cpu apple-m1 -target-feature +zcm -target-feature +zcz -target-feature +v8.5a -target-feature +aes -target-feature +altnzcv -target-feature +ccdp -target-feature +complxnum -target-feature +crc -target-feature +dotprod -target-feature +fp-armv8 -target-feature +fp16fml -target-feature +fptoint -target-feature +fullfp16 -target-feature +jsconv -target-feature +lse -target-feature +neon -target-feature +pauth -target-feature +perfmon -target-feature +predres -target-feature +ras -target-feature +rcpc -target-feature +rdm -target-feature +sb -target-feature +sha2 -target-feature +sha3 -target-feature +specrestrict -target-feature +ssbs -target-abi darwinpcs -debugger-tuning=lldb -fdebug-compilation-dir=/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs -target-linker-version 1221.4 -v -fcoverage-compilation-dir=/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-f4kzTs -resource-dir /Library/Developer/CommandLineTools/usr/lib/clang/17 -dependency-file CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o.d -skip-unused-modulemap-deps -MT CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -sys-header-deps -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -I/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -internal-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include -internal-isystem /Library/Developer/CommandLineTools/usr/lib/clang/17/include -internal-externc-isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include -internal-externc-isystem /Library/Developer/CommandLineTools/usr/include -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks -internal-iframework /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks -Wno-reorder-init-list -Wno-implicit-int-float-conversion -Wno-c99-designator -Wno-final-dtor-non-final-class -Wno-extra-semi-stmt -Wno-misleading-indentation -Wno-quoted-include-in-framework-header -Wno-implicit-fallthrough -Wno-enum-enum-conversion -Wno-enum-float-conversion -Wno-elaborated-enum-base -fdeprecated-macro -ferror-limit 19 -stack-protector 1 -fstack-check -mdarwin-stkchk-strong-link -fblocks -fencode-extended-block-signature -fregister-global-dtors-with-atexit -fgnuc-version=4.2.1 -fno-cxx-modules -fskip-odr-check-in-gmf -fcxx-exceptions -fexceptions -fmax-type-align=16 -fcommon -clang-vendor-feature=+disableNonDependentMemberExprInCurrentInstantiation -fno-odr-hash-protocols -clang-vendor-feature=+enableAggressiveVLAFolding -clang-vendor-feature=+revert09abecef7bbf -clang-vendor-feature=+thisNoAlignAttr -clang-vendor-feature=+thisNoNullAttr -clang-vendor-feature=+disableAtImportPrivateFrameworkInImplementationError -D__GCC_HAVE_DWARF2_CFI_ASM=1 -o CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -x c++ /opt/homebrew/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [clang -cc1 version 17.0.0 (clang-1700.3.19.1) default target arm64-apple-darwin25.0.0]
+        ignore line: [ignoring nonexistent directory "/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/local/include"]
+        ignore line: [ignoring nonexistent directory "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Frameworks"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1]
+        ignore line: [ /Library/Developer/CommandLineTools/usr/lib/clang/17/include]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include]
+        ignore line: [ /Library/Developer/CommandLineTools/usr/include]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks (framework directory)]
+        ignore line: [ /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/SubFrameworks (framework directory)]
+        ignore line: [End of search list.]
+        ignore line: [Linking CXX executable cmTC_85657]
+        ignore line: [/opt/homebrew/bin/cmake -E cmake_link_script CMakeFiles/cmTC_85657.dir/link.txt --verbose=1]
+        ignore line: [Apple clang version 17.0.0 (clang-1700.3.19.1)]
+        ignore line: [Target: arm64-apple-darwin25.0.0]
+        ignore line: [Thread model: posix]
+        ignore line: [InstalledDir: /Library/Developer/CommandLineTools/usr/bin]
+        link line: [ "/Library/Developer/CommandLineTools/usr/bin/ld" -demangle -lto_library /Library/Developer/CommandLineTools/usr/lib/libLTO.dylib -dynamic -arch arm64 -platform_version macos 26.0.0 26.0 -syslibroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -mllvm -enable-linkonceodr-outlining -o cmTC_85657 -L/usr/local/lib -search_paths_first -headerpad_max_install_names -v CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o -lc++ -lSystem /Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+          arg [/Library/Developer/CommandLineTools/usr/bin/ld] ==> ignore
+          arg [-demangle] ==> ignore
+          arg [-lto_library] ==> ignore, skip following value
+          arg [/Library/Developer/CommandLineTools/usr/lib/libLTO.dylib] ==> skip value of -lto_library
+          arg [-dynamic] ==> ignore
+          arg [-arch] ==> ignore
+          arg [arm64] ==> ignore
+          arg [-platform_version] ==> ignore
+          arg [macos] ==> ignore
+          arg [26.0.0] ==> ignore
+          arg [26.0] ==> ignore
+          arg [-syslibroot] ==> ignore
+          arg [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk] ==> ignore
+          arg [-mllvm] ==> ignore
+          arg [-enable-linkonceodr-outlining] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_85657] ==> ignore
+          arg [-L/usr/local/lib] ==> dir [/usr/local/lib]
+          arg [-search_paths_first] ==> ignore
+          arg [-headerpad_max_install_names] ==> ignore
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_85657.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lc++] ==> lib [c++]
+          arg [-lSystem] ==> lib [System]
+          arg [/Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a] ==> lib [/Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        linker tool for 'CXX': /Library/Developer/CommandLineTools/usr/bin/ld
+        Library search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift]
+        Framework search paths: [;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        remove lib [System]
+        remove lib [/Library/Developer/CommandLineTools/usr/lib/clang/17/lib/darwin/libclang_rt.osx.a]
+        collapse library dir [/usr/local/lib] ==> [/usr/local/lib]
+        collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib]
+        collapse library dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift]
+        collapse framework dir [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks] ==> [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+        implicit libs: [c++]
+        implicit objs: []
+        implicit dirs: [/usr/local/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift]
+        implicit fwks: [/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/opt/homebrew/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "/opt/homebrew/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/Library/Developer/CommandLineTools/usr/bin/ld" "-v"
+      @(#)PROGRAM:ld PROJECT:ld-1221.4
+      BUILD 16:29:08 Aug 11 2025
+      configured to support archs: armv6 armv7 armv7s arm64 arm64e arm64_32 i386 x86_64 x86_64h armv6m armv7k armv7m armv7em armv8m.main armv8.1m.main
+      will use ld-classic for: armv6 armv7 armv7s i386 armv6m armv7k armv7m armv7em
+      LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
+      TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.3.8)
 ...
