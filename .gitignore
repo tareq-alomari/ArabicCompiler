@@ -1,0 +1,49 @@
+# Build artifacts
+build/
+bin/
+obj/
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# Compiler output files
+*_output.c
+*_output.asm
+*_output_intermediate.txt
+*_output
+
+# Test executables (generated during test runs)
+Tests/test_[0-9]*[0-9]
+Tests/*_test
+Tests/*_program
+
+# IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# macOS specific
+*.dSYM/
+

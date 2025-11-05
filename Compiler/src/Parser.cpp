@@ -141,16 +141,44 @@ std::unique_ptr<ProgramNode> Parser::parseProgram()
         {
             std::cout << "[DBG] parsing declaration, current token=" << peek().typeToString()
                       << " ('" << peek().value << ")" << std::endl;
-            auto decl = parseDeclaration();
-            if (decl)
+            
+            // Special handling for CONSTANT to parse multiple constants in the same block
+            if (check(TokenType::CONSTANT))
             {
-                program->declarations.push_back(std::move(decl));
+                advance(); // Consume CONSTANT token
+                
+                // Parse all constants in this block
+                while ((check(TokenType::IDENTIFIER) || check(TokenType::BOOLEAN) ||
+                        check(TokenType::INTEGER) || check(TokenType::REAL) ||
+                        check(TokenType::STRING)) &&
+                       !check(TokenType::DOT) && !check(TokenType::PROCEDURE) &&
+                       !check(TokenType::VARIABLE) && !check(TokenType::TYPE) &&
+                       !check(TokenType::END) && !isAtEnd())
+                {
+                    auto constDecl = parseConstantDeclaration();
+                    if (constDecl)
+                    {
+                        program->declarations.push_back(std::move(constDecl));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
             else
             {
-                // إذا كانت النتيجة nullptr، فهذا جملة تعيين، معالجتها كجملة
-                std::cout << "[DBG] declaration returned nullptr, treating as statement" << std::endl;
-                program->statements.push_back(parseStatement());
+                auto decl = parseDeclaration();
+                if (decl)
+                {
+                    program->declarations.push_back(std::move(decl));
+                }
+                else
+                {
+                    // إذا كانت النتيجة nullptr، فهذا جملة تعيين، معالجتها كجملة
+                    std::cout << "[DBG] declaration returned nullptr, treating as statement" << std::endl;
+                    program->statements.push_back(parseStatement());
+                }
             }
         }
         else

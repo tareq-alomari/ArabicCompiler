@@ -143,6 +143,7 @@ private:
     int tempVarCounter;
     std::vector<std::string> stringLiterals;
     std::unordered_map<std::string, std::string> stringToLabel;
+    std::unordered_set<std::string> stringTempVars; // Track which temp variables hold char* values
 
     std::string generateLabel();
     std::string generateTempVar();

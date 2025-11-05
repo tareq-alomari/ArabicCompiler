@@ -45,6 +45,7 @@ std::vector<Instruction> Compiler::compile(std::unique_ptr<ProgramNode> program)
     tempVarCounter = 0;
     stringLiterals.clear();
     stringToLabel.clear();
+    stringTempVars.clear();
 
     if (program)
     {
@@ -277,8 +278,28 @@ void Compiler::compileConstantDeclaration(ConstantDeclarationNode *node)
     if (!node)
         return;
 
-    // تخزين الثابت في جدول الرموز
-    symbolTable[node->name] = "ثابت";
+    // تخزين الثابت في جدول الرموز مع نوعه الفعلي
+    // Infer type from the constant value
+    if (auto literal = dynamic_cast<LiteralNode *>(node->value.get()))
+    {
+        if (literal->literalType == TokenType::STRING_LITERAL)
+        {
+            symbolTable[node->name] = "primitive:char*";
+        }
+        else if (literal->literalType == TokenType::REAL_LITERAL)
+        {
+            symbolTable[node->name] = "primitive:double";
+        }
+        else
+        {
+            symbolTable[node->name] = "primitive:int";
+        }
+    }
+    else
+    {
+        // For complex constant expressions, default to int
+        symbolTable[node->name] = "primitive:int";
+    }
 
     std::string temp = compileExpression(node->value.get());
     emit(InstructionType::STORE, node->name, temp);
@@ -637,6 +658,7 @@ std::string Compiler::compileExpression(ASTNode *expr)
         {
             std::string label = getStringLabel(literal->value);
             emit(InstructionType::LOAD, temp, label);
+            stringTempVars.insert(temp); // Mark this temp as holding a char* value
         }
         else
         {
@@ -973,7 +995,15 @@ void Compiler::generateCCode(const std::string &filename)
     // تعريف المتغيرات المؤقتة
     for (int i = 0; i < tempVarCounter; i++)
     {
-        file << "    int t" << i << " = 0;" << std::endl;
+        std::string tempName = "t" + std::to_string(i);
+        if (stringTempVars.find(tempName) != stringTempVars.end())
+        {
+            file << "    char* " << tempName << " = NULL;" << std::endl;
+        }
+        else
+        {
+            file << "    int " << tempName << " = 0;" << std::endl;
+        }
     }
 
     // تعريف السلاسل النصية كمتغيرات ثابتة
