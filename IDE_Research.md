@@ -105,15 +105,25 @@ process.Start();
 
 **Key Questions to Answer:**
 - [ ] How easy is RTL/Arabic text support?
-- [ ] Can we integrate a modern code editor component?
+- [ ] Can we integrate AvaloniaEdit (recommended by lead)?
 - [ ] Process invocation and output capture complexity?
 - [ ] Build and deployment story on macOS?
+- [ ] How does it feel on macOS M2?
+
+**Editor Component Research:**
+- **AvaloniaEdit**: Open-source text editor component for Avalonia
+  - GitHub: https://github.com/AvaloniaUI/AvaloniaEdit
+  - Based on SharpDevelop's editor
+  - Syntax highlighting support
+  - **Action:** Test with Arabic text in PoC
 
 **PoC Plan:**
-1. Create basic window with text editor area
-2. Add output console section
-3. Implement "Compile" button that runs `ArabicCompiler`
-4. Capture and display compiler output
+1. Create basic Avalonia app
+2. Integrate AvaloniaEdit component
+3. Test Arabic text input/display
+4. Add output console (TextBox or similar)
+5. Implement "Compile" button with process invocation
+6. Capture and display compiler output
 
 ---
 
@@ -233,12 +243,33 @@ Each PoC must demonstrate:
 
 ## Evaluation Criteria
 
+### Lead Developer Guidance (Key Priorities):
+
+1. **Developer Velocity** ⚡
+   - Smooth learning curve
+   - High-quality tooling
+   - Excellent documentation
+   - Fast iteration cycles
+
+2. **macOS Native Experience** 🍎
+   - Respects macOS conventions
+   - Crisp text rendering
+   - Snappy performance
+   - Feels "at home" on M2
+
+3. **Code Editor Component** 📝
+   - Critical: Good editor with Arabic support
+   - Known option: [AvaloniaEdit](https://github.com/AvaloniaUI/AvaloniaEdit) for Avalonia
+   - This could be a major deciding factor
+
+### Evaluation Matrix
+
 | Criterion | Weight | Avalonia | MAUI | Web-Based | Winner |
 |-----------|--------|----------|------|-----------|--------|
-| **Development Experience** | 25% | TBD | TBD | TBD | - |
-| **Cross-Platform Quality** | 25% | TBD | TBD | TBD | - |
+| **Developer Velocity** | 25% | TBD | TBD | TBD | - |
+| **macOS Native Feel** | 25% | TBD | TBD | TBD | - |
 | **Arabic/RTL Support** | 20% | TBD | TBD | TBD | - |
-| **Editor Integration** | 15% | TBD | TBD | TBD | - |
+| **Editor Component Quality** | 15% | TBD | TBD | TBD | - |
 | **Community & Ecosystem** | 10% | TBD | TBD | TBD | - |
 | **Performance** | 5% | TBD | TBD | TBD | - |
 | **Total Score** | 100% | - | - | - | - |
@@ -247,12 +278,13 @@ Each PoC must demonstrate:
 
 ## Timeline
 
-### Day 1 (Today) - Baseline & Setup
+### Day 1 (Today) - Baseline & Setup ✅
 - [x] Analyze current IDE requirements
 - [x] Create research document framework
-- [ ] Set up development environment
-- [ ] Install Avalonia templates
-- [ ] Install MAUI workload
+- [x] Install .NET 9 SDK (9.0.306)
+- [x] Get approval from lead developer
+- [ ] Install MAUI workload (manual: `sudo dotnet workload install maui`)
+- [ ] Install Avalonia templates (manual: `dotnet new install Avalonia.Templates`)
 
 ### Day 2 - Avalonia PoC
 - [ ] Create Avalonia project
