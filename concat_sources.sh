@@ -50,6 +50,7 @@ INCLUDE_PATTERNS=(
     # Build configuration
     "Compiler/CMakeLists.txt"
     "Compiler/build.bat"
+    "Compiler/build.sh"
     
     # Tests
     "Compiler/tests/*.cpp"
@@ -78,7 +79,10 @@ INCLUDE_PATTERNS=(
     # Documentation
     "README.md"
     "README_macOS.md"
+    "SETUP_COMPLETE.md"
+    "IDE_Research.md"
     "LICENSE"
+    ".gitignore"
 )
 
 # Function to get language identifier for syntax highlighting

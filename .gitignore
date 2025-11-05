@@ -56,3 +56,5 @@ Makefile
 *.dSYM/
 
 project_codebase.md
+
+cursor_chats/
