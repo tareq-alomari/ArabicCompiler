@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 TESTS_DIR="$SCRIPT_DIR/Tests"
-COMPILER="$SCRIPT_DIR/Compiler/ArabicCompiler_mac"
+COMPILER="$SCRIPT_DIR/Compiler/build/ArabicCompiler"
 
 # Test files
 TESTS=(
