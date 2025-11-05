@@ -1,0 +1,60 @@
+# RunOne.cmake - runs compiler on input and checks expected outputs exist
+if(NOT DEFINED INPUT)
+  message(FATAL_ERROR "INPUT not set")
+endif()
+
+if(NOT DEFINED ARG_BIN)
+  # Try to locate the built binary relative to this script
+  get_filename_component(SCRIPT_DIR "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
+  set(_candidates
+      "${SCRIPT_DIR}/../build/ArabicCompiler"
+      "${SCRIPT_DIR}/../build/ArabicCompiler.exe")
+  foreach(_p IN LISTS _candidates)
+    if(EXISTS "${_p}")
+      set(ARG_BIN "${_p}")
+      break()
+    endif()
+  endforeach()
+endif()
+
+if(NOT ARG_BIN OR NOT EXISTS "${ARG_BIN}")
+  message(FATAL_ERROR "Binary not found: ${ARG_BIN}")
+endif()
+
+if(NOT EXISTS "${INPUT}")
+  message(FATAL_ERROR "Input file not found: ${INPUT}")
+endif()
+
+# Options: GEN_IR; GEN_C; GEN_ASM
+if(GEN_IR)
+  execute_process(COMMAND ${ARG_BIN} ${INPUT} --ir RESULT_VARIABLE rv)
+  if(NOT rv EQUAL 0)
+    message(FATAL_ERROR "Compiler failed (IR) with code ${rv}")
+  endif()
+  string(REGEX REPLACE "\\.arabic$" "_intermediate.txt" IR_OUT "${INPUT}")
+  if(NOT EXISTS "${IR_OUT}")
+    message(FATAL_ERROR "IR output missing: ${IR_OUT}")
+  endif()
+endif()
+
+if(GEN_C)
+  execute_process(COMMAND ${ARG_BIN} ${INPUT} --c RESULT_VARIABLE rv)
+  if(NOT rv EQUAL 0)
+    message(FATAL_ERROR "Compiler failed (C) with code ${rv}")
+  endif()
+  string(REGEX REPLACE "\\.arabic$" ".c" C_OUT "${INPUT}")
+  if(NOT EXISTS "${C_OUT}")
+    message(FATAL_ERROR "C output missing: ${C_OUT}")
+  endif()
+endif()
+
+if(GEN_ASM)
+  execute_process(COMMAND ${ARG_BIN} ${INPUT} --asm RESULT_VARIABLE rv)
+  if(NOT rv EQUAL 0)
+    message(FATAL_ERROR "Compiler failed (ASM) with code ${rv}")
+  endif()
+  string(REGEX REPLACE "\\.arabic$" ".asm" ASM_OUT "${INPUT}")
+  if(NOT EXISTS "${ASM_OUT}")
+    message(FATAL_ERROR "ASM output missing: ${ASM_OUT}")
+  endif()
+endif()

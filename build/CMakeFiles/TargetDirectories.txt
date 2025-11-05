@@ -1,0 +1,3 @@
+D:/IT/Compiler/ArabicCompiler-main/build/CMakeFiles/ArabicCompiler.dir
+D:/IT/Compiler/ArabicCompiler-main/build/CMakeFiles/ALL_BUILD.dir
+D:/IT/Compiler/ArabicCompiler-main/build/CMakeFiles/ZERO_CHECK.dir

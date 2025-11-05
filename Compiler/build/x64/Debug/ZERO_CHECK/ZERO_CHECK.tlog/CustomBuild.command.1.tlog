@@ -1,0 +1,10 @@
+^D:\ARABICCOMPILER-MAIN\COMPILER\BUILD\CMAKEFILES\2B20E959B510395DE2338A28D0F32437\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/ArabicCompiler-main/Compiler -BD:/ArabicCompiler-main/Compiler/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/ArabicCompiler-main/Compiler/build/ArabicCompiler.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

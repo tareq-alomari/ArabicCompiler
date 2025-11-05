@@ -1,0 +1,1649 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineSystem.cmake:212 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Windows - 10.0.19045 - AMD64
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCCompilerId.c.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerId.c.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:122 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
+      Copyright (C) Microsoft Corporation. All rights reserved.
+      
+      Build started 13/05/47 01:59:42 ص.
+      Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdC\\CompilerIdC.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.06
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        D:/ArabicCompiler-main/Compiler/build/CMakeFiles/4.1.1/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:103 (__resolve_linker_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.com"
+    found: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lld-link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.com"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.exe"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link"
+      - "C:/Program Files/Python313/Scripts/lld-link.com"
+      - "C:/Program Files/Python313/Scripts/lld-link.exe"
+      - "C:/Program Files/Python313/Scripts/lld-link"
+      - "C:/Program Files/Python313/lld-link.com"
+      - "C:/Program Files/Python313/lld-link.exe"
+      - "C:/Program Files/Python313/lld-link"
+      - "C:/Program Files/Python310/Scripts/lld-link.com"
+      - "C:/Program Files/Python310/Scripts/lld-link.exe"
+      - "C:/Program Files/Python310/Scripts/lld-link"
+      - "C:/Program Files/Python310/lld-link.com"
+      - "C:/Program Files/Python310/lld-link.exe"
+      - "C:/Program Files/Python310/lld-link"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.com"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.exe"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link"
+      - "C:/Windows/System32/lld-link.com"
+      - "C:/Windows/System32/lld-link.exe"
+      - "C:/Windows/System32/lld-link"
+      - "C:/Windows/lld-link.com"
+      - "C:/Windows/lld-link.exe"
+      - "C:/Windows/lld-link"
+      - "C:/Windows/System32/wbem/lld-link.com"
+      - "C:/Windows/System32/wbem/lld-link.exe"
+      - "C:/Windows/System32/wbem/lld-link"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Windows/System32/OpenSSH/lld-link.com"
+      - "C:/Windows/System32/OpenSSH/lld-link.exe"
+      - "C:/Windows/System32/OpenSSH/lld-link"
+      - "C:/Program Files/dotnet/lld-link.com"
+      - "C:/Program Files/dotnet/lld-link.exe"
+      - "C:/Program Files/dotnet/lld-link"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link"
+      - "C:/MinGW/bin/lld-link.com"
+      - "C:/MinGW/bin/lld-link.exe"
+      - "C:/MinGW/bin/lld-link"
+      - "C:/Program Files/Java/jdk-23/bin/lld-link.com"
+      - "C:/Program Files/Java/jdk-23/bin/lld-link.exe"
+      - "C:/Program Files/Java/jdk-23/bin/lld-link"
+      - "C:/ProgramData/chocolatey/bin/lld-link.com"
+      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
+      - "C:/ProgramData/chocolatey/bin/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link"
+      - "C:/Program Files/Git/cmd/lld-link.com"
+      - "C:/Program Files/Git/cmd/lld-link.exe"
+      - "C:/Program Files/Git/cmd/lld-link"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.com"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.exe"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "C:/Users/MK/.dotnet/tools/lld-link.com"
+      - "C:/Users/MK/.dotnet/tools/lld-link.exe"
+      - "C:/Users/MK/.dotnet/tools/lld-link"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
+      - "D:/ArabicCompiler-main/Compiler/C/lld-link.com"
+      - "D:/ArabicCompiler-main/Compiler/C/lld-link.exe"
+      - "D:/ArabicCompiler-main/Compiler/C/lld-link"
+      - "C:/flutter/bin/lld-link.com"
+      - "C:/flutter/bin/lld-link.exe"
+      - "C:/flutter/bin/lld-link"
+      - "C:/Program Files/nodejs/lld-link.com"
+      - "C:/Program Files/nodejs/lld-link.exe"
+      - "C:/Program Files/nodejs/lld-link"
+      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.com"
+      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.exe"
+      - "D:/Programs Unvercity/antlr4-master/bin/lld-link"
+      - "C:/Program Files/CMake/bin/lld-link.com"
+      - "C:/Program Files/CMake/bin/lld-link.exe"
+      - "C:/Program Files/CMake/bin/lld-link"
+      - "C:/mingw64/bin/lld-link.com"
+      - "C:/mingw64/bin/lld-link.exe"
+      - "C:/mingw64/bin/lld-link"
+      - "C:/xampp/php/lld-link.com"
+      - "C:/xampp/php/lld-link.exe"
+      - "C:/xampp/php/lld-link"
+      - "C:/Users/MK/composer/lld-link.com"
+      - "C:/Users/MK/composer/lld-link.exe"
+      - "C:/Users/MK/composer/lld-link"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.com"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.exe"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link"
+      - "C:/Users/MK/AppData/Roaming/npm/lld-link.com"
+      - "C:/Users/MK/AppData/Roaming/npm/lld-link.exe"
+      - "C:/Users/MK/AppData/Roaming/npm/lld-link"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_LINKER"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.com"
+    found: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/link.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_MT"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "mt"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/mt.com"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/mt.exe"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/mt"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/mt"
+      - "C:/Program Files/Python313/Scripts/mt.com"
+      - "C:/Program Files/Python313/Scripts/mt.exe"
+      - "C:/Program Files/Python313/Scripts/mt"
+      - "C:/Program Files/Python313/mt.com"
+      - "C:/Program Files/Python313/mt.exe"
+      - "C:/Program Files/Python313/mt"
+      - "C:/Program Files/Python310/Scripts/mt.com"
+      - "C:/Program Files/Python310/Scripts/mt.exe"
+      - "C:/Program Files/Python310/Scripts/mt"
+      - "C:/Program Files/Python310/mt.com"
+      - "C:/Program Files/Python310/mt.exe"
+      - "C:/Program Files/Python310/mt"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/mt.com"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/mt.exe"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/mt"
+      - "C:/Windows/System32/mt.com"
+      - "C:/Windows/System32/mt.exe"
+      - "C:/Windows/System32/mt"
+      - "C:/Windows/mt.com"
+      - "C:/Windows/mt.exe"
+      - "C:/Windows/mt"
+      - "C:/Windows/System32/wbem/mt.com"
+      - "C:/Windows/System32/wbem/mt.exe"
+      - "C:/Windows/System32/wbem/mt"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/mt"
+      - "C:/Windows/System32/OpenSSH/mt.com"
+      - "C:/Windows/System32/OpenSSH/mt.exe"
+      - "C:/Windows/System32/OpenSSH/mt"
+      - "C:/Program Files/dotnet/mt.com"
+      - "C:/Program Files/dotnet/mt.exe"
+      - "C:/Program Files/dotnet/mt"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/mt.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/mt.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/mt"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/mt.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/mt.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/mt"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/mt"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/mt"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/mt"
+      - "C:/MinGW/bin/mt.com"
+      - "C:/MinGW/bin/mt.exe"
+      - "C:/MinGW/bin/mt"
+      - "C:/Program Files/Java/jdk-23/bin/mt.com"
+      - "C:/Program Files/Java/jdk-23/bin/mt.exe"
+      - "C:/Program Files/Java/jdk-23/bin/mt"
+      - "C:/ProgramData/chocolatey/bin/mt.com"
+      - "C:/ProgramData/chocolatey/bin/mt.exe"
+      - "C:/ProgramData/chocolatey/bin/mt"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/mt"
+      - "C:/Program Files/Git/cmd/mt.com"
+      - "C:/Program Files/Git/cmd/mt.exe"
+      - "C:/Program Files/Git/cmd/mt"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/mt.com"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/mt.exe"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/mt"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/mt.com"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/mt.exe"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/mt"
+      - "C:/Users/MK/.dotnet/tools/mt.com"
+      - "C:/Users/MK/.dotnet/tools/mt.exe"
+      - "C:/Users/MK/.dotnet/tools/mt"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/mt.com"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/mt.exe"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/mt"
+      - "D:/ArabicCompiler-main/Compiler/C/mt.com"
+      - "D:/ArabicCompiler-main/Compiler/C/mt.exe"
+      - "D:/ArabicCompiler-main/Compiler/C/mt"
+      - "C:/flutter/bin/mt.com"
+      - "C:/flutter/bin/mt.exe"
+      - "C:/flutter/bin/mt"
+      - "C:/Program Files/nodejs/mt.com"
+      - "C:/Program Files/nodejs/mt.exe"
+      - "C:/Program Files/nodejs/mt"
+      - "D:/Programs Unvercity/antlr4-master/bin/mt.com"
+      - "D:/Programs Unvercity/antlr4-master/bin/mt.exe"
+      - "D:/Programs Unvercity/antlr4-master/bin/mt"
+      - "C:/Program Files/CMake/bin/mt.com"
+      - "C:/Program Files/CMake/bin/mt.exe"
+      - "C:/Program Files/CMake/bin/mt"
+      - "C:/mingw64/bin/mt.com"
+      - "C:/mingw64/bin/mt.exe"
+      - "C:/mingw64/bin/mt"
+      - "C:/xampp/php/mt.com"
+      - "C:/xampp/php/mt.exe"
+      - "C:/xampp/php/mt"
+      - "C:/Users/MK/composer/mt.com"
+      - "C:/Users/MK/composer/mt.exe"
+      - "C:/Users/MK/composer/mt"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/mt.com"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/mt.exe"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/mt"
+      - "C:/Users/MK/AppData/Roaming/npm/mt.com"
+      - "C:/Users/MK/AppData/Roaming/npm/mt.exe"
+      - "C:/Users/MK/AppData/Roaming/npm/mt"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:238 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCCompiler.cmake:200 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_AR"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lib"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lib.com"
+    found: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lib.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:462 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:500 (CMAKE_DETERMINE_COMPILER_ID_WRITE)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "file"
+    variable: "src_in"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "CMakeCXXCompilerId.cpp.in"
+    candidate_directories:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/"
+    found: "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerId.cpp.in"
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:125 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
+      Copyright (C) Microsoft Corporation. All rights reserved.
+      
+      Build started 13/05/47 01:59:43 ص.
+      Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.exe
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\4.1.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:00.76
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        D:/ArabicCompiler-main/Compiler/build/CMakeFiles/4.1.1/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:37 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:65 (__resolve_tool_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeFindBinUtils.cmake:104 (__resolve_linker_path)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCXXCompiler.cmake:206 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "_CMAKE_TOOL_WITH_PATH"
+    description: "Path to a program."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: false
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: false
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "lld-link"
+    candidate_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+    searched_directories:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.com"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link.exe"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/Hostx64/x64/lld-link"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/lld-link"
+      - "C:/Program Files/Python313/Scripts/lld-link.com"
+      - "C:/Program Files/Python313/Scripts/lld-link.exe"
+      - "C:/Program Files/Python313/Scripts/lld-link"
+      - "C:/Program Files/Python313/lld-link.com"
+      - "C:/Program Files/Python313/lld-link.exe"
+      - "C:/Program Files/Python313/lld-link"
+      - "C:/Program Files/Python310/Scripts/lld-link.com"
+      - "C:/Program Files/Python310/Scripts/lld-link.exe"
+      - "C:/Program Files/Python310/Scripts/lld-link"
+      - "C:/Program Files/Python310/lld-link.com"
+      - "C:/Program Files/Python310/lld-link.exe"
+      - "C:/Program Files/Python310/lld-link"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.com"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link.exe"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/lld-link"
+      - "C:/Windows/System32/lld-link.com"
+      - "C:/Windows/System32/lld-link.exe"
+      - "C:/Windows/System32/lld-link"
+      - "C:/Windows/lld-link.com"
+      - "C:/Windows/lld-link.exe"
+      - "C:/Windows/lld-link"
+      - "C:/Windows/System32/wbem/lld-link.com"
+      - "C:/Windows/System32/wbem/lld-link.exe"
+      - "C:/Windows/System32/wbem/lld-link"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/lld-link"
+      - "C:/Windows/System32/OpenSSH/lld-link.com"
+      - "C:/Windows/System32/OpenSSH/lld-link.exe"
+      - "C:/Windows/System32/OpenSSH/lld-link"
+      - "C:/Program Files/dotnet/lld-link.com"
+      - "C:/Program Files/dotnet/lld-link.exe"
+      - "C:/Program Files/dotnet/lld-link"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/lld-link"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/lld-link"
+      - "C:/MinGW/bin/lld-link.com"
+      - "C:/MinGW/bin/lld-link.exe"
+      - "C:/MinGW/bin/lld-link"
+      - "C:/Program Files/Java/jdk-23/bin/lld-link.com"
+      - "C:/Program Files/Java/jdk-23/bin/lld-link.exe"
+      - "C:/Program Files/Java/jdk-23/bin/lld-link"
+      - "C:/ProgramData/chocolatey/bin/lld-link.com"
+      - "C:/ProgramData/chocolatey/bin/lld-link.exe"
+      - "C:/ProgramData/chocolatey/bin/lld-link"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/lld-link"
+      - "C:/Program Files/Git/cmd/lld-link.com"
+      - "C:/Program Files/Git/cmd/lld-link.exe"
+      - "C:/Program Files/Git/cmd/lld-link"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.com"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link.exe"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/lld-link"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.com"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link.exe"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/lld-link"
+      - "C:/Users/MK/.dotnet/tools/lld-link.com"
+      - "C:/Users/MK/.dotnet/tools/lld-link.exe"
+      - "C:/Users/MK/.dotnet/tools/lld-link"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.com"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link.exe"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/lld-link"
+      - "D:/ArabicCompiler-main/Compiler/C/lld-link.com"
+      - "D:/ArabicCompiler-main/Compiler/C/lld-link.exe"
+      - "D:/ArabicCompiler-main/Compiler/C/lld-link"
+      - "C:/flutter/bin/lld-link.com"
+      - "C:/flutter/bin/lld-link.exe"
+      - "C:/flutter/bin/lld-link"
+      - "C:/Program Files/nodejs/lld-link.com"
+      - "C:/Program Files/nodejs/lld-link.exe"
+      - "C:/Program Files/nodejs/lld-link"
+      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.com"
+      - "D:/Programs Unvercity/antlr4-master/bin/lld-link.exe"
+      - "D:/Programs Unvercity/antlr4-master/bin/lld-link"
+      - "C:/Program Files/CMake/bin/lld-link.com"
+      - "C:/Program Files/CMake/bin/lld-link.exe"
+      - "C:/Program Files/CMake/bin/lld-link"
+      - "C:/mingw64/bin/lld-link.com"
+      - "C:/mingw64/bin/lld-link.exe"
+      - "C:/mingw64/bin/lld-link"
+      - "C:/xampp/php/lld-link.com"
+      - "C:/xampp/php/lld-link.exe"
+      - "C:/xampp/php/lld-link"
+      - "C:/Users/MK/composer/lld-link.com"
+      - "C:/Users/MK/composer/lld-link.exe"
+      - "C:/Users/MK/composer/lld-link"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.com"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link.exe"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/lld-link"
+      - "C:/Users/MK/AppData/Roaming/npm/lld-link.com"
+      - "C:/Users/MK/AppData/Roaming/npm/lld-link.exe"
+      - "C:/Users/MK/AppData/Roaming/npm/lld-link"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineRCCompiler.cmake:40 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:574 (enable_language)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC.cmake:547 (__windows_compiler_msvc_enable_rc)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Platform/Windows-MSVC-C.cmake:5 (__windows_compiler_msvc)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCInformation.cmake:48 (include)"
+      - "CMakeLists.txt:2 (project)"
+    mode: "program"
+    variable: "CMAKE_RC_COMPILER"
+    description: "RC compiler"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "rc"
+    candidate_directories:
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/"
+      - "C:/Program Files/Python313/Scripts/"
+      - "C:/Program Files/Python313/"
+      - "C:/Program Files/Python310/Scripts/"
+      - "C:/Program Files/Python310/"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/"
+      - "C:/MinGW/bin/"
+      - "C:/Program Files/Java/jdk-23/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Users/MK/.dotnet/tools/"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "D:/ArabicCompiler-main/Compiler/C/"
+      - "C:/flutter/bin/"
+      - "C:/Program Files/nodejs/"
+      - "D:/Programs Unvercity/antlr4-master/bin/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/mingw64/bin/"
+      - "C:/xampp/php/"
+      - "C:/Users/MK/composer/"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/"
+      - "C:/Users/MK/AppData/Roaming/npm/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/sbin/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/ArabicCompiler/bin/"
+      - "C:/Program Files (x86)/ArabicCompiler/sbin/"
+      - "C:/Program Files (x86)/ArabicCompiler/"
+    searched_directories:
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.com"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc.exe"
+      - "C:/Program Files/Common Files/Oracle/Java/javapath/rc"
+      - "C:/Program Files/Python313/Scripts/rc.com"
+      - "C:/Program Files/Python313/Scripts/rc.exe"
+      - "C:/Program Files/Python313/Scripts/rc"
+      - "C:/Program Files/Python313/rc.com"
+      - "C:/Program Files/Python313/rc.exe"
+      - "C:/Program Files/Python313/rc"
+      - "C:/Program Files/Python310/Scripts/rc.com"
+      - "C:/Program Files/Python310/Scripts/rc.exe"
+      - "C:/Program Files/Python310/Scripts/rc"
+      - "C:/Program Files/Python310/rc.com"
+      - "C:/Program Files/Python310/rc.exe"
+      - "C:/Program Files/Python310/rc"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/rc.com"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/rc.exe"
+      - "C:/Program Files (x86)/VMware/VMware Player/bin/rc"
+      - "C:/Windows/System32/rc.com"
+      - "C:/Windows/System32/rc.exe"
+      - "C:/Windows/System32/rc"
+      - "C:/Windows/rc.com"
+      - "C:/Windows/rc.exe"
+      - "C:/Windows/rc"
+      - "C:/Windows/System32/wbem/rc.com"
+      - "C:/Windows/System32/wbem/rc.exe"
+      - "C:/Windows/System32/wbem/rc"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.com"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc.exe"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/rc"
+      - "C:/Windows/System32/OpenSSH/rc.com"
+      - "C:/Windows/System32/OpenSSH/rc.exe"
+      - "C:/Windows/System32/OpenSSH/rc"
+      - "C:/Program Files/dotnet/rc.com"
+      - "C:/Program Files/dotnet/rc.exe"
+      - "C:/Program Files/dotnet/rc"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/rc.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/rc.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/DTS/Binn/rc"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/rc.com"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/rc.exe"
+      - "C:/Program Files (x86)/Microsoft SQL Server/160/Tools/Binn/rc"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/Tools/Binn/rc"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/rc"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/160/DTS/Binn/rc"
+      - "C:/MinGW/bin/rc.com"
+      - "C:/MinGW/bin/rc.exe"
+      - "C:/MinGW/bin/rc"
+      - "C:/Program Files/Java/jdk-23/bin/rc.com"
+      - "C:/Program Files/Java/jdk-23/bin/rc.exe"
+      - "C:/Program Files/Java/jdk-23/bin/rc"
+      - "C:/ProgramData/chocolatey/bin/rc.com"
+      - "C:/ProgramData/chocolatey/bin/rc.exe"
+      - "C:/ProgramData/chocolatey/bin/rc"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc.com"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc.exe"
+      - "C:/Program Files/Microsoft SQL Server/150/Tools/Binn/rc"
+      - "C:/Program Files/Git/cmd/rc.com"
+      - "C:/Program Files/Git/cmd/rc.exe"
+      - "C:/Program Files/Git/cmd/rc"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/rc.com"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/rc.exe"
+      - "C:/Users/MK/AppData/Local/Android/Sdk/cmdline-tools/latest/bin/rc"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/rc.com"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/rc.exe"
+      - "C:/Users/MK/AppData/Local/Microsoft/WindowsApps/rc"
+      - "C:/Users/MK/.dotnet/tools/rc.com"
+      - "C:/Users/MK/.dotnet/tools/rc.exe"
+      - "C:/Users/MK/.dotnet/tools/rc"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/rc.com"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/rc.exe"
+      - "C:/Users/MK/AppData/Local/Programs/Microsoft VS Code/bin/rc"
+      - "D:/ArabicCompiler-main/Compiler/C/rc.com"
+      - "D:/ArabicCompiler-main/Compiler/C/rc.exe"
+      - "D:/ArabicCompiler-main/Compiler/C/rc"
+      - "C:/flutter/bin/rc.com"
+      - "C:/flutter/bin/rc.exe"
+      - "C:/flutter/bin/rc"
+      - "C:/Program Files/nodejs/rc.com"
+      - "C:/Program Files/nodejs/rc.exe"
+      - "C:/Program Files/nodejs/rc"
+      - "D:/Programs Unvercity/antlr4-master/bin/rc.com"
+      - "D:/Programs Unvercity/antlr4-master/bin/rc.exe"
+      - "D:/Programs Unvercity/antlr4-master/bin/rc"
+      - "C:/Program Files/CMake/bin/rc.com"
+      - "C:/Program Files/CMake/bin/rc.exe"
+      - "C:/Program Files/CMake/bin/rc"
+      - "C:/mingw64/bin/rc.com"
+      - "C:/mingw64/bin/rc.exe"
+      - "C:/mingw64/bin/rc"
+      - "C:/xampp/php/rc.com"
+      - "C:/xampp/php/rc.exe"
+      - "C:/xampp/php/rc"
+      - "C:/Users/MK/composer/rc.com"
+      - "C:/Users/MK/composer/rc.exe"
+      - "C:/Users/MK/composer/rc"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/rc.com"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/rc.exe"
+      - "C:/Users/MK/AppData/Roaming/Composer/vendor/bin/rc"
+      - "C:/Users/MK/AppData/Roaming/npm/rc.com"
+      - "C:/Users/MK/AppData/Roaming/npm/rc.exe"
+      - "C:/Users/MK/AppData/Roaming/npm/rc"
+      - "C:/Program Files/bin/rc.com"
+      - "C:/Program Files/bin/rc.exe"
+      - "C:/Program Files/bin/rc"
+      - "C:/Program Files/sbin/rc.com"
+      - "C:/Program Files/sbin/rc.exe"
+      - "C:/Program Files/sbin/rc"
+      - "C:/Program Files/rc.com"
+      - "C:/Program Files/rc.exe"
+      - "C:/Program Files/rc"
+      - "C:/Program Files (x86)/bin/rc.com"
+      - "C:/Program Files (x86)/bin/rc.exe"
+      - "C:/Program Files (x86)/bin/rc"
+      - "C:/Program Files (x86)/sbin/rc.com"
+      - "C:/Program Files (x86)/sbin/rc.exe"
+      - "C:/Program Files (x86)/sbin/rc"
+      - "C:/Program Files (x86)/rc.com"
+      - "C:/Program Files (x86)/rc.exe"
+      - "C:/Program Files (x86)/rc"
+      - "C:/Program Files/CMake/bin/rc.com"
+      - "C:/Program Files/CMake/bin/rc.exe"
+      - "C:/Program Files/CMake/bin/rc"
+      - "C:/Program Files/CMake/sbin/rc.com"
+      - "C:/Program Files/CMake/sbin/rc.exe"
+      - "C:/Program Files/CMake/sbin/rc"
+      - "C:/Program Files/CMake/rc.com"
+      - "C:/Program Files/CMake/rc.exe"
+      - "C:/Program Files/CMake/rc"
+      - "C:/Program Files (x86)/ArabicCompiler/bin/rc.com"
+      - "C:/Program Files (x86)/ArabicCompiler/bin/rc.exe"
+      - "C:/Program Files (x86)/ArabicCompiler/bin/rc"
+      - "C:/Program Files (x86)/ArabicCompiler/sbin/rc.com"
+      - "C:/Program Files (x86)/ArabicCompiler/sbin/rc.exe"
+      - "C:/Program Files (x86)/ArabicCompiler/sbin/rc"
+      - "C:/Program Files (x86)/ArabicCompiler/rc.com"
+      - "C:/Program Files (x86)/ArabicCompiler/rc.exe"
+      - "C:/Program Files (x86)/ArabicCompiler/rc"
+    found: false
+    search_context:
+      ENV{PATH}:
+        - "C:\\Program Files\\Common Files\\Oracle\\Java\\javapath"
+        - "C:\\Program Files\\Python313\\Scripts\\"
+        - "C:\\Program Files\\Python313\\"
+        - "C:\\Program Files\\Python310\\Scripts\\"
+        - "C:\\Program Files\\Python310\\"
+        - "C:\\Program Files (x86)\\VMware\\VMware Player\\bin\\"
+        - "C:\\Windows\\system32"
+        - "C:\\Windows"
+        - "C:\\Windows\\System32\\Wbem"
+        - "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\Windows\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\Program Files (x86)\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\"
+        - "C:\\Program Files\\Microsoft SQL Server\\160\\DTS\\Binn\\"
+        - "C:\\MinGW\\bin"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:\\Program Files\\Microsoft SQL Server\\150\\Tools\\Binn\\"
+        - "C:\\Program Files\\Git\\cmd"
+        - "C:\\Users\\MK\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C"
+        - "C:\\Program Files\\Java\\jdk-23\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Program Files\\nodejs\\"
+        - "D:\\Programs Unvercity\\antlr4-master\\bin"
+        - "C:\\Program Files\\CMake\\bin"
+        - "C:\\Users\\MK\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\MK\\.dotnet\\tools"
+        - "C:\\Users\\MK\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\mingw64\\bin"
+        - "C:\\MinGW\\bin"
+        - "C:\\xampp\\php"
+        - "C:\\Users\\MK\\composer"
+        - "C:\\Users\\MK\\AppData\\Roaming\\Composer\\vendor\\bin"
+        - "C:\\flutter\\bin"
+        - "C:\\Users\\MK\\AppData\\Roaming\\npm"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/ArabicCompiler"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/ArabicCompiler"
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki"
+      binary: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
+      CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_be6e2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
+        Copyright (C) Microsoft Corporation. All rights reserved.
+        
+        Build started 13/05/47 01:59:45 ص.
+        Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\cmTC_be6e2.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_be6e2.dir\\Debug\\".
+          Creating directory "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\Debug\\".
+          Creating directory "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_be6e2.dir\\Debug\\\\" /Fd"cmTC_be6e2.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.30.30705 for x64
+          CMakeCCompilerABI.c
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Fo"cmTC_be6e2.dir\\Debug\\\\" /Fd"cmTC_be6e2.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCCompilerABI.c"
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /OUT:"D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\Debug\\cmTC_be6e2.exe" /INCREMENTAL /ILK:"cmTC_be6e2.dir\\Debug\\cmTC_be6e2.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki/Debug/cmTC_be6e2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-u08cki/Debug/cmTC_be6e2.lib" /MACHINE:X64  /machine:x64 cmTC_be6e2.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_be6e2.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\Debug\\cmTC_be6e2.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\unsuccessfulbuild".
+          Touching "cmTC_be6e2.dir\\Debug\\cmTC_be6e2.tlog\\cmTC_be6e2.lastbuildstate".
+        Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-u08cki\\cmTC_be6e2.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.70
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.30.30705.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:83 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz"
+      binary: "D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_678be.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Microsoft (R) Build Engine version 17.0.0+c9eb9dd64 for .NET Framework
+        Copyright (C) Microsoft Corporation. All rights reserved.
+        
+        Build started 13/05/47 01:59:46 ص.
+        Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\cmTC_678be.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_678be.dir\\Debug\\".
+          Creating directory "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\Debug\\".
+          Creating directory "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_678be.dir\\Debug\\\\" /Fd"cmTC_678be.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.30.30705 for x64
+          CMakeCXXCompilerABI.cpp
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /GR /Fo"cmTC_678be.dir\\Debug\\\\" /Fd"cmTC_678be.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.1\\Modules\\CMakeCXXCompilerABI.cpp"
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.30.30705\\bin\\HostX64\\x64\\link.exe /OUT:"D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\Debug\\cmTC_678be.exe" /INCREMENTAL /ILK:"cmTC_678be.dir\\Debug\\cmTC_678be.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz/Debug/cmTC_678be.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"D:/ArabicCompiler-main/Compiler/build/CMakeFiles/CMakeScratch/TryCompile-q8qwzz/Debug/cmTC_678be.lib" /MACHINE:X64  /machine:x64 cmTC_678be.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_678be.vcxproj -> D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\Debug\\cmTC_678be.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\unsuccessfulbuild".
+          Touching "cmTC_678be.dir\\Debug\\cmTC_678be.tlog\\cmTC_678be.lastbuildstate".
+        Done Building Project "D:\\ArabicCompiler-main\\Compiler\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q8qwzz\\cmTC_678be.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.70
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:253 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeDetermineLinkerId.cmake:36 (message)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeDetermineCompilerABI.cmake:299 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.30.30705/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.30.30705.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+...
