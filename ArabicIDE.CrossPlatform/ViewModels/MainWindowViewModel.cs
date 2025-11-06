@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using ArabicIDE.CrossPlatform.Services;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using AvaloniaEdit.Highlighting;
+using AvaloniaEdit.Highlighting.Xshd;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -30,6 +34,9 @@ public partial class MainWindowViewModel : ViewModelBase
     [NotifyCanExecuteChangedFor(nameof(RunCommand))]
     private bool _canRun = false;
 
+    [ObservableProperty]
+    private IHighlightingDefinition? _syntaxHighlighting;
+
     private string? _currentFilePath;
     private string? _lastGeneratedCFile;
     private bool _hasUnsavedChanges;
@@ -38,6 +45,9 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _compilerService = new CompilerService();
         _fileService = new FileService();
+        
+        // Load custom Arabic syntax highlighting
+        LoadSyntaxHighlighting();
         
         // Monitor text changes for unsaved changes indicator
         PropertyChanged += (s, e) =>
@@ -48,6 +58,34 @@ public partial class MainWindowViewModel : ViewModelBase
                 UpdateFileName();
             }
         };
+    }
+
+    private void LoadSyntaxHighlighting()
+    {
+        try
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var resourceName = "ArabicIDE.CrossPlatform.ArabicSyntax.xshd";
+
+            using var stream = assembly.GetManifestResourceStream(resourceName);
+            if (stream == null)
+            {
+                // Fallback to plain text if resource is not found
+                SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("Text");
+                Console.WriteLine("Warning: Could not load ArabicSyntax.xshd, using plain text");
+            }
+            else
+            {
+                using var reader = new XmlTextReader(stream);
+                SyntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                Console.WriteLine("✅ Arabic syntax highlighting loaded successfully!");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading syntax highlighting: {ex.Message}");
+            SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("Text");
+        }
     }
 
     [RelayCommand]
