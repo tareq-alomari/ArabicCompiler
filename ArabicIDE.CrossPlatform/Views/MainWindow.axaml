@@ -3,12 +3,14 @@
         xmlns:vm="using:ArabicIDE.CrossPlatform.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avaloniaedit="https://github.com/avaloniaui/avaloniaedit"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="700"
         x:Class="ArabicIDE.CrossPlatform.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="مترجم اللغة العربية - Arabic Compiler IDE"
-        Width="1000" Height="700">
+        Width="1000" Height="700"
+        FlowDirection="RightToLeft">
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
@@ -65,35 +67,37 @@
             </Grid.RowDefinitions>
 
             <!-- Code Editor -->
-            <Border Grid.Row="0" BorderBrush="#CCCCCC" BorderThickness="1" Margin="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    
-                    <!-- Editor Header -->
-                    <Border Grid.Row="0" Background="#E8E8E8" Padding="8,4">
-                        <TextBlock Text="{Binding CurrentFileName}" 
-                                   FontFamily="Arial" 
-                                   FontWeight="SemiBold"/>
-                    </Border>
-                    
-                    <!-- Editor Content -->
-                    <ScrollViewer Grid.Row="1">
-                        <TextBox Text="{Binding EditorText}"
-                                 AcceptsReturn="True"
-                                 AcceptsTab="True"
-                                 FontFamily="Arial"
-                                 FontSize="14"
-                                 FlowDirection="RightToLeft"
-                                 TextAlignment="Right"
-                                 Watermark="اكتب الكود العربي هنا... (Write Arabic code here...)"
-                                 Background="White"
-                                 BorderThickness="0"/>
-                    </ScrollViewer>
-                </Grid>
-            </Border>
+            <Grid Grid.Row="0" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Editor Header -->
+                <Border Grid.Row="0" Background="#E8E8E8" Padding="8,4" BorderBrush="#CCCCCC" BorderThickness="1,1,1,0">
+                    <TextBlock Text="{Binding CurrentFileName}" 
+                               FontFamily="Arial" 
+                               FontWeight="SemiBold"/>
+                </Border>
+                
+                <!-- Editor Content -->
+                <avaloniaedit:TextEditor Grid.Row="1" 
+                                          Name="TextEditor"
+                                          FontFamily="Arial"
+                                          FontSize="14"
+                                          ShowLineNumbers="True"
+                                          Background="White"
+                                          Foreground="Black"
+                                          SyntaxHighlighting="{Binding SyntaxHighlighting}"
+                                          IsReadOnly="False"
+                                          Focusable="True"
+                                          WordWrap="False"
+                                          BorderBrush="#CCCCCC"
+                                          BorderThickness="1,0,1,1"
+                                          HorizontalScrollBarVisibility="Auto"
+                                          VerticalScrollBarVisibility="Auto"
+                                          FlowDirection="LeftToRight"/>
+            </Grid>
 
             <!-- Splitter -->
             <GridSplitter Grid.Row="1" 
