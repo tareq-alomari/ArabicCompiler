@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="Arabic" extensions=".arabic" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  
+  <!-- Main color definitions -->
+  <Color name="Comment" foreground="#008000" fontStyle="italic" />
+  <Color name="String" foreground="#A31515" />
+  <Color name="Keyword" foreground="#0000FF" fontWeight="bold" />
+  <Color name="DataType" foreground="#2B91AF" fontWeight="bold" />
+  <Color name="Number" foreground="#098658" />
+  <Color name="Operator" foreground="#000000" />
+  <Color name="Identifier" foreground="#000000" />
+  <Color name="Punctuation" foreground="#000000" />
+  <Color name="Boolean" foreground="#0000FF" fontWeight="bold" />
+  
+  <RuleSet ignoreCase="false">
+    
+    <!-- Comments (single-line starting with //) -->
+    <Span color="Comment" begin="//" />
+    
+    <!-- String literals -->
+    <Span color="String" multiline="false">
+      <Begin>"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <!-- Escape sequences -->
+        <Span begin="\\" end="." />
+      </RuleSet>
+    </Span>
+    
+    <!-- Numbers (integers and reals) -->
+    <Rule color="Number">
+      \b[0-9]+(\.[0-9]+)?\b
+    </Rule>
+    
+    <!-- Boolean values -->
+    <Keywords color="Boolean">
+      <Word>صح</Word>
+      <Word>خطأ</Word>
+    </Keywords>
+    
+    <!-- Program structure keywords -->
+    <Keywords color="Keyword">
+      <Word>برنامج</Word>
+      <Word>نهاية</Word>
+      <Word>إجراء</Word>
+    </Keywords>
+    
+    <!-- Declaration keywords -->
+    <Keywords color="Keyword">
+      <Word>متغير</Word>
+      <Word>ثابت</Word>
+      <Word>نوع</Word>
+      <Word>قائمة</Word>
+      <Word>سجل</Word>
+    </Keywords>
+    
+    <!-- Data types -->
+    <Keywords color="DataType">
+      <Word>صحيح</Word>
+      <Word>حقيقي</Word>
+      <Word>منطقي</Word>
+      <Word>خيط</Word>
+      <Word>خيط_رمزي</Word>
+      <Word>حرفي</Word>
+    </Keywords>
+    
+    <!-- Control flow keywords -->
+    <Keywords color="Keyword">
+      <Word>اذا</Word>
+      <Word>فان</Word>
+      <Word>والا</Word>
+      <Word>وإلا</Word>
+      <Word>طالما</Word>
+      <Word>كرر</Word>
+      <Word>اعد</Word>
+      <Word>حتى</Word>
+      <Word>استمر</Word>
+    </Keywords>
+    
+    <!-- Operation keywords -->
+    <Keywords color="Keyword">
+      <Word>اطبع</Word>
+      <Word>اقرأ</Word>
+      <Word>الى</Word>
+      <Word>اضف</Word>
+      <Word>إرجاع</Word>
+    </Keywords>
+    
+    <!-- Parameter passing keywords -->
+    <Keywords color="Keyword">
+      <Word>بالقيمة</Word>
+      <Word>بالمرجع</Word>
+      <Word>من</Word>
+    </Keywords>
+    
+    <!-- Operators and punctuation -->
+    <Rule color="Operator">
+      [+\-*/&lt;&gt;=!&amp;|]
+    </Rule>
+    
+    <Rule color="Punctuation">
+      [;,.:(){}[\]]
+    </Rule>
+    
+  </RuleSet>
+  
+</SyntaxDefinition>
+

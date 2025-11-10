@@ -1,0 +1,80 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:ArabicIDE.Avalonia.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="600"
+        x:Class="ArabicIDE.Avalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="مترجم اللغة العربية - Avalonia PoC"
+        Width="900" Height="600">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <!-- Toolbar at top -->
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10">
+            <Button Content="ترجم (Compile)" 
+                    Command="{Binding CompileCommand}"
+                    FontFamily="Arial"
+                    Margin="0,0,10,0"
+                    Padding="15,8"/>
+            <Button Content="شغّل (Run)" 
+                    Command="{Binding RunCommand}"
+                    FontFamily="Arial"
+                    Margin="0,0,10,0"
+                    Padding="15,8"/>
+        </StackPanel>
+
+        <!-- Split view: Editor + Output -->
+        <Grid DockPanel.Dock="Top">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Code Editor Area -->
+            <Border Grid.Row="0" BorderBrush="Gray" BorderThickness="1" Margin="10">
+                <ScrollViewer>
+                    <!-- Using Arial with RTL support for proper Arabic layout -->
+                    <TextBox Text="{Binding CodeText}"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             FontFamily="Arial"
+                             FontSize="14"
+                             FlowDirection="RightToLeft"
+                             TextAlignment="Right"
+                             Watermark="اكتب الكود هنا... (Write code here...)"
+                             Background="#F5F5F5"/>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Splitter -->
+            <GridSplitter Grid.Row="1" 
+                          Height="5" 
+                          HorizontalAlignment="Stretch"
+                          Background="LightGray"/>
+
+            <!-- Output Console -->
+            <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" Margin="10">
+                <ScrollViewer>
+                    <TextBox Text="{Binding OutputText}"
+                             IsReadOnly="True"
+                             AcceptsReturn="True"
+                             FontFamily="Arial"
+                             FontSize="12"
+                             FlowDirection="RightToLeft"
+                             TextAlignment="Right"
+                             Background="#1E1E1E"
+                             Foreground="#D4D4D4"
+                             Watermark="مخرجات المترجم ستظهر هنا... (Compiler output will appear here...)"/>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </DockPanel>
+
+</Window>

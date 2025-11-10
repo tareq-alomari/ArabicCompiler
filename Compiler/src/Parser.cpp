@@ -141,16 +141,69 @@ std::unique_ptr<ProgramNode> Parser::parseProgram()
         {
             std::cout << "[DBG] parsing declaration, current token=" << peek().typeToString()
                       << " ('" << peek().value << ")" << std::endl;
-            auto decl = parseDeclaration();
-            if (decl)
+            
+            // Special handling for VARIABLE to parse multiple variables in the same block
+            if (check(TokenType::VARIABLE))
             {
-                program->declarations.push_back(std::move(decl));
+                advance(); // Consume VARIABLE token
+                
+                // Parse all variables in this block
+                while ((check(TokenType::IDENTIFIER) || check(TokenType::BOOLEAN) ||
+                        check(TokenType::INTEGER) || check(TokenType::REAL) ||
+                        check(TokenType::STRING)) &&
+                       !check(TokenType::LBRACKET) &&
+                       !check(TokenType::DOT) && !check(TokenType::PROCEDURE) &&
+                       !check(TokenType::CONSTANT) && !check(TokenType::TYPE) &&
+                       !check(TokenType::END) && !isAtEnd())
+                {
+                    auto varDecl = parseVariableDeclaration();
+                    if (varDecl)
+                    {
+                        program->declarations.push_back(std::move(varDecl));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            // Special handling for CONSTANT to parse multiple constants in the same block
+            else if (check(TokenType::CONSTANT))
+            {
+                advance(); // Consume CONSTANT token
+                
+                // Parse all constants in this block
+                while ((check(TokenType::IDENTIFIER) || check(TokenType::BOOLEAN) ||
+                        check(TokenType::INTEGER) || check(TokenType::REAL) ||
+                        check(TokenType::STRING)) &&
+                       !check(TokenType::DOT) && !check(TokenType::PROCEDURE) &&
+                       !check(TokenType::VARIABLE) && !check(TokenType::TYPE) &&
+                       !check(TokenType::END) && !isAtEnd())
+                {
+                    auto constDecl = parseConstantDeclaration();
+                    if (constDecl)
+                    {
+                        program->declarations.push_back(std::move(constDecl));
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
             else
             {
-                // إذا كانت النتيجة nullptr، فهذا جملة تعيين، معالجتها كجملة
-                std::cout << "[DBG] declaration returned nullptr, treating as statement" << std::endl;
-                program->statements.push_back(parseStatement());
+                auto decl = parseDeclaration();
+                if (decl)
+                {
+                    program->declarations.push_back(std::move(decl));
+                }
+                else
+                {
+                    // إذا كانت النتيجة nullptr، فهذا جملة تعيين، معالجتها كجملة
+                    std::cout << "[DBG] declaration returned nullptr, treating as statement" << std::endl;
+                    program->statements.push_back(parseStatement());
+                }
             }
         }
         else
@@ -180,30 +233,7 @@ std::unique_ptr<ASTNode> Parser::parseDeclaration()
 {
     if (match(TokenType::VARIABLE))
     {
-        // معالجة متغيرات متعددة
-        auto firstDecl = parseVariableDeclaration();
-
-        // إذا كانت النتيجة nullptr، فهذا ليس تعريف متغير
-        if (!firstDecl)
-        {
-            return nullptr;
-        }
-
-        // إذا كان هناك متغيرات إضافية، نتجاهلها ونعود بالأول
-        // لكن نتوقف إذا رأينا LBRACKET أو DOT (علامات جملة تعيين)
-        while ((check(TokenType::IDENTIFIER) || check(TokenType::BOOLEAN) ||
-                check(TokenType::INTEGER) || check(TokenType::REAL) ||
-                check(TokenType::STRING)) &&
-               !check(TokenType::LBRACKET) &&
-               !check(TokenType::DOT) && !check(TokenType::PROCEDURE) &&
-               !check(TokenType::CONSTANT) && !check(TokenType::TYPE) &&
-               !check(TokenType::END) && !isAtEnd())
-        {
-            auto nextDecl = parseVariableDeclaration();
-            if (!nextDecl) break; // إذا لم يكن تعريفاً، توقف
-        }
-
-        return firstDecl;
+        return parseVariableDeclaration();
     }
     else if (match(TokenType::CONSTANT))
     {

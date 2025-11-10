@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"D:/ArabicCompiler-main/Compiler/build/cmake_install.cmake"
+		"/Users/salahmac/Desktop/MLProjects/ArabicCompiler/Compiler/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }
